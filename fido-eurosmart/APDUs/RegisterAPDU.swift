@@ -143,7 +143,7 @@ final class RegisterAPDU: APDUType {
                 let name = "Optional("+String(describing: data.value(forKey: "name") as? String ?? "Nothing")+")"
                 if (name == username){
                     // Fido dans la BDD ?
-                    //data.setValue(str, forKey: "fidotoken")
+                    data.setValue(str, forKey: "fidotoken")
                     print("Fidotoken: ",data.value(forKey: "fidotoken") as? String ?? "Nothing")
                     if (data.value(forKey: "fidotoken") as? String ?? "Nothing" == str){
                         print("Pubk OK !!!!")

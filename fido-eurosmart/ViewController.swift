@@ -72,8 +72,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         // PROVISOIR (TEST SUR IPHONE PHYSIQUE
-        //DoLogin(username!,password!)
-        LoginDone()
+        DoLogin(username!,password!)
+        //LoginDone()
     }
     
     func DoLogin(_ user:String,_ pwd:String)
@@ -145,11 +145,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Ajout ou Authentification du token fido
         if(isfidoinbdd){
             //PROVISOIR
-            performSegue(withIdentifier: "addFidoSegue", sender: self)
-            /*username.isEnabled = false
+            //performSegue(withIdentifier: "addFidoSegue", sender: self)
+            username.isEnabled = false
             password.isEnabled = false
             
-            submit_button.setTitle("Logout", for: .normal)*/
+            submit_button.setTitle("Logout", for: .normal)
         }else{
             // Redirection vers la page d'ajout du token fido
             performSegue(withIdentifier: "addFidoSegue", sender: self)
