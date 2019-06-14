@@ -96,6 +96,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
+                print(json!)
             }
             catch
             {
@@ -109,7 +110,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             if let data_block = server_response["data"] as? NSDictionary
             {
-                print("Response block : \(data_block)")
                 if let session_data = data_block["sid"] as? String
                 {
                     let preferences = UserDefaults.standard

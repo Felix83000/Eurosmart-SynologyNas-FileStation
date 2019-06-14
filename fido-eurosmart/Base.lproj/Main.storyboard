@@ -208,7 +208,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q90-Yk-Fax">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="226" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="Files" id="09N-fk-4lJ">
@@ -224,26 +224,45 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="JnS-yv-DPH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteCell" id="mdp-Wr-OPp">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="Tlw-BE-fa7" detailTextLabel="ecB-ac-q05" style="IBUITableViewCellStyleSubtitle" id="tZ3-CD-3qu">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdp-Wr-OPp" id="yAz-WC-nYH">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tZ3-CD-3qu" id="A31-NP-S9d">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tlw-BE-fa7">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ecB-ac-q05">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sow-9t-UBR" id="JtK-Z2-3pN"/>
+                                    <outlet property="delegate" destination="sow-9t-UBR" id="ycq-rL-cEj"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="JnS-yv-DPH" secondAttribute="bottom" id="A0c-tf-Yc3"/>
+                            <constraint firstItem="pBH-1W-gbb" firstAttribute="leading" secondItem="7ju-sd-yGO" secondAttribute="leading" id="DTg-zQ-Y3x"/>
+                            <constraint firstItem="j1x-Xh-lNK" firstAttribute="bottom" secondItem="pBH-1W-gbb" secondAttribute="bottom" id="Dfh-5E-m3n"/>
                             <constraint firstItem="q90-Yk-Fax" firstAttribute="leading" secondItem="7ju-sd-yGO" secondAttribute="leading" id="EuS-Fw-agJ">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
@@ -251,16 +270,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="JnS-yv-DPH" firstAttribute="leading" secondItem="7ju-sd-yGO" secondAttribute="leading" id="P45-gf-wkR"/>
-                            <constraint firstItem="JnS-yv-DPH" firstAttribute="top" secondItem="q90-Yk-Fax" secondAttribute="bottom" id="Uve-Mo-kFr"/>
-                            <constraint firstAttribute="trailing" secondItem="JnS-yv-DPH" secondAttribute="trailing" id="WLR-5H-X0t"/>
+                            <constraint firstAttribute="trailing" secondItem="pBH-1W-gbb" secondAttribute="trailing" id="OxR-lp-UGe"/>
                             <constraint firstAttribute="trailing" secondItem="q90-Yk-Fax" secondAttribute="trailing" id="fk7-mW-m5p"/>
+                            <constraint firstItem="pBH-1W-gbb" firstAttribute="top" secondItem="q90-Yk-Fax" secondAttribute="bottom" id="iyy-Xc-OB1"/>
                             <constraint firstItem="q90-Yk-Fax" firstAttribute="top" secondItem="j1x-Xh-lNK" secondAttribute="top" id="jOa-jl-mrK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j1x-Xh-lNK"/>
                     </view>
                     <connections>
                         <outlet property="navBar" destination="q90-Yk-Fax" id="OLf-Iv-rAh"/>
+                        <outlet property="tableView" destination="pBH-1W-gbb" id="Xfe-qu-Ib8"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logout" modalTransitionStyle="flipHorizontal" id="OCs-Gi-iYg"/>
                     </connections>
                 </viewController>
