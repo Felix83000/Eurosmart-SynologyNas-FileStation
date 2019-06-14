@@ -16,6 +16,7 @@
 		D450950B22B00CF4002CE6A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D450950A22B00CF4002CE6A2 /* Assets.xcassets */; };
 		D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */; };
 		D450951622B02254002CE6A2 /* RNCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450951522B02254002CE6A2 /* RNCryptor.swift */; };
+		D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF359E22B3882B00D37FF7 /* FileViewController.swift */; };
 		D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */; };
 		D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */; };
 		D4E559AF22B14BAE006BC7D6 /* RegisterAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559AC22B14BAE006BC7D6 /* RegisterAPDU.swift */; };
@@ -44,6 +45,7 @@
 		D450950D22B00CF4002CE6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D450950F22B00CF4002CE6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D450951522B02254002CE6A2 /* RNCryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNCryptor.swift; sourceTree = "<group>"; };
+		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		D4E559AC22B14BAE006BC7D6 /* RegisterAPDU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAPDU.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				D450950322B00CF2002CE6A2 /* AppDelegate.swift */,
 				D450950522B00CF2002CE6A2 /* ViewController.swift */,
 				D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */,
+				D4CF359E22B3882B00D37FF7 /* FileViewController.swift */,
 				D4E559A622B14B8D006BC7D6 /* Managers */,
 				D4E559AB22B14BAE006BC7D6 /* APDUs */,
 				D4E559B222B14C00006BC7D6 /* Utils */,
@@ -254,6 +257,7 @@
 				D4E559BD22B14C00006BC7D6 /* CryptoHelper.swift in Sources */,
 				D4E559C322B14C00006BC7D6 /* Keychain.m in Sources */,
 				D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */,
+				D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */,
 				D4E559B022B14BAE006BC7D6 /* AuthenticateAPDU.swift in Sources */,
 				D450950422B00CF2002CE6A2 /* AppDelegate.swift in Sources */,
 				D445921E22B13D0200DAD5A7 /* AddFidoViewController.swift in Sources */,

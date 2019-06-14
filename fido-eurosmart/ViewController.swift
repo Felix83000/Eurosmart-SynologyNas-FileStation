@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let success = String(describing: preferences.object(forKey: "success"))
     
         
-        if(preferences.object(forKey: "session") != nil && success == "true")
+        if(preferences.object(forKey: "sid") != nil && success == "true")
         {
             LoginDone()
         }
@@ -72,8 +72,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         // PROVISOIR (TEST SUR IPHONE PHYSIQUE
-        //DoLogin(username!,password!)
-        LoginDone()
+        DoLogin(username!,password!)
+        //LoginDone()
     }
     
     func DoLogin(_ user:String,_ pwd:String)
@@ -139,21 +139,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print("Connection successful : \(username.text!)")
         let preferences = UserDefaults.standard
         preferences.set(username.text, forKey: "username")
+        
+        //PROVISOIR
+        performSegue(withIdentifier: "fileSegue", sender: self)
 
-        let isfidoinbdd = IsFidoInBdd()
+        /*let isfidoinbdd = IsFidoInBdd()
         print("Is the user a registered fidotoken in local BDD? \(isfidoinbdd)")
         // Ajout ou Authentification du token fido
         if(isfidoinbdd){
             //PROVISOIR
-            performSegue(withIdentifier: "addFidoSegue", sender: self)
-            /*username.isEnabled = false
-            password.isEnabled = false
-            
-            submit_button.setTitle("Logout", for: .normal)*/
+            performSegue(withIdentifier: "fileSegue", sender: self)
         }else{
             // Redirection vers la page d'ajout du token fido
             performSegue(withIdentifier: "addFidoSegue", sender: self)
-        }
+        }*/
     }
     
     // L'utilisateur à un token fido dans la BDD -> true
