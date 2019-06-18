@@ -39,6 +39,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .portrait
+        } else {
+            return .all
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (first){
             username.resignFirstResponder()
