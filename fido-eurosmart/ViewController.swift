@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var submit_button: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let ip = "172.16.103.116"
     let port = "1987" // 1988 : https, 1987: http
@@ -86,6 +87,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func DoLogin(_ user:String,_ pwd:String)
     {
+        self.activityIndicator.startAnimating()
         let url = URL(string: "http://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid") // À passer en https, avec cert let's encrypt
         let session = URLSession.shared
         
@@ -104,7 +106,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print(json!)
             }
             catch
             {
@@ -123,7 +124,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     let preferences = UserDefaults.standard
                     preferences.set(session_data, forKey: "sid")
                     preferences.set(server_response["success"], forKey: "success")
-                    print("SID : \(session_data)")
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                    }
                     DispatchQueue.main.async(
                         execute:self.LoginDone
                     )

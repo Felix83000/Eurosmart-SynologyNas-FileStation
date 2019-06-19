@@ -26,6 +26,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var generalPath: UINavigationItem!
+    @IBOutlet weak var actvityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         
         /// Setting UIDocumentInteractionController delegate.
         documentInteractionController.delegate = self
-
+        
         initBackButton()
         
         fetchDirectories()
@@ -60,6 +61,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func fetchDirectories() {
+        self.actvityIndicator.startAnimating()
         let preferences = UserDefaults.standard
         self.sid = String(describing:preferences.object(forKey: "sid")!)
         let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)") // À passer en https, avec cert let's encrypt
@@ -102,6 +104,9 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                         self.listDirFiles.append(DirFileData(json))
                     }
                     self.tabListDirFiles[0] = self.listDirFiles
+                    DispatchQueue.main.async {
+                        self.actvityIndicator.stopAnimating()
+                    }
                     DispatchQueue.main.async(
                         execute:self.fetchDone
                     )
@@ -112,6 +117,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func fetchDirectoriesDetails(_ folder_path:String) {
+        self.actvityIndicator.startAnimating()
         backButton.title = "Back"
         let path = folder_path.replacingOccurrences(of: " ", with: "%20") // Gestion des espaces
         let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(path)&_sid=\(sid)") // À passer en https, avec cert let's encrypt
@@ -156,6 +162,9 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                     {
                         self.listDirFiles.append(DirFileData(json))
                     }
+                    DispatchQueue.main.async {
+                        self.actvityIndicator.stopAnimating()
+                    }
                     DispatchQueue.main.async(
                         execute:self.fetchDone
                     )
@@ -179,9 +188,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path)
         }else{
             // On ouvre le fichier
-            let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 10, omittingEmptySubsequences:   true).last ?? "file.txt")
+            let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true).last ?? "file.txt")
             /// Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
-            storeAndShare(withURLString: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(self.listDirFiles[indexPath.row].path)&mode=open&_sid=\(sid)",fileName: fileName)
+            let path = self.listDirFiles[indexPath.row].path.replacingOccurrences(of: " ", with: "%20") // Gestion des espaces
+            storeAndShare(withURLString: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(path)&mode=open&_sid=\(sid)",fileName: fileName)
         }
     }
     
@@ -189,10 +199,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         let currentDir = listDirFiles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
         if(currentDir.isDir == true){
-            let image : UIImage = UIImage(named: "folderIcon100")!
+            let image : UIImage = UIImage(named: "folderIcon")!
             cell.imageView!.image = image
         }else{
-            let image : UIImage = UIImage(named: "fileIcon100")!
+            let image : UIImage = UIImage(named: "fileIcon")!
             cell.imageView!.image = image
         }
         cell.textLabel?.text = currentDir.dirName
@@ -206,7 +216,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             self.listDirFiles = self.tabListDirFiles[self.lastId]
             // On change le chemin affiché dans le titre de la navbar
             if (self.lastId != 1){
-                var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 10, omittingEmptySubsequences:   true)
+                var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true)
                 sub?.removeLast()
                 self.generalPath.title?.removeAll()
                 for str in sub!{
@@ -256,6 +266,7 @@ extension FileViewController {
     
     /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
     func storeAndShare(withURLString: String, fileName: String) {
+        self.actvityIndicator.startAnimating()
         guard let url = URL(string: withURLString) else { return }
         /// START YOUR ACTIVITY INDICATOR HERE
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -269,6 +280,7 @@ extension FileViewController {
             }
             DispatchQueue.main.async {
                 /// STOP YOUR ACTIVITY INDICATOR HERE
+                self.actvityIndicator.stopAnimating()
                 self.share(url: tmpURL)
             }
             }.resume()

@@ -59,10 +59,17 @@
                                     <constraint firstAttribute="height" constant="106" id="2ea-86-Qde"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CBn-fU-5KC">
+                                <rect key="frame" x="197" y="400" width="20" height="20"/>
+                                <color key="color" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="9f7-nI-Ovh" firstAttribute="top" secondItem="CBn-fU-5KC" secondAttribute="bottom" constant="8" id="0dq-BC-pTv"/>
+                            <constraint firstItem="CBn-fU-5KC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1WY-VA-eHP"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="centerX" secondItem="Wf0-75-kyJ" secondAttribute="centerX" id="8bu-PB-5qW"/>
+                            <constraint firstItem="CBn-fU-5KC" firstAttribute="top" secondItem="Wf0-75-kyJ" secondAttribute="bottom" constant="15" id="Fm8-TR-ZpR"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="top" secondItem="9f7-nI-Ovh" secondAttribute="bottom" constant="5" id="NRA-8d-AYo"/>
                             <constraint firstItem="Wf0-75-kyJ" firstAttribute="top" secondItem="yRB-aj-1sJ" secondAttribute="bottom" constant="40" id="PCQ-7Q-i2z"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="TpJ-d2-pY8"/>
@@ -79,6 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="CBn-fU-5KC" id="XUD-rC-2kk"/>
                         <outlet property="password" destination="VK9-xi-FkN" id="4QI-wu-EUm"/>
                         <outlet property="submit_button" destination="hUe-An-fW8" id="cUS-B8-pet"/>
                         <outlet property="username" destination="9f7-nI-Ovh" id="JKx-o0-dUd"/>
@@ -282,6 +290,10 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-Q6-WKo">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <color key="color" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -296,8 +308,10 @@
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="pBH-1W-gbb" secondAttribute="trailing" id="OxR-lp-UGe"/>
                             <constraint firstAttribute="trailing" secondItem="VeO-cH-iPG" secondAttribute="trailing" id="a24-fv-xcG"/>
+                            <constraint firstItem="Ipr-Q6-WKo" firstAttribute="centerX" secondItem="7ju-sd-yGO" secondAttribute="centerX" id="dpM-6T-KgM"/>
                             <constraint firstItem="VeO-cH-iPG" firstAttribute="leading" secondItem="7ju-sd-yGO" secondAttribute="leading" id="e9B-EU-2Wf"/>
                             <constraint firstAttribute="trailing" secondItem="q90-Yk-Fax" secondAttribute="trailing" id="fk7-mW-m5p"/>
+                            <constraint firstItem="Ipr-Q6-WKo" firstAttribute="centerY" secondItem="7ju-sd-yGO" secondAttribute="centerY" id="hMg-5N-hpD"/>
                             <constraint firstItem="pBH-1W-gbb" firstAttribute="top" secondItem="q90-Yk-Fax" secondAttribute="bottom" id="iyy-Xc-OB1"/>
                             <constraint firstItem="q90-Yk-Fax" firstAttribute="top" secondItem="j1x-Xh-lNK" secondAttribute="top" id="jOa-jl-mrK"/>
                             <constraint firstItem="j1x-Xh-lNK" firstAttribute="bottom" secondItem="VeO-cH-iPG" secondAttribute="bottom" id="z4z-pg-c8g"/>
@@ -305,6 +319,7 @@
                         <viewLayoutGuide key="safeArea" id="j1x-Xh-lNK"/>
                     </view>
                     <connections>
+                        <outlet property="actvityIndicator" destination="Ipr-Q6-WKo" id="HcM-Yx-l0y"/>
                         <outlet property="backButton" destination="qaM-Wi-kJF" id="6SH-7P-qfy"/>
                         <outlet property="generalPath" destination="09N-fk-4lJ" id="54t-rA-kH7"/>
                         <outlet property="navBar" destination="q90-Yk-Fax" id="OLf-Iv-rAh"/>
@@ -322,6 +337,6 @@
         <image name="Eurosmart" width="840" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OCs-Gi-iYg"/>
+        <segue reference="W4k-OE-Osu"/>
     </inferredMetricsTieBreakers>
 </document>
