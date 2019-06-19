@@ -64,16 +64,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func submit(_ sender: Any) {
-        
-        if(submit_button.titleLabel?.text == "Logout")
-        {
-            let preferences = UserDefaults.standard
-            preferences.removeObject(forKey: "session")
-            
-            LoginToDo()
-            return
-        }
-        
         let username = self.username.text
         let password = self.password.text
         
