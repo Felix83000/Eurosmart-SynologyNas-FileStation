@@ -10,16 +10,16 @@ import UIKit
 
 class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    var tabListDirFiles = [[DirFileData]()]// Tableau des différentes requêtes
-    var lastId = 0
-    var listDirFiles = [DirFileData]()
-    let ip = "172.16.103.116"
-    let port = "1987" // 1988 : https, 1987: http
-    let httpType = "http"
-    var sid = ""
+    fileprivate var tabListDirFiles = [[DirFileData]()]// Tableau des différentes requêtes
+    fileprivate var lastId = 0
+    fileprivate var listDirFiles = [DirFileData]()
+    fileprivate let ip = "172.16.103.116"
+    fileprivate let port = "1987" // 1988 : https, 1987: http
+    fileprivate let httpType = "http"
+    fileprivate var sid = ""
     
     /// Creating UIDocumentInteractionController instance.
-    let documentInteractionController = UIDocumentInteractionController()
+    fileprivate let documentInteractionController = UIDocumentInteractionController()
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!

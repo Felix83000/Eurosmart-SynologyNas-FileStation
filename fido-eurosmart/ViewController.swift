@@ -16,9 +16,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submit_button: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let ip = "172.16.103.116"
-    let port = "1987" // 1988 : https, 1987: http
-    var first = true
+    fileprivate let ip = "172.16.103.116"
+    fileprivate let port = "1987" // 1988 : https, 1987: http
+    fileprivate let httpType = "http"
+    fileprivate var first = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func DoLogin(_ user:String,_ pwd:String)
     {
         self.activityIndicator.startAnimating()
-        let url = URL(string: "http://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid") // À passer en https, avec cert let's encrypt
+        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid") // À passer en https, avec cert let's encrypt
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)
