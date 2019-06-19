@@ -21,6 +21,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var generalPath: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +166,8 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(self.listDirFiles[indexPath.row].isDir == true){
-        fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path)
+            self.generalPath.title = self.listDirFiles[indexPath.row].path
+            fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path)
         }else{
             print("It is a file")
         }
@@ -174,8 +176,14 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currentDir = listDirFiles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        if(currentDir.isDir == true){
+            let image : UIImage = UIImage(named: "folderIcon100")!
+            cell.imageView!.image = image
+        }else{
+            let image : UIImage = UIImage(named: "fileIcon100")!
+            cell.imageView!.image = image
+        }
         cell.textLabel?.text = currentDir.dirName
-        cell.detailTextLabel?.text = "Directory: "+String(describing:currentDir.isDir)
         return cell
     }
     
@@ -184,10 +192,24 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         if (self.lastId != 0){
             self.listDirFiles.removeAll()
             self.listDirFiles = self.tabListDirFiles[self.lastId]
+            // On change le chemin affiché dans le titre de la navbar
+            if (self.lastId != 1){
+                var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 10, omittingEmptySubsequences:   true)
+                sub?.removeLast()
+                self.generalPath.title?.removeAll()
+                for str in sub!{
+                    if (String(str) as String?) != nil {
+                        self.generalPath.title?.append("/")
+                        self.generalPath.title?.append(String(str))
+                    }
+                }
+            }else{
+                self.generalPath.title = "/"
+            }
             self.tableView.reloadData()
             self.lastId-=1
+            // On fait disparaitre le bouton de retour si on est à la racine
             if (self.lastId == 0){
-                // On fait disparaitre le bouton de retour
                 backButton.title = ""
             }
         }
