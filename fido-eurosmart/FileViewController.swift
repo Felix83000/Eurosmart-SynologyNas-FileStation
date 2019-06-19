@@ -15,7 +15,11 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     var listDirFiles = [DirFileData]()
     let ip = "172.16.103.116"
     let port = "1987" // 1988 : https, 1987: http
+    let httpType = "http"
     var sid = ""
+    
+    /// Creating UIDocumentInteractionController instance.
+    let documentInteractionController = UIDocumentInteractionController()
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
@@ -26,6 +30,9 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         navBar.delegate = self
+        
+        /// Setting UIDocumentInteractionController delegate.
+        documentInteractionController.delegate = self
 
         initBackButton()
         
@@ -53,7 +60,9 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func fetchDirectories() {
-        let url = URL(string: "http://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)") // À passer en https, avec cert let's encrypt
+        let preferences = UserDefaults.standard
+        self.sid = String(describing:preferences.object(forKey: "sid")!)
+        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)") // À passer en https, avec cert let's encrypt
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)
@@ -105,7 +114,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func fetchDirectoriesDetails(_ folder_path:String) {
         backButton.title = "Back"
         let path = folder_path.replacingOccurrences(of: " ", with: "%20") // Gestion des espaces
-        let url = URL(string: "http://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(path)&_sid=\(sid)") // À passer en https, avec cert let's encrypt
+        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(path)&_sid=\(sid)") // À passer en https, avec cert let's encrypt
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)
@@ -169,7 +178,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             self.generalPath.title = self.listDirFiles[indexPath.row].path
             fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path)
         }else{
-            print("It is a file")
+            // On ouvre le fichier
+            let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 10, omittingEmptySubsequences:   true).last ?? "file.txt")
+            /// Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
+            storeAndShare(withURLString: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(self.listDirFiles[indexPath.row].path)&mode=open&_sid=\(sid)",fileName: fileName)
         }
     }
     
@@ -230,5 +242,54 @@ struct DirFileData {
         self.isDir = dictionary["isdir"]! as! Bool
         self.dirName = dictionary["name"]! as! String
         self.path = dictionary["path"]! as! String
+    }
+}
+
+extension FileViewController {
+    /// This function will set all the required properties, and then provide a preview for the document
+    func share(url: URL) {
+        documentInteractionController.url = url
+        documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
+        documentInteractionController.name = url.localizedName ?? url.lastPathComponent
+        documentInteractionController.presentPreview(animated: true)
+    }
+    
+    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
+    func storeAndShare(withURLString: String, fileName: String) {
+        guard let url = URL(string: withURLString) else { return }
+        /// START YOUR ACTIVITY INDICATOR HERE
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            let tmpURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(fileName)
+            do {
+                try data.write(to: tmpURL)
+            } catch {
+                print(error)
+            }
+            DispatchQueue.main.async {
+                /// STOP YOUR ACTIVITY INDICATOR HERE
+                self.share(url: tmpURL)
+            }
+            }.resume()
+    }
+}
+
+extension FileViewController: UIDocumentInteractionControllerDelegate {
+    /// If presenting atop a navigation stack, provide the navigation controller in order to animate in a manner consistent with the rest of the platform
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        guard let navVC = self.navigationController else {
+            return self
+        }
+        return navVC
+    }
+}
+
+extension URL {
+    var typeIdentifier: String? {
+        return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    }
+    var localizedName: String? {
+        return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
     }
 }
