@@ -35,7 +35,7 @@ class AddFidoViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         let preferences = UserDefaults.standard
-        if(preferences.object(forKey: "session") == nil){
+        if(preferences.object(forKey: "sid") == nil){
             performSegue(withIdentifier: "logoutFido", sender: self)
         }
     }
