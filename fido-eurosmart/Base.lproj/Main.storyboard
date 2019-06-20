@@ -35,7 +35,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="send" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf0-75-kyJ">
                                 <rect key="frame" x="175" y="356" width="64" height="29"/>
@@ -44,9 +44,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUe-An-fW8">
-                                <rect key="frame" x="182.5" y="535" width="49" height="30"/>
+                                <rect key="frame" x="188" y="535" width="38" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="submit_button"/>
-                                <state key="normal" title="Submit">
+                                <state key="normal" title="Login">
                                     <color key="titleColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -91,6 +91,7 @@
                         <outlet property="submit_button" destination="hUe-An-fW8" id="cUS-B8-pet"/>
                         <outlet property="username" destination="9f7-nI-Ovh" id="JKx-o0-dUd"/>
                         <segue destination="xsM-vU-xEP" kind="presentation" identifier="addFidoSegue" id="47Y-Dk-puA"/>
+                        <segue destination="sow-9t-UBR" kind="presentation" identifier="directToFiles" id="B6E-VI-iuG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -230,7 +231,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -266,7 +267,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Back" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -323,6 +324,7 @@
         <image name="Eurosmart" width="840" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="B6E-VI-iuG"/>
         <segue reference="W4k-OE-Osu"/>
     </inferredMetricsTieBreakers>
 </document>

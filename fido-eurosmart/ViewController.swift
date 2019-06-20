@@ -35,10 +35,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         {
             LoginDone()
         }
-        else
-        {
-            LoginToDo()
-        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -58,6 +54,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }else{
             password.resignFirstResponder()
             first = true
+            submit(self)
         }
         // On retourne false pour dire qu'on ne veut pas que le boutton retour fasse un retour de base
         return false
@@ -106,6 +103,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
+            if let error = server_response["error"] as? NSDictionary
+            {
+                if let code = error["code"] as? Int
+                {
+                    if (code == 400){
+                        DispatchQueue.main.async {
+                            self.activityIndicator.stopAnimating()
+                            // create the alert
+                            let alert = UIAlertController(title: "Identification problem", message: "The account or password is not valid. Please try again.", preferredStyle: .alert)
+                            // add an action (button)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            // show the alert
+                            self.present(alert, animated: true, completion: nil)
+                            self.password.text = ""
+                        }
+                    }
+                }
+            }
+            
             if let data_block = server_response["data"] as? NSDictionary
             {
                 if let session_data = data_block["sid"] as? String
@@ -126,14 +142,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         task.resume()
     }
     
-    func LoginToDo()
-    {
-        username.isEnabled = true
-        password.isEnabled = true
-        
-        submit_button.setTitle("Login", for: .normal)
-    }
-    
     func LoginDone()
     {
         print("Connection successful : \(username.text!)")
@@ -142,6 +150,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         preferences.set(String(IsFidoInBdd()), forKey: "isFidoRegistered")
         performSegue(withIdentifier: "addFidoSegue", sender: self)
+        //performSegue(withIdentifier: "directToFiles", sender: self)
     }
     
     // L'utilisateur à un token fido dans la BDD -> true
