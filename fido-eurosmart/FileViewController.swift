@@ -63,7 +63,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func fetchDirectories() {
         self.actvityIndicator.startAnimating()
         let preferences = UserDefaults.standard
-        self.sid = String(describing:preferences.object(forKey: "sid")!)
+        self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
         let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)") // À passer en https, avec cert let's encrypt
         let session = URLSession.shared
         

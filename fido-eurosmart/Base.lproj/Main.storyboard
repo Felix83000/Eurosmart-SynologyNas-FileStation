@@ -91,7 +91,6 @@
                         <outlet property="submit_button" destination="hUe-An-fW8" id="cUS-B8-pet"/>
                         <outlet property="username" destination="9f7-nI-Ovh" id="JKx-o0-dUd"/>
                         <segue destination="xsM-vU-xEP" kind="presentation" identifier="addFidoSegue" id="47Y-Dk-puA"/>
-                        <segue destination="sow-9t-UBR" kind="presentation" identifier="fileSegue" id="PdF-YO-vBs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -110,8 +109,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="88"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQW-ry-619">
-                                        <rect key="frame" x="20" y="38" width="109" height="30"/>
-                                        <state key="normal" title="Scan &amp; connect"/>
+                                        <rect key="frame" x="20" y="38" width="147" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Scan &amp; connect FIDO"/>
                                         <connections>
                                             <action selector="scanForDevice" destination="xsM-vU-xEP" eventType="touchUpInside" id="ifr-vo-v2M"/>
                                         </connections>
@@ -155,63 +156,48 @@
                                     <constraint firstItem="awd-5Q-c37" firstAttribute="top" secondItem="wxs-Xg-WqS" secondAttribute="top" constant="20" id="r3t-7A-TKe"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQG-9V-iT1">
-                                <rect key="frame" x="277.5" y="161" width="131.5" height="34"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="REGISTER"/>
-                                <connections>
-                                    <action selector="sendRegister" destination="xsM-vU-xEP" eventType="touchUpInside" id="hZf-OV-lcl"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNf-fl-yCq">
-                                <rect key="frame" x="5" y="161" width="131.5" height="34"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                                <rect key="frame" x="131.5" y="477" width="151" height="38"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="AUTHENTICATE"/>
+                                <state key="normal" title="Authenticate FIDO"/>
                                 <connections>
                                     <action selector="sendAuthenticate" destination="xsM-vU-xEP" eventType="touchUpInside" id="Vhm-VV-IgI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-ZT-jh1">
-                                <rect key="frame" x="141.5" y="161" width="131" height="34"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQG-9V-iT1">
+                                <rect key="frame" x="147.5" y="429" width="119" height="38"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="AUTHENTICATE (CHECK)"/>
+                                <state key="normal" title="Register FIDO"/>
                                 <connections>
-                                    <action selector="sendAuthenticateCheck" destination="xsM-vU-xEP" eventType="touchUpInside" id="LD3-fa-Cxq"/>
+                                    <action selector="sendRegister" destination="xsM-vU-xEP" eventType="touchUpInside" id="hZf-OV-lcl"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Xph-ZT-jh1" firstAttribute="width" secondItem="iNf-fl-yCq" secondAttribute="width" id="0JS-3N-Tqf"/>
-                            <constraint firstItem="Ilq-aE-lLa" firstAttribute="trailing" secondItem="dQG-9V-iT1" secondAttribute="trailing" constant="5" id="82i-wd-mSL"/>
-                            <constraint firstItem="dQG-9V-iT1" firstAttribute="width" secondItem="iNf-fl-yCq" secondAttribute="width" id="M2K-oB-VfA"/>
-                            <constraint firstItem="iNf-fl-yCq" firstAttribute="leading" secondItem="Ilq-aE-lLa" secondAttribute="leading" constant="5" id="YPb-tU-blc"/>
-                            <constraint firstItem="Xph-ZT-jh1" firstAttribute="top" secondItem="wxs-Xg-WqS" secondAttribute="bottom" constant="29" id="YqS-Xm-l6g"/>
-                            <constraint firstItem="Xph-ZT-jh1" firstAttribute="centerY" secondItem="iNf-fl-yCq" secondAttribute="centerY" id="efx-XO-Kxs"/>
+                            <constraint firstItem="dQG-9V-iT1" firstAttribute="centerY" secondItem="M0H-Ar-Q5M" secondAttribute="centerY" id="5pQ-bo-q5x"/>
+                            <constraint firstItem="dQG-9V-iT1" firstAttribute="centerX" secondItem="M0H-Ar-Q5M" secondAttribute="centerX" id="T1l-48-saf"/>
+                            <constraint firstItem="iNf-fl-yCq" firstAttribute="centerX" secondItem="M0H-Ar-Q5M" secondAttribute="centerX" id="Xgr-Vq-FCj"/>
                             <constraint firstItem="wxs-Xg-WqS" firstAttribute="leading" secondItem="M0H-Ar-Q5M" secondAttribute="leading" id="fCm-jp-0R5"/>
                             <constraint firstAttribute="trailing" secondItem="wxs-Xg-WqS" secondAttribute="trailing" id="pdi-14-FC2"/>
+                            <constraint firstItem="iNf-fl-yCq" firstAttribute="top" secondItem="dQG-9V-iT1" secondAttribute="bottom" constant="10" id="v6c-9I-krL"/>
                             <constraint firstItem="wxs-Xg-WqS" firstAttribute="top" secondItem="Ilq-aE-lLa" secondAttribute="top" id="vEw-WP-c6f"/>
-                            <constraint firstItem="Xph-ZT-jh1" firstAttribute="leading" secondItem="iNf-fl-yCq" secondAttribute="trailing" constant="5" id="vNC-Eq-nti"/>
-                            <constraint firstItem="dQG-9V-iT1" firstAttribute="leading" secondItem="Xph-ZT-jh1" secondAttribute="trailing" constant="5" id="vTi-xA-omm"/>
-                            <constraint firstItem="dQG-9V-iT1" firstAttribute="centerY" secondItem="iNf-fl-yCq" secondAttribute="centerY" id="xxf-pe-spV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ilq-aE-lLa"/>
                     </view>
                     <connections>
+                        <outlet property="authenticateButton" destination="iNf-fl-yCq" id="c65-tv-Lv1"/>
                         <outlet property="loadingIndicator" destination="wde-xT-Rnu" id="dkZ-g6-nkI"/>
                         <outlet property="nameLabel" destination="Nam-nk-ajl" id="bbZ-wQ-8NC"/>
+                        <outlet property="registerButton" destination="dQG-9V-iT1" id="AcQ-LK-v1g"/>
                         <outlet property="scanButton" destination="MQW-ry-619" id="a8X-lp-L9d"/>
                         <outlet property="stateLabel" destination="lbc-Rb-kVu" id="mLU-mH-u9k"/>
-                        <outletCollection property="actionButtons" destination="iNf-fl-yCq" collectionClass="NSMutableArray" id="hB3-br-2Mg"/>
-                        <outletCollection property="actionButtons" destination="Xph-ZT-jh1" collectionClass="NSMutableArray" id="epn-sb-vff"/>
-                        <outletCollection property="actionButtons" destination="dQG-9V-iT1" collectionClass="NSMutableArray" id="p9Q-2X-rRM"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutFido" modalTransitionStyle="flipHorizontal" id="W4k-OE-Osu"/>
+                        <segue destination="sow-9t-UBR" kind="presentation" identifier="fileSegue" id="WQJ-t9-td2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBf-Pb-UlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -244,7 +230,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -280,7 +266,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Back" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -330,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNI-2x-8li" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060.8695652173915" y="137.94642857142856"/>
+            <point key="canvasLocation" x="2039" y="138"/>
         </scene>
     </scenes>
     <resources>

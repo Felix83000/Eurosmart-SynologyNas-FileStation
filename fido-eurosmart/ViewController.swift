@@ -71,9 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        // PROVISOIR (TEST SUR IPHONE PHYSIQUE
         DoLogin(username!,password!)
-        //LoginDone()
     }
     
     func DoLogin(_ user:String,_ pwd:String)
@@ -142,19 +140,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let preferences = UserDefaults.standard
         preferences.set(username.text, forKey: "username")
         
-        //PROVISOIR
-        performSegue(withIdentifier: "fileSegue", sender: self)
-
-        /*let isfidoinbdd = IsFidoInBdd()
-        print("Is the user a registered fidotoken in local BDD? \(isfidoinbdd)")
-        // Ajout ou Authentification du token fido
-        if(isfidoinbdd){
-            //PROVISOIR
-            performSegue(withIdentifier: "fileSegue", sender: self)
-        }else{
-            // Redirection vers la page d'ajout du token fido
-            performSegue(withIdentifier: "addFidoSegue", sender: self)
-        }*/
+        preferences.set(String(IsFidoInBdd()), forKey: "isFidoRegistered")
+        performSegue(withIdentifier: "addFidoSegue", sender: self)
     }
     
     // L'utilisateur à un token fido dans la BDD -> true
@@ -176,14 +163,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             for data in result as! [NSManagedObject] {
                 // Vérification si l'utilisateur est dans la BDD
                 if (data.value(forKey: "name") as? String ?? "Nothing" == username.text){
-                    print("User found in local BDD: \(data.value(forKey: "name") as? String ?? "Nothing")")
                     // Fido dans la BDD ?
-                    if (data.value(forKey: "fidotoken") as? String ?? "Nothing" == "Nothing"){
-                        return false
-                    }else {
-                        print("Token found: \(data.value(forKey: "fidotoken") as! String)")
-                        return true
-                    }
+                    return data.value(forKey: "fidotoken") as? Bool ?? false
                 }
             }
         } catch {

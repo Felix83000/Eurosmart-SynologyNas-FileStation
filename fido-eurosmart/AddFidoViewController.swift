@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddFidoViewController: UIViewController {
     
@@ -14,7 +15,8 @@ class AddFidoViewController: UIViewController {
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet fileprivate weak var stateLabel: UILabel!
     @IBOutlet fileprivate weak var nameLabel: UILabel!
-    @IBOutlet var actionButtons: [UIButton]!
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var authenticateButton: UIButton!
     
     fileprivate lazy var bluetoothManager: BluetoothManager = {
         let manager = BluetoothManager()
@@ -68,6 +70,7 @@ class AddFidoViewController: UIViewController {
             let data = APDU.buildRequest()
             bluetoothManager.exchangeAPDU(data)
             currentAPDU = APDU
+            print("APDU resitered")
         }
         else {
             print("Unable to build REGISTER APDU")
@@ -78,13 +81,43 @@ class AddFidoViewController: UIViewController {
         sendAuthenticate(checkOnly: false)
     }
     
-    @IBAction func sendAuthenticateCheck() {
-        sendAuthenticate(checkOnly: true)
+    func fetchCertificate(){
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        request.returnsObjectsAsFaults = false
+        do {
+            let preferences = UserDefaults.standard
+            let username = String(describing: preferences.object(forKey: "username"))
+            
+            let result = try managedContext.fetch(request)
+            for data in result as! [NSManagedObject] {
+                // Vérification si l'utilisateur est dans la BDD
+                let name = "Optional("+String(describing: data.value(forKey: "name") as? String ?? "Nothing")+")"
+                if (name == username){
+                    self.registerAPDU = RegisterAPDU(managedContext: managedContext)
+                    self.registerAPDU?.set_publicKey((data.value(forKey: "publickey") as? Data)!)
+                    self.registerAPDU?.set_keyHandle((data.value(forKey: "keyhandle") as? Data)!)
+                    self.registerAPDU?.set_certificate((data.value(forKey: "certificate") as? Data)!)
+                    self.registerAPDU?.set_signature((data.value(forKey: "signature") as? Data)!)
+                }
+            }
+        } catch {
+            print("Failed")
+        }
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     fileprivate func sendAuthenticate(checkOnly: Bool) {
+        
+        fetchCertificate()
+
         guard
-            let registerAPDU = registerAPDU,
+            let registerAPDU = self.registerAPDU,
             let originalKeyHandle = registerAPDU.keyHandle else {
                 print("Unable to build AUTHENTICATE APDU, not yet REGISTERED")
                 return
@@ -113,7 +146,7 @@ class AddFidoViewController: UIViewController {
         let challengeData = Data(_: challenge)
         let applicationParameterData = Data(_: applicationParameter)
         
-        if let APDU = AuthenticateAPDU(registerAPDU: registerAPDU, challenge: challengeData, applicationParameter: applicationParameterData, keyHandle: keyHandleData, checkOnly: checkOnly) {
+        if let APDU = AuthenticateAPDU(registerAPDU: registerAPDU,challenge: challengeData, applicationParameter: applicationParameterData, keyHandle: keyHandleData, checkOnly: checkOnly) {
             APDU.onDebugMessage = self.handleAPDUMessage
             let data = APDU.buildRequest()
             bluetoothManager.exchangeAPDU(data)
@@ -141,9 +174,31 @@ class AddFidoViewController: UIViewController {
     fileprivate func handleReceivedAPDU(_ manager: BluetoothManager, data: Data) {
         if let success = currentAPDU?.parseResponse(data), success {
             print("Successfully parsed APDU response of kind \(currentAPDU as APDUType?)")
-            if currentAPDU is RegisterAPDU {
-                registerAPDU = currentAPDU as? RegisterAPDU
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+            let managedContext = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+            request.returnsObjectsAsFaults = false
+            do {
+                let preferences = UserDefaults.standard
+                let username = String(describing: preferences.object(forKey: "username"))
+                
+                let result = try managedContext.fetch(request)
+                for data in result as! [NSManagedObject] {
+                    // Vérification si l'utilisateur est dans la BDD
+                    let name = "Optional("+String(describing: data.value(forKey: "name") as? String ?? "Nothing")+")"
+                    if (name == username){
+                        data.setValue(true, forKey: "fidotoken")
+                    }
+                }
+            } catch {
+                print("Failed")
             }
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+            performSegue(withIdentifier: "fileSegue", sender: self)
         }
         else {
             print("Failed to parse APDU response of kind \(type(of: currentAPDU as APDUType?))")
@@ -163,6 +218,22 @@ class AddFidoViewController: UIViewController {
         scanButton.isEnabled = bluetoothManager.state == .Disconnected
         nameLabel.isHidden = bluetoothManager.state != .Connected
         nameLabel.text = bluetoothManager.deviceName
-        actionButtons.forEach() { $0.isEnabled = bluetoothManager.state == .Connected }
+        if( bluetoothManager.state == .Connected ){
+            isFidoRegistered(true)
+        }else{
+            isFidoRegistered(false)
+        }
+    }
+    func isFidoRegistered(_ bool:Bool){
+        let preferences = UserDefaults.standard
+        if(Bool(preferences.object(forKey: "isFidoRegistered") as! String)!){
+            registerButton.setTitle("", for: .normal)
+            registerButton.isEnabled = false
+            authenticateButton.isEnabled = bool
+        }else{
+            authenticateButton.setTitle("", for: .normal)
+            authenticateButton.isEnabled = false
+            registerButton.isEnabled = bool
+        }
     }
 }

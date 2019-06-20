@@ -23,14 +23,42 @@ final class RegisterAPDU: APDUType {
     fileprivate(set) var keyHandle: Data?
     fileprivate(set) var certificate: Data?
     fileprivate(set) var signature: Data?
+
     let managedContext: NSManagedObjectContext
     
     init?(challenge: Data, applicationParameter: Data, managedContext: NSManagedObjectContext) {
-        guard challenge.count == 32 && applicationParameter.count == 32 else { return nil }
+        if (challenge.count == 32 && applicationParameter.count == 32){
+            self.challenge = challenge
+        }else{self.challenge = Data(base64Encoded: "0")!}
         
-        self.challenge = challenge
         self.applicationParameter = applicationParameter
         self.managedContext = managedContext
+    }
+    
+    init(managedContext: NSManagedObjectContext) {
+        var challenge: [UInt8] = []
+        var applicationParameter: [UInt8] = []
+        
+        for i in 0..<32 {
+            challenge.append(UInt8(i))
+            applicationParameter.append(UInt8(i) | 0x80)
+        }
+        self.challenge = Data(_: challenge)
+        self.applicationParameter = Data(_: applicationParameter)
+        self.managedContext = managedContext
+    }
+    
+    func set_publicKey(_ value: Data?){
+        self.publicKey = value
+    }
+    func set_keyHandle(_ value: Data?){
+        self.keyHandle = value
+    }
+    func set_certificate(_ value: Data?){
+        self.certificate = value
+    }
+    func set_signature(_ value: Data?){
+        self.signature = value
     }
     
     func buildRequest() -> Data {
@@ -125,11 +153,6 @@ final class RegisterAPDU: APDUType {
         self.certificate = finalCertificate as Data
         self.signature = finalSignature as Data
         
-        let str = String(decoding: self.publicKey!, as: UTF8.self)
-        
-        onDebugMessage?(self, "Building REGISTER APDU response...")
-        onDebugMessage?(self, "Got public key = \(str)")
-        
         // BDD
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         request.returnsObjectsAsFaults = false
@@ -142,14 +165,10 @@ final class RegisterAPDU: APDUType {
                 // Vérification si l'utilisateur est dans la BDD
                 let name = "Optional("+String(describing: data.value(forKey: "name") as? String ?? "Nothing")+")"
                 if (name == username){
-                    // Fido dans la BDD ?
-                    data.setValue(str, forKey: "fidotoken")
-                    print("Fidotoken: ",data.value(forKey: "fidotoken") as? String ?? "Nothing")
-                    if (data.value(forKey: "fidotoken") as? String ?? "Nothing" == str){
-                        print("Pubk OK !!!!")
-                     }else{
-                        print("Pubk not equals")
-                     }
+                    data.setValue(publicKey, forKey: "publickey")
+                    data.setValue(keyHandle, forKey: "keyhandle")
+                    data.setValue(certificate, forKey: "certificate")
+                    data.setValue(signature, forKey: "signature")
                 }
             }
         } catch {
@@ -161,7 +180,9 @@ final class RegisterAPDU: APDUType {
             print("Could not save. \(error), \(error.userInfo)")
         }
         // DBB
-        
+
+        onDebugMessage?(self, "Building REGISTER APDU response...")
+        onDebugMessage?(self, "Got public key = \(publicKey)")
         onDebugMessage?(self, "Got key handle = \(keyHandle)")
         onDebugMessage?(self, "Got certificate = \(finalCertificate)")
         onDebugMessage?(self, "Got signature = \(finalSignature)")
