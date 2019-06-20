@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D44591F422B0EF7900DAD5A7 /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44591F322B0EF7900DAD5A7 /* Cryptor.swift */; };
 		D44591F722B0F9D500DAD5A7 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D44591F522B0F9D500DAD5A7 /* Data.xcdatamodeld */; };
 		D445921E22B13D0200DAD5A7 /* AddFidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */; };
 		D450950422B00CF2002CE6A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450950322B00CF2002CE6A2 /* AppDelegate.swift */; };
@@ -15,7 +14,6 @@
 		D450950922B00CF2002CE6A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950722B00CF2002CE6A2 /* Main.storyboard */; };
 		D450950B22B00CF4002CE6A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D450950A22B00CF4002CE6A2 /* Assets.xcassets */; };
 		D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */; };
-		D450951622B02254002CE6A2 /* RNCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D450951522B02254002CE6A2 /* RNCryptor.swift */; };
 		D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF359E22B3882B00D37FF7 /* FileViewController.swift */; };
 		D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */; };
 		D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */; };
@@ -34,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D44591F322B0EF7900DAD5A7 /* Cryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
 		D44591F622B0F9D500DAD5A7 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFidoViewController.swift; sourceTree = "<group>"; };
 		D450950022B00CF2002CE6A2 /* fido-eurosmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fido-eurosmart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +41,6 @@
 		D450950A22B00CF4002CE6A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D450950D22B00CF4002CE6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D450950F22B00CF4002CE6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D450951522B02254002CE6A2 /* RNCryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNCryptor.swift; sourceTree = "<group>"; };
 		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
@@ -77,15 +73,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D44591F222B0EF2100DAD5A7 /* Cryptor */ = {
-			isa = PBXGroup;
-			children = (
-				D450951522B02254002CE6A2 /* RNCryptor.swift */,
-				D44591F322B0EF7900DAD5A7 /* Cryptor.swift */,
-			);
-			path = Cryptor;
-			sourceTree = "<group>";
-		};
 		D45094F722B00CF2002CE6A2 = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +99,6 @@
 				D4E559A622B14B8D006BC7D6 /* Managers */,
 				D4E559AB22B14BAE006BC7D6 /* APDUs */,
 				D4E559B222B14C00006BC7D6 /* Utils */,
-				D44591F222B0EF2100DAD5A7 /* Cryptor */,
 				D4E55A2E22B14E0E006BC7D6 /* Vendor */,
 				D450950722B00CF2002CE6A2 /* Main.storyboard */,
 				D450950A22B00CF4002CE6A2 /* Assets.xcassets */,
@@ -264,8 +250,6 @@
 				D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */,
 				D4E55A3722B15027006BC7D6 /* GMEllipticCurveCrypto.m in Sources */,
 				D4E559C122B14C00006BC7D6 /* DataReader.swift in Sources */,
-				D450951622B02254002CE6A2 /* RNCryptor.swift in Sources */,
-				D44591F422B0EF7900DAD5A7 /* Cryptor.swift in Sources */,
 				D4E559BF22B14C00006BC7D6 /* DataWriter.swift in Sources */,
 				D4E559AF22B14BAE006BC7D6 /* RegisterAPDU.swift in Sources */,
 				D4E559C222B14C00006BC7D6 /* TransportHelper.swift in Sources */,

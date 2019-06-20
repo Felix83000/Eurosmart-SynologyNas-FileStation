@@ -186,22 +186,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // On retourne false car l'utilisateur n'est pas dans la base et ne possède pas de token
         return false
     }
-    
-    func encryptDecryptSomething(data:String){
-        do {
-            let cryptor = Cryptor()
-            var key = String()
-            try key = cryptor.generateEncryptionKey(withPassword: data)
-            var cipherPass = String()
-            try cipherPass = cryptor.encryptMessage(message: data, encryptionKey: key)
-            
-            print("Cipher Pass: \(cipherPass)")
-            var plainPass = String()
-            try plainPass = cryptor.decryptMessage(encryptedMessage: cipherPass, encryptionKey: key)
-            print("Plain Pass: \(plainPass) ")
-        } catch {
-            print("Error Encryption")
-        }
-    }
 }
 
