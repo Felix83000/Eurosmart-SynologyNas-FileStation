@@ -30,8 +30,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navBar.delegate = self
-        
         /// Setting UIDocumentInteractionController delegate.
         documentInteractionController.delegate = self
         

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddFidoViewController: UIViewController {
+class AddFidoViewController: UIViewController, UINavigationBarDelegate {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scanButton: UIButton!
@@ -19,7 +19,7 @@ class AddFidoViewController: UIViewController {
     @IBOutlet weak var authenticateButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var stopButton: UIButton!
-    
+    @IBOutlet weak var navBar: UINavigationBar!
     
     fileprivate lazy var bluetoothManager: BluetoothManager = {
         let manager = BluetoothManager()
@@ -35,7 +35,6 @@ class AddFidoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateUI()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +42,11 @@ class AddFidoViewController: UIViewController {
         if(preferences.object(forKey: "sid") == nil){
             performSegue(withIdentifier: "logoutFido", sender: self)
         }
+    }
+    
+    // MARK: UiNavigationBarDelegate Methods
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return UIBarPosition.topAttached
     }
     
     // MARK: Actions

@@ -137,6 +137,9 @@
                                 <items>
                                     <navigationItem title="Two Factor Authentication" id="Ihq-NB-Jjv"/>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="xsM-vU-xEP" id="jrB-hc-Jqh"/>
+                                </connections>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxs-Xg-WqS">
                                 <rect key="frame" x="0.0" y="88" width="414" height="57"/>
@@ -237,6 +240,7 @@
                         <outlet property="authenticateButton" destination="iNf-fl-yCq" id="c65-tv-Lv1"/>
                         <outlet property="loadingIndicator" destination="wde-xT-Rnu" id="dkZ-g6-nkI"/>
                         <outlet property="nameLabel" destination="Nam-nk-ajl" id="bbZ-wQ-8NC"/>
+                        <outlet property="navBar" destination="bbK-2s-ytc" id="1xR-P1-qx4"/>
                         <outlet property="registerButton" destination="dQG-9V-iT1" id="AcQ-LK-v1g"/>
                         <outlet property="scanButton" destination="MQW-ry-619" id="a8X-lp-L9d"/>
                         <outlet property="stateLabel" destination="lbc-Rb-kVu" id="mLU-mH-u9k"/>
@@ -274,9 +278,12 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="sow-9t-UBR" id="FzV-gl-dSj"/>
+                                </connections>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -312,7 +319,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Back" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -370,6 +377,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WQJ-t9-td2"/>
-        <segue reference="W4k-OE-Osu"/>
+        <segue reference="OCs-Gi-iYg"/>
     </inferredMetricsTieBreakers>
 </document>
