@@ -58,6 +58,41 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         toolBar.items = [flexible,backButton,flexible]
     }
     
+    @IBAction func addButton(_ sender: Any) {
+        let alert = UIAlertController(title: "What do you want to do?", message: "Please Select an Option", preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Create a Folder", style: .default, handler: { (_) in
+            self.showAlertWithTextField()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Upload a File", style: .default, handler: { (_) in
+            print("User click Edit button")
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    
+    func showAlertWithTextField() {
+        let alertController = UIAlertController(title: "Create a Folder", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Create", style: .default) { (_) in
+            if let txtField = alertController.textFields?.first, let text = txtField.text {
+                // operations
+                print("Text==>" + text)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Folder Name"
+        }
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func fetchDirectories() {
         self.actvityIndicator.startAnimating()
         let preferences = UserDefaults.standard

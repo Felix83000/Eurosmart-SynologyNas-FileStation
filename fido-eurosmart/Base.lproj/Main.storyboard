@@ -275,6 +275,9 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="srd-nk-8r7">
                                             <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="addButton:" destination="sow-9t-UBR" id="6i3-Rx-dXf"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
