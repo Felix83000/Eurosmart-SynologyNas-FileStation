@@ -361,7 +361,7 @@
                         <viewLayoutGuide key="safeArea" id="j1x-Xh-lNK"/>
                     </view>
                     <connections>
-                        <outlet property="actvityIndicator" destination="Ipr-Q6-WKo" id="HcM-Yx-l0y"/>
+                        <outlet property="activityIndicator" destination="Ipr-Q6-WKo" id="qNE-Cr-BeC"/>
                         <outlet property="backButton" destination="qaM-Wi-kJF" id="6SH-7P-qfy"/>
                         <outlet property="generalPath" destination="09N-fk-4lJ" id="54t-rA-kH7"/>
                         <outlet property="navBar" destination="q90-Yk-Fax" id="OLf-Iv-rAh"/>
@@ -379,7 +379,7 @@
         <image name="Eurosmart" width="840" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WQJ-t9-td2"/>
+        <segue reference="B6E-VI-iuG"/>
         <segue reference="OCs-Gi-iYg"/>
     </inferredMetricsTieBreakers>
 </document>

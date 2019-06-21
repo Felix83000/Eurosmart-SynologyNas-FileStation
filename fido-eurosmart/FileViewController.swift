@@ -13,6 +13,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     fileprivate var tabListDirFiles = [[DirFileData]()]// Tableau des différentes requêtes
     fileprivate var lastId = 0
     fileprivate var listDirFiles = [DirFileData]()
+    fileprivate var currentPath = ""
     fileprivate let ip = "172.16.103.116"
     fileprivate let port = "1987" // 1988 : https, 1987: http
     fileprivate let httpType = "http"
@@ -26,7 +27,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var generalPath: UINavigationItem!
-    @IBOutlet weak var actvityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,8 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     @IBAction func addButton(_ sender: Any) {
+        // TODO: Check permissions to write in the folder path
+        
         let alert = UIAlertController(title: "What do you want to do?", message: "Please Select an Option", preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Create a Folder", style: .default, handler: { (_) in
@@ -72,16 +75,16 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         }))
         
         self.present(alert, animated: true, completion: {
-            print("completion block")
         })
     }
     
     func showAlertWithTextField() {
         let alertController = UIAlertController(title: "Create a Folder", message: nil, preferredStyle: .alert)
+        alertController.textFields?.first?.returnKeyType = UIReturnKeyType.done //Marche pas
         let confirmAction = UIAlertAction(title: "Create", style: .default) { (_) in
-            if let txtField = alertController.textFields?.first, let text = txtField.text {
-                // operations
-                print("Text==>" + text)
+            if let txtField = alertController.textFields?.first, let folder = txtField.text {
+                // When the user enter the folder name and press "Create"
+                self.createFolder(folderName: folder)
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
@@ -93,8 +96,90 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func createFolder(folderName: String){
+        self.activityIndicator.startAnimating()
+        let preferences = UserDefaults.standard
+        self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
+        var folderPath = self.currentPath
+        print("Folder path: ",folderPath)
+        if(folderPath == ""){
+            folderPath = "/"
+        }
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.CreateFolder&version=2&method=create&folder_path=\(folderPath)&name=\(folderName)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
+        let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) in
+            guard let _:Data = data else
+            {
+                return
+            }
+            
+            let json:Any?
+            
+            do
+            {
+                json = try JSONSerialization.jsonObject(with: data!, options: [])
+                print(json!)
+            }
+            catch
+            {
+                return
+            }
+            
+            guard let server_response = json as? NSDictionary else
+            {
+                return
+            }
+
+            if let error = server_response["error"] as? NSDictionary
+            {
+                if let code = error["code"] as? Int
+                {
+                    if (code == 1100){
+                        DispatchQueue.main.async {
+                            // create the alert
+                            let alert = UIAlertController(title: "Folder Creation Problem", message: "Maybe there is a rights problem. Feel free to contact the administrator.", preferredStyle: .alert)
+                            // add an action (button)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            // show the alert
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                    if (code == 400){
+                        DispatchQueue.main.async {
+                            // create the alert
+                            let alert = UIAlertController(title: "Folder Creation Problem", message: "Please enter a name for the folder.", preferredStyle: .alert)
+                            // add an action (button)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            // show the alert
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                    DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    }
+                }
+            }
+            
+            if (server_response["data"] as? NSDictionary) != nil
+            {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.fetchDirectoriesDetails(folderPath, true)
+                }
+            }
+        })
+        task.resume()
+    }
+    
     func fetchDirectories() {
-        self.actvityIndicator.startAnimating()
+        self.activityIndicator.startAnimating()
         let preferences = UserDefaults.standard
         self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
         
@@ -141,7 +226,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                     }
                     self.tabListDirFiles[0] = self.listDirFiles
                     DispatchQueue.main.async {
-                        self.actvityIndicator.stopAnimating()
+                        self.activityIndicator.stopAnimating()
                     }
                     DispatchQueue.main.async(
                         execute:self.fetchDone
@@ -152,8 +237,8 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         task.resume()
     }
     
-    func fetchDirectoriesDetails(_ folder_path:String) {
-        self.actvityIndicator.startAnimating()
+    func fetchDirectoriesDetails(_ folder_path: String,_ folderCreation: Bool) {
+        self.activityIndicator.startAnimating()
         backButton.title = "Back"
 
         let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folder_path)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
@@ -193,15 +278,17 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                     guard let jsonArray = JSON["files"] as? [[String: Any]] else {
                         return
                     }
-                    self.lastId+=1
-                    self.tabListDirFiles.insert(self.listDirFiles, at: self.lastId)
+                    if(!folderCreation){
+                        self.lastId+=1
+                        self.tabListDirFiles.insert(self.listDirFiles, at: self.lastId)
+                    }
                     self.listDirFiles.removeAll()
                     for json in jsonArray
                     {
                         self.listDirFiles.append(DirFileData(json))
                     }
                     DispatchQueue.main.async {
-                        self.actvityIndicator.stopAnimating()
+                        self.activityIndicator.stopAnimating()
                     }
                     DispatchQueue.main.async(
                         execute:self.fetchDone
@@ -223,7 +310,8 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(self.listDirFiles[indexPath.row].isDir == true){
             self.generalPath.title = self.listDirFiles[indexPath.row].path
-            fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path)
+            self.currentPath = self.listDirFiles[indexPath.row].path
+            fetchDirectoriesDetails(self.listDirFiles[indexPath.row].path,false)
         }else{
             // On ouvre le fichier
             let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true).last ?? "file.txt")
@@ -258,14 +346,18 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                 var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true)
                 sub?.removeLast()
                 self.generalPath.title?.removeAll()
+                self.currentPath = ""
                 for str in sub!{
                     if (String(str) as String?) != nil {
                         self.generalPath.title?.append("/")
+                        self.currentPath.append("/")
                         self.generalPath.title?.append(String(str))
+                        self.currentPath.append(String(str))
                     }
                 }
             }else{
                 self.generalPath.title = "/"
+                self.currentPath = "/"
             }
             self.tableView.reloadData()
             self.lastId-=1
@@ -308,7 +400,7 @@ extension FileViewController {
         let urlEncoded = URL(string: withURLString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         guard let url = urlEncoded else { return }
-        self.actvityIndicator.startAnimating()
+        self.activityIndicator.startAnimating()
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else { return }
             let tmpURL = FileManager.default.temporaryDirectory
@@ -319,7 +411,7 @@ extension FileViewController {
                 print(error)
             }
             DispatchQueue.main.async {
-                self.actvityIndicator.stopAnimating()
+                self.activityIndicator.stopAnimating()
                 self.share(url: tmpURL)
             }
             }.resume()

@@ -100,6 +100,7 @@
 				D4E559AB22B14BAE006BC7D6 /* APDUs */,
 				D4E559B222B14C00006BC7D6 /* Utils */,
 				D4E55A2E22B14E0E006BC7D6 /* Vendor */,
+				D4A7005222BD2E77004FFF93 /* Network */,
 				D450950722B00CF2002CE6A2 /* Main.storyboard */,
 				D450950A22B00CF4002CE6A2 /* Assets.xcassets */,
 				D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */,
@@ -108,6 +109,13 @@
 				D44591F522B0F9D500DAD5A7 /* Data.xcdatamodeld */,
 			);
 			path = "fido-eurosmart";
+			sourceTree = "<group>";
+		};
+		D4A7005222BD2E77004FFF93 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D4E559A622B14B8D006BC7D6 /* Managers */ = {
