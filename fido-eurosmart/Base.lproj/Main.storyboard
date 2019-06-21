@@ -106,20 +106,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="o7f-t3-58y">
+                                <rect key="frame" x="197" y="412" width="20" height="20"/>
+                                <color key="color" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNf-fl-yCq">
+                                <rect key="frame" x="119.5" y="427" width="175" height="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Authenticate FIDO"/>
+                                <connections>
+                                    <action selector="sendAuthenticate" destination="xsM-vU-xEP" eventType="touchUpInside" id="Vhm-VV-IgI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQG-9V-iT1">
+                                <rect key="frame" x="117.5" y="427" width="179" height="42"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Register your FIDO"/>
+                                <connections>
+                                    <action selector="dd:" destination="aLv-x0-otH" eventType="touchUpInside" id="i5r-2Q-ex3"/>
+                                    <action selector="sendRegister" destination="xsM-vU-xEP" eventType="touchUpInside" id="hZf-OV-lcl"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbK-2s-ytc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Two Factor Authentication" id="Ihq-NB-Jjv"/>
+                                </items>
+                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxs-Xg-WqS">
-                                <rect key="frame" x="0.0" y="44" width="414" height="88"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="57"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQW-ry-619">
-                                        <rect key="frame" x="20" y="38" width="147" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Scan &amp; connect FIDO"/>
-                                        <connections>
-                                            <action selector="scanForDevice" destination="xsM-vU-xEP" eventType="touchUpInside" id="ifr-vo-v2M"/>
-                                        </connections>
-                                    </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wde-xT-Rnu">
                                         <rect key="frame" x="125" y="19" width="20" height="20"/>
+                                        <color key="color" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awd-5Q-c37">
                                         <rect key="frame" x="20" y="20" width="42" height="18"/>
@@ -144,64 +168,85 @@
                                 <constraints>
                                     <constraint firstItem="lbc-Rb-kVu" firstAttribute="leading" secondItem="awd-5Q-c37" secondAttribute="trailing" constant="8" symbolic="YES" id="0aY-ZR-W5z"/>
                                     <constraint firstItem="wde-xT-Rnu" firstAttribute="leading" secondItem="lbc-Rb-kVu" secondAttribute="trailing" constant="8" symbolic="YES" id="2jt-zh-w7c"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MQW-ry-619" secondAttribute="trailing" constant="20" symbolic="YES" id="2xG-zw-yc4"/>
-                                    <constraint firstItem="MQW-ry-619" firstAttribute="top" secondItem="awd-5Q-c37" secondAttribute="bottom" id="3im-Vi-5bY"/>
-                                    <constraint firstAttribute="bottom" secondItem="MQW-ry-619" secondAttribute="bottom" constant="20" id="7Cd-Ot-4fq"/>
+                                    <constraint firstAttribute="bottom" secondItem="awd-5Q-c37" secondAttribute="bottom" constant="19" id="AA9-CO-RQZ"/>
                                     <constraint firstItem="Nam-nk-ajl" firstAttribute="baseline" secondItem="awd-5Q-c37" secondAttribute="baseline" id="AeI-9d-6pG"/>
                                     <constraint firstItem="wde-xT-Rnu" firstAttribute="top" secondItem="lbc-Rb-kVu" secondAttribute="top" id="Dnk-je-JPv"/>
                                     <constraint firstAttribute="trailing" secondItem="Nam-nk-ajl" secondAttribute="trailing" constant="20" id="Ntz-qr-3dB"/>
                                     <constraint firstItem="wde-xT-Rnu" firstAttribute="top" secondItem="wxs-Xg-WqS" secondAttribute="top" constant="19" id="Qcb-60-xYc"/>
                                     <constraint firstItem="Nam-nk-ajl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wde-xT-Rnu" secondAttribute="trailing" constant="8" symbolic="YES" id="TyW-f9-ZEU"/>
-                                    <constraint firstItem="MQW-ry-619" firstAttribute="leading" secondItem="wxs-Xg-WqS" secondAttribute="leading" constant="20" id="jEE-56-Lba"/>
                                     <constraint firstItem="awd-5Q-c37" firstAttribute="leading" secondItem="wxs-Xg-WqS" secondAttribute="leading" constant="20" id="pA8-K8-FNd"/>
                                     <constraint firstItem="awd-5Q-c37" firstAttribute="top" secondItem="wxs-Xg-WqS" secondAttribute="top" constant="20" id="r3t-7A-TKe"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNf-fl-yCq">
-                                <rect key="frame" x="131.5" y="477" width="151" height="38"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="Authenticate FIDO"/>
-                                <connections>
-                                    <action selector="sendAuthenticate" destination="xsM-vU-xEP" eventType="touchUpInside" id="Vhm-VV-IgI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQG-9V-iT1">
-                                <rect key="frame" x="147.5" y="429" width="119" height="38"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="Register FIDO"/>
-                                <connections>
-                                    <action selector="sendRegister" destination="xsM-vU-xEP" eventType="touchUpInside" id="hZf-OV-lcl"/>
-                                </connections>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0CB-kd-IEn">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" id="3cO-lr-XAW">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQW-ry-619">
+                                            <rect key="frame" x="20" y="10" width="164" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" title="Scan FIDO"/>
+                                            <connections>
+                                                <action selector="scanForDevice" destination="xsM-vU-xEP" eventType="touchUpInside" id="ifr-vo-v2M"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="9PM-EL-Gpx">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jiT-Xp-fsg">
+                                            <rect key="frame" x="270" y="10.5" width="124" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <state key="normal" title="Stop">
+                                                <color key="titleColor" red="0.91372549020000005" green="0.59607843140000005" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </state>
+                                            <state key="disabled">
+                                                <color key="titleColor" red="0.7845017997" green="0.7845017997" blue="0.7845017997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="stopButton:" destination="xsM-vU-xEP" eventType="touchUpInside" id="PCt-VK-2n0"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="0CB-kd-IEn" firstAttribute="bottom" secondItem="Ilq-aE-lLa" secondAttribute="bottom" id="3BD-z9-RO6"/>
+                            <constraint firstItem="wxs-Xg-WqS" firstAttribute="top" secondItem="bbK-2s-ytc" secondAttribute="bottom" id="54O-Cq-EfI"/>
                             <constraint firstItem="dQG-9V-iT1" firstAttribute="centerY" secondItem="M0H-Ar-Q5M" secondAttribute="centerY" id="5pQ-bo-q5x"/>
+                            <constraint firstAttribute="trailing" secondItem="0CB-kd-IEn" secondAttribute="trailing" id="Ghq-Yc-FeX"/>
+                            <constraint firstItem="iNf-fl-yCq" firstAttribute="top" secondItem="o7f-t3-58y" secondAttribute="bottom" constant="-5" id="Nsw-wC-dlQ"/>
                             <constraint firstItem="dQG-9V-iT1" firstAttribute="centerX" secondItem="M0H-Ar-Q5M" secondAttribute="centerX" id="T1l-48-saf"/>
+                            <constraint firstItem="bbK-2s-ytc" firstAttribute="leading" secondItem="M0H-Ar-Q5M" secondAttribute="leading" id="W6c-dH-zv3"/>
+                            <constraint firstItem="iNf-fl-yCq" firstAttribute="centerY" secondItem="M0H-Ar-Q5M" secondAttribute="centerY" id="WXo-8J-Cge"/>
                             <constraint firstItem="iNf-fl-yCq" firstAttribute="centerX" secondItem="M0H-Ar-Q5M" secondAttribute="centerX" id="Xgr-Vq-FCj"/>
+                            <constraint firstItem="0CB-kd-IEn" firstAttribute="leading" secondItem="M0H-Ar-Q5M" secondAttribute="leading" id="Z3Q-jo-nWo"/>
+                            <constraint firstAttribute="trailing" secondItem="bbK-2s-ytc" secondAttribute="trailing" id="Z6M-TT-6Jg"/>
+                            <constraint firstItem="o7f-t3-58y" firstAttribute="centerX" secondItem="M0H-Ar-Q5M" secondAttribute="centerX" id="eQb-Gl-yac"/>
                             <constraint firstItem="wxs-Xg-WqS" firstAttribute="leading" secondItem="M0H-Ar-Q5M" secondAttribute="leading" id="fCm-jp-0R5"/>
                             <constraint firstAttribute="trailing" secondItem="wxs-Xg-WqS" secondAttribute="trailing" id="pdi-14-FC2"/>
-                            <constraint firstItem="iNf-fl-yCq" firstAttribute="top" secondItem="dQG-9V-iT1" secondAttribute="bottom" constant="10" id="v6c-9I-krL"/>
-                            <constraint firstItem="wxs-Xg-WqS" firstAttribute="top" secondItem="Ilq-aE-lLa" secondAttribute="top" id="vEw-WP-c6f"/>
+                            <constraint firstItem="bbK-2s-ytc" firstAttribute="top" secondItem="Ilq-aE-lLa" secondAttribute="top" id="pwy-Ls-sRA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ilq-aE-lLa"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="o7f-t3-58y" id="h61-pu-6S8"/>
                         <outlet property="authenticateButton" destination="iNf-fl-yCq" id="c65-tv-Lv1"/>
                         <outlet property="loadingIndicator" destination="wde-xT-Rnu" id="dkZ-g6-nkI"/>
                         <outlet property="nameLabel" destination="Nam-nk-ajl" id="bbZ-wQ-8NC"/>
                         <outlet property="registerButton" destination="dQG-9V-iT1" id="AcQ-LK-v1g"/>
                         <outlet property="scanButton" destination="MQW-ry-619" id="a8X-lp-L9d"/>
                         <outlet property="stateLabel" destination="lbc-Rb-kVu" id="mLU-mH-u9k"/>
+                        <outlet property="stopButton" destination="jiT-Xp-fsg" id="bUU-OY-6r9"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutFido" modalTransitionStyle="flipHorizontal" id="W4k-OE-Osu"/>
                         <segue destination="sow-9t-UBR" kind="presentation" identifier="fileSegue" id="WQJ-t9-td2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBf-Pb-UlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aLv-x0-otH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1098.5507246376812" y="137.94642857142856"/>
         </scene>
@@ -231,7 +276,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -267,7 +312,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Back" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -317,14 +362,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNI-2x-8li" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2039" y="138"/>
+            <point key="canvasLocation" x="1996" y="137"/>
         </scene>
     </scenes>
     <resources>
         <image name="Eurosmart" width="840" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B6E-VI-iuG"/>
+        <segue reference="WQJ-t9-td2"/>
         <segue reference="W4k-OE-Osu"/>
     </inferredMetricsTieBreakers>
 </document>

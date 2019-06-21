@@ -74,7 +74,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func DoLogin(_ user:String,_ pwd:String)
     {
         self.activityIndicator.startAnimating()
-        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid") // À passer en https, avec cert let's encrypt
+        
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)

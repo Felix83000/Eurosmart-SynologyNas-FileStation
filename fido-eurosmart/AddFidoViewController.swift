@@ -17,6 +17,9 @@ class AddFidoViewController: UIViewController {
     @IBOutlet fileprivate weak var nameLabel: UILabel!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var authenticateButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var stopButton: UIButton!
+    
     
     fileprivate lazy var bluetoothManager: BluetoothManager = {
         let manager = BluetoothManager()
@@ -48,7 +51,15 @@ class AddFidoViewController: UIViewController {
         bluetoothManager.scanForDevice()
     }
     
+    @IBAction func stopButton(_ sender: Any) {
+        if (activityIndicator.isAnimating){
+            activityIndicator.stopAnimating()
+        }
+        bluetoothManager.stopSession()
+    }
+    
     @IBAction func sendRegister() {
+        activityIndicator.startAnimating()
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -78,6 +89,7 @@ class AddFidoViewController: UIViewController {
     }
     
     @IBAction func sendAuthenticate() {
+        activityIndicator.startAnimating()
         sendAuthenticate(checkOnly: false)
     }
     
@@ -198,10 +210,18 @@ class AddFidoViewController: UIViewController {
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
+            activityIndicator.stopAnimating()
             performSegue(withIdentifier: "fileSegue", sender: self)
         }
         else {
+            activityIndicator.stopAnimating()
             print("Failed to parse APDU response of kind \(type(of: currentAPDU as APDUType?))")
+            // create the alert
+            let alert = UIAlertController(title: "Identification problem", message: "This FIDO Security Key is not the one you registered. Please try again.", preferredStyle: .alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
         }
         currentAPDU = nil
     }
@@ -216,6 +236,7 @@ class AddFidoViewController: UIViewController {
         bluetoothManager.state == .Scanning ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
         stateLabel.text = bluetoothManager.state.rawValue
         scanButton.isEnabled = bluetoothManager.state == .Disconnected
+        stopButton.isEnabled = bluetoothManager.state == .Connecting || bluetoothManager.state == .Connected || bluetoothManager.state == .Scanning
         nameLabel.isHidden = bluetoothManager.state != .Connected
         nameLabel.text = bluetoothManager.deviceName
         if( bluetoothManager.state == .Connected ){
@@ -224,6 +245,7 @@ class AddFidoViewController: UIViewController {
             isFidoRegistered(false)
         }
     }
+    
     func isFidoRegistered(_ bool:Bool){
         let preferences = UserDefaults.standard
         if(Bool(preferences.object(forKey: "isFidoRegistered") as! String)!){

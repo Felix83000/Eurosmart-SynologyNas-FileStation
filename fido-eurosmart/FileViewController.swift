@@ -64,7 +64,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         self.actvityIndicator.startAnimating()
         let preferences = UserDefaults.standard
         self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
-        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)") // À passer en https, avec cert let's encrypt
+        
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)
@@ -119,8 +122,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func fetchDirectoriesDetails(_ folder_path:String) {
         self.actvityIndicator.startAnimating()
         backButton.title = "Back"
-        let path = folder_path.replacingOccurrences(of: " ", with: "%20") // Gestion des espaces
-        let url = URL(string: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(path)&_sid=\(sid)") // À passer en https, avec cert let's encrypt
+
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folder_path)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: url!)
@@ -189,8 +194,9 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         }else{
             // On ouvre le fichier
             let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true).last ?? "file.txt")
-            /// Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
-            let path = self.listDirFiles[indexPath.row].path.replacingOccurrences(of: " ", with: "%20") // Gestion des espaces
+            
+            // Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
+            let path = self.listDirFiles[indexPath.row].path
             storeAndShare(withURLString: "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(path)&mode=open&_sid=\(sid)",fileName: fileName)
         }
     }
@@ -266,9 +272,10 @@ extension FileViewController {
     
     /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
     func storeAndShare(withURLString: String, fileName: String) {
+        let urlEncoded = URL(string: withURLString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
+        guard let url = urlEncoded else { return }
         self.actvityIndicator.startAnimating()
-        guard let url = URL(string: withURLString) else { return }
-        /// START YOUR ACTIVITY INDICATOR HERE
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else { return }
             let tmpURL = FileManager.default.temporaryDirectory
@@ -279,7 +286,6 @@ extension FileViewController {
                 print(error)
             }
             DispatchQueue.main.async {
-                /// STOP YOUR ACTIVITY INDICATOR HERE
                 self.actvityIndicator.stopAnimating()
                 self.share(url: tmpURL)
             }
