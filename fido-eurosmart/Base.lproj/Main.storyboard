@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9f7-nI-Ovh">
-                                <rect key="frame" x="25" y="428" width="364" height="40"/>
+                                <rect key="frame" x="20" y="428" width="374" height="40"/>
                                 <accessibility key="accessibilityConfiguration" label="Username"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UQ0-bl-pK7"/>
@@ -29,7 +29,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-xi-FkN">
-                                <rect key="frame" x="25" y="473" width="364" height="40"/>
+                                <rect key="frame" x="20" y="473" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ogs-E6-mB4"/>
                                 </constraints>
@@ -54,7 +54,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Eurosmart" translatesAutoresizingMaskIntoConstraints="NO" id="yRB-aj-1sJ">
-                                <rect key="frame" x="25" y="210" width="364" height="106"/>
+                                <rect key="frame" x="20" y="210" width="374" height="106"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="2ea-86-Qde"/>
                                 </constraints>
@@ -72,12 +72,12 @@
                             <constraint firstItem="CBn-fU-5KC" firstAttribute="top" secondItem="Wf0-75-kyJ" secondAttribute="bottom" constant="15" id="Fm8-TR-ZpR"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="top" secondItem="9f7-nI-Ovh" secondAttribute="bottom" constant="5" id="NRA-8d-AYo"/>
                             <constraint firstItem="Wf0-75-kyJ" firstAttribute="top" secondItem="yRB-aj-1sJ" secondAttribute="bottom" constant="40" id="PCQ-7Q-i2z"/>
-                            <constraint firstItem="9f7-nI-Ovh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="TpJ-d2-pY8"/>
+                            <constraint firstItem="9f7-nI-Ovh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="TpJ-d2-pY8"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="top" secondItem="Wf0-75-kyJ" secondAttribute="bottom" constant="43" id="V4R-Qk-ei8"/>
                             <constraint firstItem="hUe-An-fW8" firstAttribute="centerX" secondItem="Wf0-75-kyJ" secondAttribute="centerX" id="Yvz-18-mg8"/>
                             <constraint firstItem="hUe-An-fW8" firstAttribute="top" secondItem="VK9-xi-FkN" secondAttribute="bottom" constant="22" id="ee1-98-ENN"/>
                             <constraint firstItem="yRB-aj-1sJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ftl-aQ-blC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9f7-nI-Ovh" secondAttribute="trailing" constant="5" id="i0r-QF-aD9"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9f7-nI-Ovh" secondAttribute="trailing" id="i0r-QF-aD9"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="width" secondItem="9f7-nI-Ovh" secondAttribute="width" id="lTz-hc-ZzS"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oGM-vE-HQl"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="centerX" secondItem="Wf0-75-kyJ" secondAttribute="centerX" id="vs5-LV-pVo"/>
@@ -182,11 +182,11 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0CB-kd-IEn">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" id="3cO-lr-XAW">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQW-ry-619">
-                                            <rect key="frame" x="20" y="10" width="164" height="34"/>
+                                            <rect key="frame" x="20" y="5" width="164" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -197,8 +197,8 @@
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="9PM-EL-Gpx">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jiT-Xp-fsg">
-                                            <rect key="frame" x="270" y="10.5" width="124" height="33"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jiT-Xp-fsg">
+                                            <rect key="frame" x="270" y="5.5" width="124" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Stop">
@@ -286,7 +286,7 @@
                                 </connections>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -322,7 +322,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Back" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -362,6 +362,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Ipr-Q6-WKo" id="qNE-Cr-BeC"/>
+                        <outlet property="addButton" destination="srd-nk-8r7" id="vQW-WE-c6e"/>
                         <outlet property="backButton" destination="qaM-Wi-kJF" id="6SH-7P-qfy"/>
                         <outlet property="generalPath" destination="09N-fk-4lJ" id="54t-rA-kH7"/>
                         <outlet property="navBar" destination="q90-Yk-Fax" id="OLf-Iv-rAh"/>

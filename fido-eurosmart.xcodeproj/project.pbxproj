@@ -14,6 +14,7 @@
 		D450950922B00CF2002CE6A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950722B00CF2002CE6A2 /* Main.storyboard */; };
 		D450950B22B00CF4002CE6A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D450950A22B00CF4002CE6A2 /* Assets.xcassets */; };
 		D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */; };
+		D45F370322C229BC00B2D6BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45F370222C229BC00B2D6BB /* Network.swift */; };
 		D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF359E22B3882B00D37FF7 /* FileViewController.swift */; };
 		D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */; };
 		D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */; };
@@ -41,6 +42,7 @@
 		D450950A22B00CF4002CE6A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D450950D22B00CF4002CE6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D450950F22B00CF4002CE6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D45F370222C229BC00B2D6BB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
@@ -96,11 +98,11 @@
 				D450950522B00CF2002CE6A2 /* ViewController.swift */,
 				D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */,
 				D4CF359E22B3882B00D37FF7 /* FileViewController.swift */,
+				D4A7005222BD2E77004FFF93 /* Network */,
 				D4E559A622B14B8D006BC7D6 /* Managers */,
 				D4E559AB22B14BAE006BC7D6 /* APDUs */,
 				D4E559B222B14C00006BC7D6 /* Utils */,
 				D4E55A2E22B14E0E006BC7D6 /* Vendor */,
-				D4A7005222BD2E77004FFF93 /* Network */,
 				D450950722B00CF2002CE6A2 /* Main.storyboard */,
 				D450950A22B00CF4002CE6A2 /* Assets.xcassets */,
 				D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */,
@@ -114,6 +116,7 @@
 		D4A7005222BD2E77004FFF93 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D45F370222C229BC00B2D6BB /* Network.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				D4E559B022B14BAE006BC7D6 /* AuthenticateAPDU.swift in Sources */,
 				D450950422B00CF2002CE6A2 /* AppDelegate.swift in Sources */,
 				D445921E22B13D0200DAD5A7 /* AddFidoViewController.swift in Sources */,
+				D45F370322C229BC00B2D6BB /* Network.swift in Sources */,
 				D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */,
 				D4E55A3722B15027006BC7D6 /* GMEllipticCurveCrypto.m in Sources */,
 				D4E559C122B14C00006BC7D6 /* DataReader.swift in Sources */,

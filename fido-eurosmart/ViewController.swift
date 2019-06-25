@@ -16,14 +16,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submit_button: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    fileprivate let ip = "172.16.103.116"
-    fileprivate let port = "1987" // 1988 : https, 1987: http
-    fileprivate let httpType = "http"
+    fileprivate var network: Network? = nil
     fileprivate var first = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.network = Network()
         username.becomeFirstResponder()
         username.delegate = self
         
@@ -33,7 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if(preferences.object(forKey: "sid") != nil && success == "true")
         {
-            LoginDone()
+            loginDone()
         }
     }
     
@@ -68,90 +67,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        DoLogin(username!,password!)
+        self.network?.doLogin(self,username!,password!)
     }
     
-    func DoLogin(_ user:String,_ pwd:String)
-    {
-        self.activityIndicator.startAnimating()
-        
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
-        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
-        
-        let session = URLSession.shared
-        
-        let request = NSMutableURLRequest(url: url!)
-        request.httpMethod = "GET"
-        
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {
-            (data, response, error) in
-            guard let _:Data = data else
-            {
-                return
-            }
-            
-            let json:Any?
-            
-            do
-            {
-                json = try JSONSerialization.jsonObject(with: data!, options: [])
-            }
-            catch
-            {
-                return
-            }
-            
-            guard let server_response = json as? NSDictionary else
-            {
-                return
-            }
-            
-            if let error = server_response["error"] as? NSDictionary
-            {
-                if let code = error["code"] as? Int
-                {
-                    if (code == 400){
-                        DispatchQueue.main.async {
-                            self.activityIndicator.stopAnimating()
-                            // create the alert
-                            let alert = UIAlertController(title: "Identification problem", message: "The account or password is not valid. Please try again.", preferredStyle: .alert)
-                            // add an action (button)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            // show the alert
-                            self.present(alert, animated: true, completion: nil)
-                            self.password.text = ""
-                        }
-                    }
-                }
-            }
-            
-            if let data_block = server_response["data"] as? NSDictionary
-            {
-                if let session_data = data_block["sid"] as? String
-                {
-                    let preferences = UserDefaults.standard
-                    preferences.set(session_data, forKey: "sid")
-                    preferences.set(server_response["success"], forKey: "success")
-                    DispatchQueue.main.async {
-                        self.activityIndicator.stopAnimating()
-                    }
-                    DispatchQueue.main.async(
-                        execute:self.LoginDone
-                    )
-                }
-            }
-        })
-        
-        task.resume()
-    }
-    
-    func LoginDone()
+    func loginDone()
     {
         print("Connection successful : \(username.text!)")
         let preferences = UserDefaults.standard
         preferences.set(username.text, forKey: "username")
         
-        preferences.set(String(IsFidoInBdd()), forKey: "isFidoRegistered")
+        preferences.set(String(isFidoInBdd()), forKey: "isFidoRegistered")
         performSegue(withIdentifier: "addFidoSegue", sender: self)
         //performSegue(withIdentifier: "directToFiles", sender: self)
     }
@@ -160,7 +85,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // L'utilisateur n'a pas de token fido dans la BDD -> false
     //
     // Si l'utilisateur n'existe pas dans la BDD local on l'ajoute 
-    func IsFidoInBdd() -> Bool
+    func isFidoInBdd() -> Bool
     {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -182,7 +107,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } catch {
             print("Failed")
         }
-        
         
         // Stockage de l'utilisateur en BDD local
         let entity = NSEntityDescription.entity(forEntityName: "User", in: managedContext)!
