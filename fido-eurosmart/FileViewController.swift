@@ -54,12 +54,13 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     func initButtons(){
         backButton.title = ""
+        backButton.image = nil
         backButton.isEnabled = false
         addButton.isEnabled = false
         // Alignement du boutton au centre
         toolBar.sizeToFit()
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        toolBar.items = [flexible,backButton,flexible]
+        toolBar.items = [flexible,backButton,flexible,flexible,flexible,flexible]
     }
     
     @IBAction func addButton(_ sender: Any) {
@@ -117,8 +118,8 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         if(self.listDirFiles[indexPath.row].isDir == true){
             self.generalPath.title = self.listDirFiles[indexPath.row].path
             self.currentPath = self.listDirFiles[indexPath.row].path
-            backButton.title = "Back"
             backButton.isEnabled = true
+            backButton.image = UIImage(named: "backIcon")
             addButton.isEnabled = true
             self.network?.fetchDirectoriesDetails(self,self.listDirFiles[indexPath.row].path,false)
         }else{
@@ -173,6 +174,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             // On fait disparaitre le bouton de retour si on est à la racine
             if (self.lastId == 0){
                 backButton.title = ""
+                backButton.image = nil
                 backButton.isEnabled = false
                 addButton.isEnabled = false
             }
@@ -180,9 +182,16 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     @IBAction func logout(_ sender: Any) {
-        let preferences = UserDefaults.standard
-        preferences.removeObject(forKey: "sid")
-        performSegue(withIdentifier: "logout", sender: self)
+        let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            let preferences = UserDefaults.standard
+            preferences.removeObject(forKey: "sid")
+            self.performSegue(withIdentifier: "logout", sender: self)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
