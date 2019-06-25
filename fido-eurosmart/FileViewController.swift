@@ -8,7 +8,6 @@
 
 import UIKit
 import MobileCoreServices
-import Foundation
 
 class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
