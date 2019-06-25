@@ -11,7 +11,16 @@ final class Network {
     fileprivate(set) var ip = "172.16.103.116"
     fileprivate(set) var port = "1987" // 1988 : https, 1987: http
     fileprivate(set) var httpType = "http"
-    fileprivate var sid = ""
+    var sid = "none"
+    
+    init() {
+        let preferences = UserDefaults.standard
+        if(preferences.object(forKey: "sid") != nil){
+            self.sid = preferences.object(forKey: "sid") as? String ?? "none"
+        }else{
+            self.sid = "none"
+        }
+    }
     
     func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String)
     {
@@ -73,6 +82,8 @@ final class Network {
                 {
                     let preferences = UserDefaults.standard
                     preferences.set(session_data, forKey: "sid")
+                    //Setting the session key attribute
+                    self.sid = session_data
                     preferences.set(server_response["success"], forKey: "success")
                     DispatchQueue.main.async {
                         viewController.activityIndicator.stopAnimating()
@@ -88,8 +99,7 @@ final class Network {
     
     func createFolder(_ fileViewController: FileViewController,_ folderName: String){
         fileViewController.activityIndicator.startAnimating()
-        let preferences = UserDefaults.standard
-        self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
+
         var folderPath = fileViewController.currentPath
         if(folderPath == ""){
             folderPath = "/"
@@ -108,9 +118,7 @@ final class Network {
             {
                 return
             }
-            
             let json:Any?
-            
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
@@ -119,12 +127,10 @@ final class Network {
             {
                 return
             }
-            
             guard let server_response = json as? NSDictionary else
             {
                 return
             }
-            
             if let error = server_response["error"] as? NSDictionary
             {
                 if let code = error["code"] as? Int
@@ -154,7 +160,6 @@ final class Network {
                     }
                 }
             }
-            
             if (server_response["data"] as? NSDictionary) != nil
             {
                 DispatchQueue.main.async {
@@ -168,8 +173,6 @@ final class Network {
     
     func fetchDirectories(_ fileViewController: FileViewController) {
         fileViewController.activityIndicator.startAnimating()
-        let preferences = UserDefaults.standard
-        self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
         
         let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)"// À passer en https, avec cert let's encrypt
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
@@ -185,9 +188,7 @@ final class Network {
             {
                 return
             }
-            
             let json:Any?
-            
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
@@ -196,12 +197,10 @@ final class Network {
             {
                 return
             }
-            
             guard let server_response = json as? NSDictionary else
             {
                 return
             }
-            
             if let data_block = server_response["data"] as? NSDictionary
             {
                 if let JSON = data_block as? [String: Any] {
@@ -242,9 +241,7 @@ final class Network {
             {
                 return
             }
-            
             let json:Any?
-            
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
@@ -253,12 +250,10 @@ final class Network {
             {
                 return
             }
-            
             guard let server_response = json as? NSDictionary else
             {
                 return
             }
-            
             if let data_block = server_response["data"] as? NSDictionary
             {
                 if let JSON = data_block as? [String: Any] {
@@ -296,13 +291,11 @@ final class Network {
             var documentData = Data()
             documentData.append(try Data(contentsOf: urls.first!))
             
-            let preferences = UserDefaults.standard
-            self.sid = String(describing:(preferences.object(forKey: "sid") as? String ?? "default"))
             var folderPath = fileViewController.currentPath
-            print("Folder path: ",folderPath)
             if(folderPath == ""){
                 folderPath = "/"
             }
+            
             let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi"// À passer en https, avec cert let's encrypt
             let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
             
@@ -316,18 +309,14 @@ final class Network {
             request.httpBody = body as Data
             request.addValue(String(describing: body.length), forHTTPHeaderField: "Content-Length")
             request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-            print("http header fields: ",request.allHTTPHeaderFields!)
             
             let task = session.dataTask(with: request as URLRequest, completionHandler: {
                 (data, response, error) in
-                
                 guard let _:Data = data else
                 {
                     return
                 }
-                
                 let json:Any?
-                
                 do
                 {
                     json = try JSONSerialization.jsonObject(with: data!, options: [])
@@ -336,12 +325,10 @@ final class Network {
                 {
                     return
                 }
-                
                 guard let server_response = json as? NSDictionary else
                 {
                     return
                 }
-                
                 if let error = server_response["error"] as? NSDictionary
                 {
                     if let code = error["code"] as? Int

@@ -15,7 +15,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     var listDirFiles = [DirFileData]()
     var lastId = 0
     fileprivate(set) var currentPath = ""
-    fileprivate var sid = ""
     fileprivate var network: Network? = nil
     
     /// Creating UIDocumentInteractionController instance.
@@ -128,7 +127,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             
             // Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
             let path = self.listDirFiles[indexPath.row].path
-            storeAndShare(withURLString: "\(network!.httpType)://\(network!.ip):\(network!.port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(path)&mode=open&_sid=\(sid)",fileName: fileName)
+            storeAndShare(withURLString: "\(network!.httpType)://\(network!.ip):\(network!.port)/webapi/entry.cgi?api=SYNO.FileStation.Download&version=2&method=download&path=\(path)&mode=open&_sid=\(network!.sid)",fileName: fileName)
         }
     }
     
