@@ -3,7 +3,7 @@
 
 Developed for [Eurosmart](https://www.eurosmart.com/)
 
-## Use
+## Use (for Developers)
 To use this application with your **Synology NAS** you simply have to change the **IP**, **PORT** and the **HTTPTYPE** in this file: [Network.swift](/fido-eurosmart/Network/Network.swift)
 
 Please make sure that the following requirements are fulfilled: 
