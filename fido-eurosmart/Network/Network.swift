@@ -164,15 +164,17 @@ final class Network {
             {
                 DispatchQueue.main.async {
                     fileViewController.activityIndicator.stopAnimating()
-                    self.fetchDirectoriesDetails(fileViewController,folderPath, true)
+                    self.fetchDirectoriesDetails(fileViewController,folderPath,noBackButton: true)
                 }
             }
         })
         task.resume()
     }
     
-    func fetchDirectories(_ fileViewController: FileViewController) {
-        fileViewController.activityIndicator.startAnimating()
+    func fetchDirectories(_ fileViewController: FileViewController, refresh: Bool=false) {
+        if(!refresh){
+            fileViewController.activityIndicator.startAnimating()
+        }
         
         let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)"// À passer en https, avec cert let's encrypt
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
@@ -207,26 +209,36 @@ final class Network {
                     guard let jsonArray = JSON["shares"] as? [[String: Any]] else {
                         return
                     }
+                    fileViewController.listDirFiles.removeAll()
                     for json in jsonArray
                     {
                         fileViewController.listDirFiles.append(DirFileData(json))
                     }
                     fileViewController.tabListDirFiles[0] = fileViewController.listDirFiles
                     DispatchQueue.main.async {
-                        fileViewController.activityIndicator.stopAnimating()
+                        if(fileViewController.activityIndicator.isAnimating){
+                            fileViewController.activityIndicator.stopAnimating()
+                        }
                     }
                     DispatchQueue.main.async(
                         execute:fileViewController.fetchDone
                     )
+                    if(refresh){
+                        let deadLine = DispatchTime.now() + .milliseconds(700)
+                        DispatchQueue.main.asyncAfter(deadline: deadLine){
+                            fileViewController.refresher.endRefreshing()
+                        }
+                    }
                 }
             }
         })
         task.resume()
     }
     
-    func fetchDirectoriesDetails(_ fileViewController: FileViewController,_ folder_path: String,_ folderCreation: Bool) {
-        fileViewController.activityIndicator.startAnimating()
-
+    func fetchDirectoriesDetails(_ fileViewController: FileViewController,_ folder_path: String, noBackButton: Bool, refresh: Bool=false) {
+        if(!refresh){
+            fileViewController.activityIndicator.startAnimating()
+        }
         let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folder_path)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
@@ -260,7 +272,7 @@ final class Network {
                     guard let jsonArray = JSON["files"] as? [[String: Any]] else {
                         return
                     }
-                    if(!folderCreation){
+                    if(!noBackButton){
                         fileViewController.lastId+=1
                         fileViewController.tabListDirFiles.insert(fileViewController.listDirFiles, at: fileViewController.lastId)
                     }
@@ -270,11 +282,19 @@ final class Network {
                         fileViewController.listDirFiles.append(DirFileData(json))
                     }
                     DispatchQueue.main.async {
-                        fileViewController.activityIndicator.stopAnimating()
+                        if(fileViewController.activityIndicator.isAnimating){
+                            fileViewController.activityIndicator.stopAnimating()
+                        }
                     }
                     DispatchQueue.main.async(
                         execute:fileViewController.fetchDone
                     )
+                    if(refresh){
+                        let deadLine = DispatchTime.now() + .milliseconds(700)
+                        DispatchQueue.main.asyncAfter(deadline: deadLine){
+                            fileViewController.refresher.endRefreshing()
+                        }
+                    }
                 }
             }
         })
@@ -362,7 +382,7 @@ final class Network {
                 {
                     DispatchQueue.main.async {
                         fileViewController.activityIndicator.stopAnimating()
-                        self.fetchDirectoriesDetails(fileViewController,folderPath, true)
+                        self.fetchDirectoriesDetails(fileViewController,folderPath,noBackButton: true)
                     }
                 }
             })

@@ -28,10 +28,19 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
+    lazy var refresher: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(callRefresh), for: .valueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /// Setting UIDocumentInteractionController delegate.
         documentInteractionController.delegate = self
+        
+        tableView.refreshControl = refresher
         
         self.network = Network()
         
@@ -44,6 +53,15 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "sid") == nil){
             performSegue(withIdentifier: "logout", sender: self)
+        }
+    }
+    
+    @objc
+    func callRefresh(){
+        if (self.currentPath == "" || self.currentPath == "/"){
+            self.network?.fetchDirectories(self,refresh: true)
+        }else{
+            self.network?.fetchDirectoriesDetails(self, self.currentPath,noBackButton: true,refresh: true)
         }
     }
     
@@ -121,7 +139,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             backButton.isEnabled = true
             backButton.image = UIImage(named: "backIcon")
             addButton.isEnabled = true
-            self.network?.fetchDirectoriesDetails(self,self.listDirFiles[indexPath.row].path,false)
+            self.network?.fetchDirectoriesDetails(self,self.listDirFiles[indexPath.row].path,noBackButton: false)
         }else{
             // On ouvre le fichier
             let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true).last ?? "file.txt")
