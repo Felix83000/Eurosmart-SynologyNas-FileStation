@@ -27,6 +27,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var generalPath: UINavigationItem!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var moreButton: UIBarButtonItem!
     
     lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -71,14 +72,30 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     }
     
     func initButtons(){
-        backButton.title = ""
-        backButton.image = nil
         backButton.isEnabled = false
         addButton.isEnabled = false
         // Alignement du boutton au centre
         toolBar.sizeToFit()
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        toolBar.items = [flexible,backButton,flexible,flexible,flexible,flexible]
+        toolBar.items = [flexible,backButton,flexible,flexible,moreButton,flexible]
+    }
+    
+    @IBAction func moreButton(_ sender: Any) {
+        // create the alert
+        let alert = UIAlertController(title: "About", message: "Félix Herrenschmidt developped this application for Eurosmart as an Intern.", preferredStyle: .alert)
+        // add an action (button)
+        let linkAction = UIAlertAction(title: "Check his LinkedIn", style: .default) { (_) in
+            let linkedinHooks = "linkedin://in/felix-herrenschmidt/"
+            if (UIApplication.shared.canOpenURL(URL(string: linkedinHooks)!)){
+                UIApplication.shared.open(URL(string: linkedinHooks)!)
+            }else{
+                UIApplication.shared.open(URL(string:"https://www.linkedin.com/in/felix-herrenschmidt/")!)
+            }
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(linkAction)
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func addButton(_ sender: Any) {
@@ -137,7 +154,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             self.generalPath.title = self.listDirFiles[indexPath.row].path
             self.currentPath = self.listDirFiles[indexPath.row].path
             backButton.isEnabled = true
-            backButton.image = UIImage(named: "backIcon")
             addButton.isEnabled = true
             self.network?.fetchDirectoriesDetails(self,self.listDirFiles[indexPath.row].path,noBackButton: false)
         }else{
@@ -191,8 +207,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             self.lastId-=1
             // On fait disparaitre le bouton de retour si on est à la racine
             if (self.lastId == 0){
-                backButton.title = ""
-                backButton.image = nil
                 backButton.isEnabled = false
                 addButton.isEnabled = false
             }

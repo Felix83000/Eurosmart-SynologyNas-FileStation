@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <navigationItem title="Two Factor Authentication" id="Ihq-NB-Jjv"/>
+                                    <navigationItem title="Two-Factor Authentication" id="Ihq-NB-Jjv"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="xsM-vU-xEP" id="jrB-hc-Jqh"/>
@@ -182,11 +182,11 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0CB-kd-IEn">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem style="plain" id="3cO-lr-XAW">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQW-ry-619">
-                                            <rect key="frame" x="20" y="5" width="164" height="34"/>
+                                            <rect key="frame" x="20" y="10" width="164" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,7 +198,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="9PM-EL-Gpx">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jiT-Xp-fsg">
-                                            <rect key="frame" x="270" y="5.5" width="124" height="33"/>
+                                            <rect key="frame" x="270" y="10.5" width="124" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Stop">
@@ -286,7 +286,7 @@
                                 </connections>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -322,9 +322,15 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
-                                    <barButtonItem image="backIcon" landscapeImage="backIcon" largeContentSizeImage="backIcon" id="qaM-Wi-kJF">
+                                    <barButtonItem image="moreIcon" landscapeImage="moreIcon" largeContentSizeImage="moreIcon" id="UMo-Ai-Q4V">
+                                        <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="moreButton:" destination="sow-9t-UBR" id="2GW-IU-62N"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Back" image="backIcon" landscapeImage="backIcon" largeContentSizeImage="backIcon" id="qaM-Wi-kJF">
                                         <color key="tintColor" red="0.25882352941176473" green="0.54509803921568623" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="backButton:" destination="sow-9t-UBR" id="J4T-5T-i1q"/>
@@ -365,6 +371,7 @@
                         <outlet property="addButton" destination="srd-nk-8r7" id="vQW-WE-c6e"/>
                         <outlet property="backButton" destination="qaM-Wi-kJF" id="6SH-7P-qfy"/>
                         <outlet property="generalPath" destination="09N-fk-4lJ" id="54t-rA-kH7"/>
+                        <outlet property="moreButton" destination="UMo-Ai-Q4V" id="pd7-UK-dpC"/>
                         <outlet property="navBar" destination="q90-Yk-Fax" id="OLf-Iv-rAh"/>
                         <outlet property="tableView" destination="pBH-1W-gbb" id="Xfe-qu-Ib8"/>
                         <outlet property="toolBar" destination="VeO-cH-iPG" id="Kem-vS-n44"/>
@@ -379,9 +386,10 @@
     <resources>
         <image name="Eurosmart" width="840" height="250"/>
         <image name="backIcon" width="30" height="30"/>
+        <image name="moreIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B6E-VI-iuG"/>
-        <segue reference="OCs-Gi-iYg"/>
+        <segue reference="WQJ-t9-td2"/>
+        <segue reference="W4k-OE-Osu"/>
     </inferredMetricsTieBreakers>
 </document>
