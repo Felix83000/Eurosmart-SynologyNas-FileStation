@@ -438,12 +438,6 @@ final class Network {
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: {
             (data, response, error) in
-            if let response = response{
-                print(response)
-            }
-            if let error = error{
-                print(error)
-            }
             guard let _:Data = data else
             {
                 return
@@ -452,7 +446,6 @@ final class Network {
             do
             {
                 json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print(json!)
             }
             catch
             {
