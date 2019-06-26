@@ -1,5 +1,7 @@
 # Eurosmart Drive
-IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) - Developed for [Eurosmart](https://www.eurosmart.com/)
+#### IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) 
+
+Developed for [Eurosmart](https://www.eurosmart.com/)
 
 ## Releases
 You can download all the [Releases](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/releases). 
