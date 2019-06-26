@@ -20,6 +20,8 @@ Please make sure that the following requirements are fulfilled:
     * Export the certificates and keys. Store the certificates (root and server certificates, both have the file extension .crt) in a secure location separately from the key files!
     * Send these .crt files to yourself by email (do not send the keys!). In the mail app on your iPhone tap on the crt files and                follow the steps to install them on your iPhone.
 
+The Synology File Station API [Documentation](https://global.download.synology.com/download/Document/DeveloperGuide/Synology_File_Station_API_Guide.pdf)
+
 ## Releases
 You can download all the [Releases](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/releases). 
 
