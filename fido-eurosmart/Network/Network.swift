@@ -424,4 +424,69 @@ final class Network {
         
         return body
     }
+    
+    func deleteFile(_ fileViewController: FileViewController,_ path: String){
+        fileViewController.activityIndicator.startAnimating()
+        
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.Delete&version=2&method=delete&path=\(path)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
+        
+        let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) in
+            if let response = response{
+                print(response)
+            }
+            if let error = error{
+                print(error)
+            }
+            guard let _:Data = data else
+            {
+                return
+            }
+            let json:Any?
+            do
+            {
+                json = try JSONSerialization.jsonObject(with: data!, options: [])
+                print(json!)
+            }
+            catch
+            {
+                return
+            }
+            guard let server_response = json as? NSDictionary else
+            {
+                return
+            }
+            if let error = server_response["error"] as? NSDictionary
+            {
+                if let code = error["code"] as? Int
+                {
+                    if (code == 900){
+                        DispatchQueue.main.async {
+                            // create the alert
+                            let alert = UIAlertController(title: "Delete Problem", message: "Maybe there is a rights problem. Feel free to contact the administrator.", preferredStyle: .alert)
+                            // add an action (button)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            // show the alert
+                            fileViewController.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        fileViewController.activityIndicator.stopAnimating()
+                    }
+                }
+            }else{
+                DispatchQueue.main.async {
+                    fileViewController.activityIndicator.stopAnimating()
+                    self.fetchDirectoriesDetails(fileViewController,fileViewController.currentPath,noBackButton: true)
+                }
+            }
+        })
+        task.resume()
+    }
 }

@@ -180,6 +180,32 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            if (self.currentPath != "" && self.currentPath != "/"){
+                let alertController = UIAlertController(title: "Delete", message: "Are you sure you want to delete this?", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+                     self.network?.deleteFile(self, self.listDirFiles[indexPath.row].path)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true, completion: nil)
+            }else {
+                let alertController = UIAlertController(title: "Delete", message: "Are you sure you want to delete this?", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+                    let alert = UIAlertController(title: "Delete Problem", message: "Maybe there is a rights problem. Feel free to contact the administrator.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
     @IBAction func backButton(_ sender: Any) {
         // Si on n'est pas au dossier racine
         if (self.lastId != 0){
