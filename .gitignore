@@ -11,6 +11,11 @@
 ehthumbs.db
 Thumbs.db
 
+## UITests
+/Eurosmart DriveUITests
+## Disable this if you create a file
+*.xcscheme
+
 ## Build generated
 build/
 DerivedData/

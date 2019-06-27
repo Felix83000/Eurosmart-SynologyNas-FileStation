@@ -84,7 +84,6 @@ final class Network {
                     preferences.set(session_data, forKey: "sid")
                     //Setting the session key attribute
                     self.sid = session_data
-                    preferences.set(server_response["success"], forKey: "success")
                     DispatchQueue.main.async {
                         viewController.activityIndicator.stopAnimating()
                     }

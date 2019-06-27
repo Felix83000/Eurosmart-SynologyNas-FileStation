@@ -27,10 +27,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         username.delegate = self
         
         let preferences = UserDefaults.standard
-        let success = String(describing: preferences.object(forKey: "success"))
-    
         
-        if(preferences.object(forKey: "sid") != nil && success == "true")
+        if(preferences.object(forKey: "sid") != nil)
         {
             loginDone()
         }
@@ -77,8 +75,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         preferences.set(username.text, forKey: "username")
         
         preferences.set(String(isFidoInBdd()), forKey: "isFidoRegistered")
-        performSegue(withIdentifier: "addFidoSegue", sender: self)
-        //performSegue(withIdentifier: "directToFiles", sender: self)
+        //performSegue(withIdentifier: "addFidoSegue", sender: self)
+        performSegue(withIdentifier: "directToFiles", sender: self)
     }
     
     // L'utilisateur à un token fido dans la BDD -> true
@@ -100,7 +98,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             for data in result as! [NSManagedObject] {
                 // Vérification si l'utilisateur est dans la BDD
                 if (data.value(forKey: "name") as? String ?? "Nothing" == username.text){
-                    // Fido dans la BDD ?
+                    // Is fido registered?
                     return data.value(forKey: "fidotoken") as? Bool ?? false
                 }
             }
