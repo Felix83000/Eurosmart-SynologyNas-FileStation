@@ -83,32 +83,32 @@ static int getRandomNumber(uint64_t *p_vli, int NUM_ECC_DIGITS)
     int success = SecRandomCopyBytes(kSecRandomDefault, NUM_ECC_DIGITS * 8, (uint8_t*)p_vli);
     return (success == 0) ? 1: 0;
     
-//    int l_fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
-//    if(l_fd == -1)
-//    {
-//        l_fd = open("/dev/random", O_RDONLY | O_CLOEXEC);
-//        if(l_fd == -1)
-//        {
-//            return 0;
-//        }
-//    }
-//    
-//    char *l_ptr = (char *)p_vli;
-//    size_t l_left = NUM_ECC_DIGITS * 8;
-//    while(l_left > 0)
-//    {
-//        int l_read = read(l_fd, l_ptr, l_left);
-//        if(l_read <= 0)
-//        { // read failed
-//            close(l_fd);
-//            return 0;
-//        }
-//        l_left -= l_read;
-//        l_ptr += l_read;
-//    }
-//    
-//    close(l_fd);
-//    return 1;
+    //    int l_fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
+    //    if(l_fd == -1)
+    //    {
+    //        l_fd = open("/dev/random", O_RDONLY | O_CLOEXEC);
+    //        if(l_fd == -1)
+    //        {
+    //            return 0;
+    //        }
+    //    }
+    //
+    //    char *l_ptr = (char *)p_vli;
+    //    size_t l_left = NUM_ECC_DIGITS * 8;
+    //    while(l_left > 0)
+    //    {
+    //        int l_read = read(l_fd, l_ptr, l_left);
+    //        if(l_read <= 0)
+    //        { // read failed
+    //            close(l_fd);
+    //            return 0;
+    //        }
+    //        l_left -= l_read;
+    //        l_ptr += l_read;
+    //    }
+    //
+    //    close(l_fd);
+    //    return 1;
 }
 
 static void vli_clear(uint64_t *p_vli, int NUM_ECC_DIGITS)
@@ -613,7 +613,7 @@ static void vli_mmod_fast(uint64_t *p_result, uint64_t *p_product, int NUM_ECC_D
             NSLog(@"Curve undefined; no vli_mmod_fast defined");
             break;
     }
-
+    
 }
 
 /* Computes p_result = (p_left * p_right) % curve_p. */
@@ -968,10 +968,10 @@ static void mod_sqrt(uint64_t *a, int NUM_ECC_DIGITS, uint64_t *curve_p)
     for (int i = 1; i < NUM_ECC_DIGITS; i++) {
         p1[i] = l_result[i] = 0;
     }
-
-//    uint64_t p1[NUM_ECC_DIGITS] = {1};
-//    uint64_t l_result[NUM_ECC_DIGITS] = {1};
-
+    
+    //    uint64_t p1[NUM_ECC_DIGITS] = {1};
+    //    uint64_t l_result[NUM_ECC_DIGITS] = {1};
+    
     /* Since curve_p == 3 (mod 4) for all supported curves, we can
      compute sqrt(a) = a^((curve_p + 1) / 4) (mod curve_p). */
     vli_add(p1, curve_p, p1, NUM_ECC_DIGITS); /* p1 = curve_p + 1 */
@@ -1038,10 +1038,10 @@ int ecc_make_key(uint8_t *p_publicKey, uint8_t *p_privateKey, int NUM_ECC_DIGITS
         
         EccPoint_mult(l_publicX, l_publicY, curve_GX, curve_GY, l_private, NULL, vli_numBits(l_private, NUM_ECC_DIGITS), NUM_ECC_DIGITS, curve_p);
         //EccPoint_mult(&l_public, &curve_G, l_private, NULL, vli_numBits(l_private));
-
+        
     } while(EccPoint_isZero(l_publicX, l_publicY, NUM_ECC_DIGITS));
     //} while(EccPoint_isZero(&l_public, NUM_ECC_DIGITS));
-
+    
     ecc_native2bytes(p_privateKey, l_private, NUM_ECC_DIGITS);
     ecc_native2bytes(p_publicKey + 1, l_publicX, NUM_ECC_DIGITS);
     p_publicKey[0] = 2 + (l_publicY[0] & 0x01);
@@ -1293,7 +1293,7 @@ int ecdsa_verify(const uint8_t *p_publicKey, const uint8_t *p_hash, const uint8_
         copy_ecc_point(l_pointX, l_pointY, &l_pointsX[l_index * NUM_ECC_DIGITS], &l_pointsY[l_index * NUM_ECC_DIGITS], NUM_ECC_DIGITS);
         //l_point = l_points[l_index];
         if(l_index)
-        //if(l_point)
+            //if(l_point)
         {
             vli_set(tx, l_pointX, NUM_ECC_DIGITS);
             vli_set(ty, l_pointY, NUM_ECC_DIGITS);
@@ -1371,16 +1371,16 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
 }
 
 + (GMEllipticCurve)curveForKey:(NSData *)privateOrPublicKey {
-
+    
     NSInteger length = [privateOrPublicKey length];
-
+    
     // We need at least 1 byte
     if (length == 0) {
         return GMEllipticCurveNone;
     }
-
+    
     const uint8_t *bytes = [privateOrPublicKey bytes];
-
+    
     // Odd-length, therefore a public key
     if (length % 2) {
         switch (bytes[0]) {
@@ -1394,7 +1394,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
                 return GMEllipticCurveNone;
         }
     }
-
+    
     switch (length) {
         case 16:
             return GMEllipticCurveSecp128r1;
@@ -1405,7 +1405,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
         case 48:
             return GMEllipticCurveSecp384r1;
     }
-
+    
     return GMEllipticCurveNone;
 }
 
@@ -1439,7 +1439,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     self = [super init];
     if (self) {
         _compressedPublicKey = YES;
-
+        
         _bits = curve;
         _bytes = _bits / 8;
         _numDigits = _bytes / 8;
@@ -1482,7 +1482,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
                 return nil;
                 break;
         }
-
+        
     }
     return self;
 }
@@ -1491,7 +1491,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
 - (BOOL)generateNewKeyPair {
     uint8_t l_public[_bytes + 1];
     uint8_t l_private[_bytes];
-        
+    
     BOOL success = ecc_make_key(l_public, l_private, _numDigits, _curve_p, _curve_n, _curve_Gx, _curve_Gy);
     
     _publicKey = [NSData dataWithBytes:l_public length:_bytes + 1];
@@ -1512,18 +1512,18 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
         [NSException raise:@"Invalid Key" format:@"Private key %@ is invalid", _privateKey];
     }
     [_privateKey getBytes:&l_private length:[_privateKey length]];
-
+    
     // Prepare the public key
     uint8_t l_other_public[_bytes + 1];
     if ([otherPublicKey length] != _bytes + 1) {
         [NSException raise:@"Invalid Key" format:@"Public key %@ is invalid", otherPublicKey];
     }
     [otherPublicKey getBytes:&l_other_public length:[otherPublicKey length]];
-
+    
     // Create the secret
     uint8_t l_secret[_bytes];
     int success = ecdh_shared_secret(l_other_public, l_private, l_secret, _numDigits, _curve_p, _curve_b);
-
+    
     if (!success) { return nil; }
     
     return [NSData dataWithBytes:l_secret length:_bytes];
@@ -1539,7 +1539,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     if (!_privateKey) {
         [NSException raise:@"Missing Key" format:@"Cannot sign a hash without a private key"];
     }
-
+    
     // Prepare the private key
     uint8_t l_private[_bytes];
     if ([_privateKey length] != _bytes) {
@@ -1557,7 +1557,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     // Create the signature
     uint8_t l_signature[2 * _bytes];
     int success = ecdsa_sign(l_private, l_hash, l_signature, _numDigits, _curve_p, _curve_n, _curve_Gx, _curve_Gy);
-
+    
     if (!success) { return nil; }
     
     return [NSData dataWithBytes:l_signature length:2 * _bytes];
@@ -1568,28 +1568,28 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     if (!_publicKey) {
         [NSException raise:@"Missing Key" format:@"Cannot verify signature without a public key"];
     }
-
+    
     // Prepare the signature
     uint8_t l_signature[2 * _bytes];
     if ([signature length] != 2 * _bytes) {
         [NSException raise:@"Invalid signature" format:@"Signature must be twice the length of its curve"];
     }
     [signature getBytes:&l_signature length:[signature length]];
-
+    
     // Prepare the public key
     uint8_t l_public[_bytes + 1];
     if ([_publicKey length] != _bytes + 1) {
         [NSException raise:@"Invalid Key" format:@"Public key %@ is invalid", _publicKey];
     }
     [_publicKey getBytes:&l_public length:[_publicKey length]];
-
+    
     // Prepare the hash
     uint8_t l_hash[_bytes];
     if ([hash length] != _bytes) {
         [NSException raise:@"Invalid hash" format:@"Verifying requires a hash the same length as the curve"];
     }
     [hash getBytes:&l_hash length:[hash length]];
-
+    
     // Check the signature
     return ecdsa_verify(l_public, l_hash, l_signature, _numDigits, _curve_p, _curve_b, _curve_n, _curve_Gx, _curve_Gy);
 }
@@ -1611,7 +1611,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
 
 
 - (NSData*)publicKeyForPrivateKey: (NSData*)privateKey {
-
+    
     // Prepare the private key
     uint8_t l_privateBytes[_bytes];
     if ([privateKey length] != _bytes) {
@@ -1620,99 +1620,108 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     [privateKey getBytes:&l_privateBytes length:[privateKey length]];
     uint64_t l_private[_numDigits];
     ecc_bytes2native(l_private, l_privateBytes, _numDigits);
-
+    
     // The (x, y) public point
     uint64_t l_publicX[_numDigits], l_publicY[_numDigits];
     EccPoint_mult(l_publicX, l_publicY, _curve_Gx, _curve_Gy, l_private, NULL, vli_numBits(l_private, _numDigits), _numDigits, _curve_p);
-
+    
     // Now compress the point into our public key
     uint8_t l_public[_bytes + 1];
     ecc_native2bytes(l_public + 1, l_publicX, _numDigits);
     l_public[0] = 2 + (l_publicY[0] & 0x01);
-
+    
     return [NSData dataWithBytes:l_public length:_bytes + 1];
 }
 
 - (NSData*)compressPublicKey: (NSData*)publicKey {
-
+    
     NSInteger length = [publicKey length];
-
+    
     if (length == 0) {
         return nil;
     }
-
+    
     const uint8_t *bytes = [publicKey bytes];
-
+    
     switch (bytes[0]) {
-
-        // Already compressed
+            
+            // Already compressed
         case 0x02: case 0x03:
             if (length != (1 + _bytes)) {
                 return nil;
             }
-
+            
             return publicKey;
-
-        // Compress!
+            
+            // Compress!
         case 0x04: {
             if (length != (1 + 2 * _bytes)) {
                 return nil;
             }
-
+            
             // Get the (x, y) point from the public key
             uint64_t l_publicX[_numDigits], l_publicY[_numDigits];
             ecc_bytes2native(l_publicX, &bytes[1], _numDigits);
             ecc_bytes2native(l_publicY, &bytes[1 + _bytes], _numDigits);
-
+            
             // And compress
             uint8_t l_public[_bytes + 1];
             ecc_native2bytes(l_public + 1, l_publicX, _numDigits);
             l_public[0] = 2 + (l_publicY[0] & 0x01);
-
+            
             return [NSData dataWithBytes:l_public length:_bytes + 1];
         }
     }
-
+    
     return nil;
 }
 
 - (NSData*)decompressPublicKey: (NSData*)publicKey {
     NSInteger length = [publicKey length];
-
+    
     if (length == 0) {
         return nil;
     }
-
+    
     const uint8_t *bytes = [publicKey bytes];
-
+    
     switch (bytes[0]) {
-
-        // Already uncompressed
+            
+            // Already uncompressed
         case 0x04:
             if (length != (1 + 2 * _bytes)) {
                 return nil;
             }
             return publicKey;
-
+            
         case 0x02: case 0x03: {
             if (length != (1 + _bytes)) {
                 return nil;
             }
-
+            
             // Decompress to get the (x, y) point
             uint64_t l_publicX[_numDigits], l_publicY[_numDigits];
             ecc_point_decompress(l_publicX, l_publicY, [_publicKey bytes], _numDigits, _curve_p, _curve_b);
-
+            
             // Compose the public key (0x04 + x + y)
             uint8_t l_public[2 * _bytes + 1];
             l_public[0] = 0x04;
             ecc_native2bytes(l_public + 1, l_publicX, _numDigits);
             ecc_native2bytes(l_public + 1 + _bytes, l_publicY, _numDigits);
-
+            
+            uint8_t l_publicXBytes[_bytes];
+            uint8_t l_publicYBytes[_bytes];
+            ecc_native2bytes(l_publicXBytes, l_publicX, _numDigits);
+            ecc_native2bytes(l_publicYBytes, l_publicY, _numDigits);
+            
+            self.publicKeyBase64 = [[NSData dataWithBytes:l_publicXBytes length:_bytes] base64EncodedStringWithOptions:NSUTF8StringEncoding];
+            
+            self.publicKeyBase64 = [[NSData dataWithBytes:l_publicYBytes length:_bytes] base64EncodedStringWithOptions:NSUTF8StringEncoding];
+            
             return [NSData dataWithBytes:l_public length:2 * _bytes + 1];
         }
     }
-
+    
     return nil;
 }
 
@@ -1726,7 +1735,7 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     if (keyBits != _bits) {
         [NSException raise:@"Invalid Key" format:@"Private key %@ is %d bits; curve is %d bits", privateKey, keyBits, _bits];
     }
-
+    
     NSData *checkPublicKey = [self publicKeyForPrivateKey:privateKey];
     if (_publicKey && ![_publicKey isEqual:checkPublicKey]) {
         [NSException raise:@"Key mismatch" format:@"Private key %@ does not match public key %@", privateKey, _publicKey];
@@ -1759,18 +1768,18 @@ static uint64_t Curve_n_384[6] = {0xECEC196ACCC52973, 0x581A0DB248B0A77A, 0xC763
     if (keyBits != _bits) {
         [NSException raise:@"Invalid Key" format:@"Public key %@ is %d bits; curve is %d bits", publicKey, keyBits, _bits];
     }
-
+    
     const uint8_t *bytes = [publicKey bytes];
     BOOL compressedPublicKey = (bytes[0] != (uint8_t)0x04);
-
+    
     // Ensure the key is compressed (we only store compressed keys internally)
     publicKey = [self compressPublicKey:publicKey];
-
+    
     // If the private key has already been set, and it doesn't match, complain
     if (_privateKey && ![publicKey isEqual:_publicKey]) {
         [NSException raise:@"Key mismatch" format:@"Private key %@ does not match public key %@", _privateKey, publicKey];
     }
-
+    
     _compressedPublicKey = compressedPublicKey;
     _publicKey = publicKey;
 }
