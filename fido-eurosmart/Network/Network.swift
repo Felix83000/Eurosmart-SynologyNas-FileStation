@@ -38,6 +38,7 @@ final class Network {
             (data, response, error) in
             guard let _:Data = data else
             {
+                viewController.activityIndicator.stopAnimating()
                 return
             }
             
@@ -115,6 +116,7 @@ final class Network {
             (data, response, error) in
             guard let _:Data = data else
             {
+                fileViewController.activityIndicator.stopAnimating()
                 return
             }
             let json:Any?
@@ -187,6 +189,7 @@ final class Network {
             (data, response, error) in
             guard let _:Data = data else
             {
+                fileViewController.activityIndicator.stopAnimating()
                 return
             }
             let json:Any?
@@ -250,6 +253,7 @@ final class Network {
             (data, response, error) in
             guard let _:Data = data else
             {
+                fileViewController.activityIndicator.stopAnimating()
                 return
             }
             let json:Any?
@@ -333,6 +337,7 @@ final class Network {
                 (data, response, error) in
                 guard let _:Data = data else
                 {
+                    fileViewController.activityIndicator.stopAnimating()
                     return
                 }
                 let json:Any?
@@ -439,6 +444,7 @@ final class Network {
             (data, response, error) in
             guard let _:Data = data else
             {
+                fileViewController.activityIndicator.stopAnimating()
                 return
             }
             let json:Any?

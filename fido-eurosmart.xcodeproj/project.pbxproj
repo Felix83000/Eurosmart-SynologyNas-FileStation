@@ -31,6 +31,7 @@
 		D4E559C322B14C00006BC7D6 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E559BC22B14C00006BC7D6 /* Keychain.m */; };
 		D4E55A3622B15027006BC7D6 /* GMEllipticCurveCrypto+hash.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E55A3422B15027006BC7D6 /* GMEllipticCurveCrypto+hash.m */; };
 		D4E55A3722B15027006BC7D6 /* GMEllipticCurveCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E55A3522B15027006BC7D6 /* GMEllipticCurveCrypto.m */; };
+		D4ECB64E22CBA24E0017ACCA /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ECB64D22CBA24E0017ACCA /* NetworkCheck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		D4E55A3422B15027006BC7D6 /* GMEllipticCurveCrypto+hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GMEllipticCurveCrypto+hash.m"; sourceTree = "<group>"; };
 		D4E55A3522B15027006BC7D6 /* GMEllipticCurveCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMEllipticCurveCrypto.m; sourceTree = "<group>"; };
 		D4E55A3822B15116006BC7D6 /* fido-eurosmart-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fido-eurosmart-Bridging-Header.h"; sourceTree = "<group>"; };
+		D4ECB64D22CBA24E0017ACCA /* NetworkCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		D4A7005222BD2E77004FFF93 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D4ECB64D22CBA24E0017ACCA /* NetworkCheck.swift */,
 				D45F370222C229BC00B2D6BB /* Network.swift */,
 			);
 			path = Network;
@@ -323,6 +326,7 @@
 				D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */,
 				D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */,
 				D4E559B022B14BAE006BC7D6 /* AuthenticateAPDU.swift in Sources */,
+				D4ECB64E22CBA24E0017ACCA /* NetworkCheck.swift in Sources */,
 				D450950422B00CF2002CE6A2 /* AppDelegate.swift in Sources */,
 				D445921E22B13D0200DAD5A7 /* AddFidoViewController.swift in Sources */,
 				D45F370322C229BC00B2D6BB /* Network.swift in Sources */,

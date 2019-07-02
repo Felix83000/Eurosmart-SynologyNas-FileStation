@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import Network
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserver {
 
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -18,6 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate var network: Network? = nil
     fileprivate var first = true
+    fileprivate var networkCheck: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if(preferences.object(forKey: "sid") != nil)
         {
             loginDone()
+        }
+        
+        if #available(iOS 12.0, *) {
+            self.networkCheck = NetworkCheck.sharedInstance()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 12.0, *) {
+            if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
+                // create the alert
+                let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
+            }
+            (networkCheck as! NetworkCheck).addObserver(observer: self)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if #available(iOS 12.0, *) {
+            (networkCheck as! NetworkCheck).removeObserver(observer: self)
+        }
+        super.viewWillDisappear(animated)
+    }
+    
+    @available(iOS 12.0, *)
+    func statusDidChange(status: NWPath.Status) {
+        if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
+            // create the alert
+            let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

@@ -8,14 +8,16 @@
 
 import UIKit
 import MobileCoreServices
+import Network
 
-class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource, NetworkCheckObserver {
 
     var tabListDirFiles = [[DirFileData]()]// Tableau des différentes requêtes
     var listDirFiles = [DirFileData]()
     var lastId = 0
     fileprivate(set) var currentPath = ""
     fileprivate var network: Network? = nil
+    fileprivate var networkCheck: Any?
     
     /// Creating UIDocumentInteractionController instance.
     fileprivate let documentInteractionController = UIDocumentInteractionController()
@@ -48,12 +50,50 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         initButtons()
         
         self.network?.fetchDirectories(self)
+        
+        if #available(iOS 12.0, *) {
+            self.networkCheck = NetworkCheck.sharedInstance()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         let preferences = UserDefaults.standard
         if(preferences.object(forKey: "sid") == nil){
             performSegue(withIdentifier: "logout", sender: self)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 12.0, *) {
+            if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
+                // create the alert
+                let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
+            }
+            (networkCheck as! NetworkCheck).addObserver(observer: self)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if #available(iOS 12.0, *) {
+            (networkCheck as! NetworkCheck).removeObserver(observer: self)
+        }
+        super.viewWillDisappear(animated)
+    }
+    
+    @available(iOS 12.0, *)
+    func statusDidChange(status: NWPath.Status) {
+        if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
+            // create the alert
+            let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
