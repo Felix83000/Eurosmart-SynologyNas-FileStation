@@ -34,7 +34,6 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         {
             loginDone()
         }
-        
         if #available(iOS 12.0, *) {
             self.networkCheck = NetworkCheck.sharedInstance()
         }
@@ -45,7 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         if #available(iOS 12.0, *) {
             if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
                 // create the alert
-                let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Network problem", message: "Check your network connection.", preferredStyle: .alert)
                 // add an action (button)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 // show the alert
@@ -66,7 +65,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     func statusDidChange(status: NWPath.Status) {
         if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
             // create the alert
-            let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Network problem", message: "Check your network connection.", preferredStyle: .alert)
             // add an action (button)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             // show the alert
