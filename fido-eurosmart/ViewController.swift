@@ -114,8 +114,8 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         preferences.set(username.text, forKey: "username")
         
         preferences.set(String(isFidoInBdd()), forKey: "isFidoRegistered")
-        //performSegue(withIdentifier: "addFidoSegue", sender: self)
-        performSegue(withIdentifier: "directToFiles", sender: self)
+        performSegue(withIdentifier: "addFidoSegue", sender: self)
+        //performSegue(withIdentifier: "directToFiles", sender: self)
     }
     // MARK: DatabaseManager
     /**
