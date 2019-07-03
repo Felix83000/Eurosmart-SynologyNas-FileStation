@@ -2,7 +2,8 @@
 #### IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) 
 
 Works on all IOS platforms. 
-Developed for [Eurosmart](https://www.eurosmart.com/)
+
+Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
 
 ## Use (for Developers)
 To use this application with your **Synology NAS** you simply have to change the **IP**, **PORT** and the **HTTPTYPE** in this file: [Network.swift](/fido-eurosmart/Network/Network.swift)
