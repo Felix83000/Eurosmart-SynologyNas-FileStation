@@ -150,7 +150,7 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
     
     // MARK: DatabaseManager
     /**
-     **Fetch** MultiPass FIDO Certificate **informations** into the Database and **set** these into **registerAPDU** instance.
+    Fetch MultiPass FIDO Certificate **informations** into the Database and **set** these into **registerAPDU** instance.
      */
     func fetchCertificate(){
         let appDelegate = UIApplication.shared.delegate as? AppDelegate ?? AppDelegate()

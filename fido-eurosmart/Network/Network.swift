@@ -9,8 +9,11 @@
 import UIKit
 
 final class Network {
+    /// The `ip` variable is use to reach a Synology NAS, please fill it with your NAS `ip`.
     fileprivate(set) var ip = "172.16.103.116"
+    /// The `port` variable is use to reach a Synology NAS, please fill it with your NAS `port`.
     fileprivate(set) var port = "1987" // 1988 : https, 1987: http
+    /// If you want to configure **API Requests** in **http** or **https** change this `httpType` variable.
     fileprivate(set) var httpType = "http"
     var sid = "none"
     
@@ -438,7 +441,7 @@ final class Network {
      - Parameter contentFile: Content of the file the user wants to upload.
      - Parameter selectedFileUrl: Local application url to the file selected.
      - Parameter boundary: Boundary.
-     - Parameter folderPath: Synology FileStation path to the folder needed to upload the file.
+     - Parameter folderPath: Synology FileStation path to the wanted folder to upload the file.
      */
     func createBody(contentFile: Data,_ folderPath: String,_ selectedFileUrl: URL,_ boundary: String) -> NSMutableData {
         let body = NSMutableData()
