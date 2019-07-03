@@ -20,6 +20,7 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9f7-nI-Ovh">
                                 <rect key="frame" x="20" y="428" width="374" height="40"/>
+                                <color key="tintColor" red="0.25882352939999997" green="0.5450980392" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <accessibility key="accessibilityConfiguration" label="Username"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UQ0-bl-pK7"/>
@@ -30,6 +31,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-xi-FkN">
                                 <rect key="frame" x="20" y="473" width="374" height="40"/>
+                                <color key="tintColor" red="0.25882352939999997" green="0.5450980392" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ogs-E6-mB4"/>
                                 </constraints>
@@ -70,10 +72,12 @@
                             <constraint firstItem="CBn-fU-5KC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1WY-VA-eHP"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="centerX" secondItem="Wf0-75-kyJ" secondAttribute="centerX" id="8bu-PB-5qW"/>
                             <constraint firstItem="CBn-fU-5KC" firstAttribute="top" secondItem="Wf0-75-kyJ" secondAttribute="bottom" constant="15" id="Fm8-TR-ZpR"/>
+                            <constraint firstItem="9f7-nI-Ovh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LRE-MC-ydh"/>
                             <constraint firstItem="VK9-xi-FkN" firstAttribute="top" secondItem="9f7-nI-Ovh" secondAttribute="bottom" constant="5" id="NRA-8d-AYo"/>
                             <constraint firstItem="Wf0-75-kyJ" firstAttribute="top" secondItem="yRB-aj-1sJ" secondAttribute="bottom" constant="40" id="PCQ-7Q-i2z"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="TpJ-d2-pY8"/>
                             <constraint firstItem="9f7-nI-Ovh" firstAttribute="top" secondItem="Wf0-75-kyJ" secondAttribute="bottom" constant="43" id="V4R-Qk-ei8"/>
+                            <constraint firstItem="9f7-nI-Ovh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="WK9-rq-qal"/>
                             <constraint firstItem="hUe-An-fW8" firstAttribute="centerX" secondItem="Wf0-75-kyJ" secondAttribute="centerX" id="Yvz-18-mg8"/>
                             <constraint firstItem="hUe-An-fW8" firstAttribute="top" secondItem="VK9-xi-FkN" secondAttribute="bottom" constant="22" id="ee1-98-ENN"/>
                             <constraint firstItem="yRB-aj-1sJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ftl-aQ-blC"/>
@@ -182,11 +186,11 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0CB-kd-IEn">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" id="3cO-lr-XAW">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MQW-ry-619">
-                                            <rect key="frame" x="20" y="10" width="164" height="34"/>
+                                            <rect key="frame" x="20" y="5" width="140" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,7 +202,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="9PM-EL-Gpx">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jiT-Xp-fsg">
-                                            <rect key="frame" x="270" y="10.5" width="124" height="33"/>
+                                            <rect key="frame" x="300" y="5.5" width="94" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Stop">
@@ -243,8 +247,11 @@
                         <outlet property="navBar" destination="bbK-2s-ytc" id="1xR-P1-qx4"/>
                         <outlet property="registerButton" destination="dQG-9V-iT1" id="AcQ-LK-v1g"/>
                         <outlet property="scanButton" destination="MQW-ry-619" id="a8X-lp-L9d"/>
+                        <outlet property="scanButtonItem" destination="3cO-lr-XAW" id="rrQ-mF-FZR"/>
                         <outlet property="stateLabel" destination="lbc-Rb-kVu" id="mLU-mH-u9k"/>
                         <outlet property="stopButton" destination="jiT-Xp-fsg" id="bUU-OY-6r9"/>
+                        <outlet property="stopButtonItem" destination="9PM-EL-Gpx" id="UKb-dI-7H4"/>
+                        <outlet property="toolBar" destination="0CB-kd-IEn" id="X5e-yJ-yc5"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutFido" modalTransitionStyle="flipHorizontal" id="W4k-OE-Osu"/>
                         <segue destination="sow-9t-UBR" kind="presentation" identifier="fileSegue" id="WQJ-t9-td2"/>
                     </connections>
@@ -286,7 +293,7 @@
                                 </connections>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-1W-gbb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -322,7 +329,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeO-cH-iPG">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem image="moreIcon" landscapeImage="moreIcon" largeContentSizeImage="moreIcon" id="UMo-Ai-Q4V">
                                         <color key="tintColor" red="0.088955707849999996" green="0.55313080550000004" blue="0.61759221549999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -389,7 +396,7 @@
         <image name="moreIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WQJ-t9-td2"/>
+        <segue reference="B6E-VI-iuG"/>
         <segue reference="W4k-OE-Osu"/>
     </inferredMetricsTieBreakers>
 </document>

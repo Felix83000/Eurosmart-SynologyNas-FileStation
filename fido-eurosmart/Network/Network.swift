@@ -5,6 +5,7 @@
 //  Created by FelixMac on 25/06/2019.
 //  Copyright © 2019 Eurosmart. All rights reserved.
 //
+
 import UIKit
 
 final class Network {
@@ -22,6 +23,14 @@ final class Network {
         }
     }
     
+    // MARK: API Requests
+    /**
+     Login Request to **Synology FileStation API**. Connect the user if the request is successful. Also handle errors.
+     
+     - Parameter viewController: Permit access to local Controller attributes.
+     - Parameter user: Username who have to correspond to the NAS LDAP user.
+     - Parameter pwd: Password who have also to correspond to the NAS LDAP user.
+     */
     func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String)
     {
         viewController.activityIndicator.startAnimating()
@@ -97,6 +106,12 @@ final class Network {
         task.resume()
     }
     
+    /**
+     Create Request to **Synology FileStation API**. Create the folder if the request is successful. Also handle errors.
+     
+     - Parameter fileViewController: Permit access to local Controller attributes.
+     - Parameter folderName: FolderName that the user wants to create.
+     */
     func createFolder(_ fileViewController: FileViewController,_ folderName: String){
         fileViewController.activityIndicator.startAnimating()
 
@@ -172,6 +187,12 @@ final class Network {
         task.resume()
     }
     
+    /**
+     List Share Request to **Synology FileStation API**. List the shared folders if the request is successful. Also handle errors.
+     
+     - Parameter fileViewController: Permit access to local Controller attributes.
+     - Parameter refresh: If the dev wants to use this function to refresh. Refresher indicator ends after the request response.
+     */
     func fetchDirectories(_ fileViewController: FileViewController, refresh: Bool=false) {
         if(!refresh){
             fileViewController.activityIndicator.startAnimating()
@@ -237,11 +258,19 @@ final class Network {
         task.resume()
     }
     
-    func fetchDirectoriesDetails(_ fileViewController: FileViewController,_ folder_path: String, noBackButton: Bool, refresh: Bool=false) {
+    /**
+     List Request to **Synology FileStation API**. List the folder needed if the request is successful. Also handle errors.
+     
+     - Parameter fileViewController: Permit access to local Controller attributes.
+     - Parameter refresh: If the dev wants to use this function to refresh. Refresher indicator ends after the request response.
+     - Parameter folderPath: Synology FileStation path to the folder needed.
+     - Parameter noBackButton: If the dev wants to use this function without enable back button history.
+     */
+    func fetchDirectoriesDetails(_ fileViewController: FileViewController,_ folderPath: String, noBackButton: Bool, refresh: Bool=false) {
         if(!refresh){
             fileViewController.activityIndicator.startAnimating()
         }
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folder_path)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folderPath)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         let session = URLSession.shared
@@ -304,6 +333,12 @@ final class Network {
         task.resume()
     }
     
+    /**
+     Upload Request to **Synology FileStation API**. Upload the file needed if the request is successful. Also handle errors.
+     
+     - Parameter fileViewController: Permit access to local Controller attributes.
+     - Parameter urls: **Local** application Urls of **selected files**. In our case it is only **one url** to the file selected.
+     */
     func uploadFile(_ fileViewController: FileViewController,_ urls: [URL]){
         guard let selectedFileURL = urls.first else {
             return
@@ -397,6 +432,14 @@ final class Network {
         }
     }
     
+    /**
+     Create the http POST body.
+     
+     - Parameter contentFile: Content of the file the user wants to upload.
+     - Parameter selectedFileUrl: Local application url to the file selected.
+     - Parameter boundary: Boundary.
+     - Parameter folderPath: Synology FileStation path to the folder needed to upload the file.
+     */
     func createBody(contentFile: Data,_ folderPath: String,_ selectedFileUrl: URL,_ boundary: String) -> NSMutableData {
         let body = NSMutableData()
         
@@ -429,6 +472,12 @@ final class Network {
         return body
     }
     
+    /**
+     Delete Request to **Synology FileStation API**. Delete the folder or file needed if the request is successful. Also handle errors.
+     
+     - Parameter fileViewController: Permit access to local Controller attributes.
+     - Parameter path: Synology FileStation path to the folder or file the user wants to delete.
+     */
     func deleteFile(_ fileViewController: FileViewController,_ path: String){
         fileViewController.activityIndicator.startAnimating()
         

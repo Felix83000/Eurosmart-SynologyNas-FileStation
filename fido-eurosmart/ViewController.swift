@@ -43,12 +43,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         super.viewWillAppear(animated)
         if #available(iOS 12.0, *) {
             if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
-                // create the alert
-                let alert = UIAlertController(title: "Network problem", message: "Check your network connection.", preferredStyle: .alert)
-                // add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
+                alertNetwork()
             }
             (networkCheck as! NetworkCheck).addObserver(observer: self)
         }
@@ -64,13 +59,14 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     @available(iOS 12.0, *)
     func statusDidChange(status: NWPath.Status) {
         if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
-            // create the alert
-            let alert = UIAlertController(title: "Network problem", message: "Check your network connection.", preferredStyle: .alert)
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            // show the alert
-            self.present(alert, animated: true, completion: nil)
+            alertNetwork()
         }
+    }
+    
+    func alertNetwork(){
+        let alert = UIAlertController(title: "Network problem", message: "Check your network connection.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -81,21 +77,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (first){
-            username.resignFirstResponder()
-            password.becomeFirstResponder()
-            password.delegate = self
-            first = false
-        }else{
-            password.resignFirstResponder()
-            first = true
-            submit(self)
-        }
-        // On retourne false pour dire qu'on ne veut pas que le boutton retour fasse un retour de base
-        return false
-    }
-
+    // MARK: Action Buttons
     @IBAction func submit(_ sender: Any) {
         let username = self.username.text
         let password = self.password.text
@@ -107,6 +89,24 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         self.network?.doLogin(self,username!,password!)
     }
     
+    // MARK: Update UI
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (first){
+            username.resignFirstResponder()
+            password.becomeFirstResponder()
+            password.delegate = self
+            first = false
+        }else{
+            password.resignFirstResponder()
+            first = true
+            submit(self)
+        }
+        return false
+    }
+    
+    /**
+     Set the **username** and **FIDO multipass** verification in the **preferences** and perform a segue to **AddFidoViewController**
+     */
     func loginDone()
     {
         print("Connection successful : \(username.text!)")
@@ -117,11 +117,15 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         //performSegue(withIdentifier: "addFidoSegue", sender: self)
         performSegue(withIdentifier: "directToFiles", sender: self)
     }
-    
-    // L'utilisateur à un token fido dans la BDD -> true
-    // L'utilisateur n'a pas de token fido dans la BDD -> false
-    //
-    // Si l'utilisateur n'existe pas dans la BDD local on l'ajoute 
+    // MARK: DatabaseManager
+    /**
+     Check if the user exist in database and if he has already register a FIDO multipass or not.
+     If the user does not exist in the local database, he is added.
+     
+     - Returns:
+        - **true**: The user has a fido token in the Database
+        - **false**: The user does not have a fido token in the Database or does not exist
+     */
     func isFidoInBdd() -> Bool
     {
         guard let appDelegate =
@@ -135,7 +139,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         do {
             let result = try managedContext.fetch(request)
             for data in result as! [NSManagedObject] {
-                // Vérification si l'utilisateur est dans la BDD
+                // Checking if the user is in the Database
                 if (data.value(forKey: "name") as? String ?? "Nothing" == username.text){
                     // Is fido registered?
                     return data.value(forKey: "fidotoken") as? Bool ?? false
@@ -145,7 +149,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
             print("Failed")
         }
         
-        // Stockage de l'utilisateur en BDD local
+        // Storing the user in the local database
         let entity = NSEntityDescription.entity(forEntityName: "User", in: managedContext)!
         let person = NSManagedObject(entity: entity, insertInto: managedContext)
         
@@ -156,7 +160,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        // On retourne false car l'utilisateur n'est pas dans la base et ne possède pas de token
+        // User is not in bdd and do not have FIDO registered
         return false
     }
 }

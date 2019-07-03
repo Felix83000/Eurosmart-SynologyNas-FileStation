@@ -1,9 +1,9 @@
 //
 //  AuthenticateAPDU.swift
-//  u2f-ble-test-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 17/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -60,7 +60,7 @@ final class AuthenticateAPDU: APDUType {
     func parseResponse(_ data: Data) -> Bool {
         let reader = DataReader(data: data)
 
-        // flags
+        // Flags
         guard
             let userPresenceFlag = reader.readNextUInt8(),
             let counter = reader.readNextBigEndianUInt32()
@@ -68,7 +68,7 @@ final class AuthenticateAPDU: APDUType {
             return false
         }
         
-        // signature
+        // Signature
         guard let derSequence = reader.readNextUInt8(), derSequence == type(of: self).derSeqByte else { return false }
         guard
             let signatureLength = reader.readNextUInt8(),
@@ -93,5 +93,4 @@ final class AuthenticateAPDU: APDUType {
 
         return true
     }
-    
 }

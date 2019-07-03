@@ -55,6 +55,7 @@
 		D450950D22B00CF4002CE6A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D450950F22B00CF4002CE6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F370222C229BC00B2D6BB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		D473895722CCAF5C004DFB1C /* fido-eurosmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fido-eurosmart.entitlements"; sourceTree = "<group>"; };
 		D484C04C22C4AE7400F9D35A /* Eurosmart DriveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Eurosmart DriveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D484C04E22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eurosmart_DriveUITests.swift; sourceTree = "<group>"; };
 		D484C05022C4AE7400F9D35A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 		D450950222B00CF2002CE6A2 /* fido-eurosmart */ = {
 			isa = PBXGroup;
 			children = (
+				D473895722CCAF5C004DFB1C /* fido-eurosmart.entitlements */,
 				D450950322B00CF2002CE6A2 /* AppDelegate.swift */,
 				D450950522B00CF2002CE6A2 /* ViewController.swift */,
 				D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */,
@@ -264,7 +266,7 @@
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -502,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "fido-eurosmart/fido-eurosmart.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9W3QGD4RMG;
 				INFOPLIST_FILE = "fido-eurosmart/Info.plist";
@@ -521,6 +524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "fido-eurosmart/fido-eurosmart.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9W3QGD4RMG;
 				INFOPLIST_FILE = "fido-eurosmart/Info.plist";

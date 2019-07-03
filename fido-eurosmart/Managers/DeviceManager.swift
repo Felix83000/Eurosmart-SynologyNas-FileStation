@@ -1,9 +1,9 @@
 //
 //  DeviceManager.swift
-//  u2f-ble-test-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 13/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -52,7 +52,7 @@ final class DeviceManager: NSObject {
             return
         }
         
-        // discover services
+        // Discover services
         onDebugMessage?(self, "Discovering services...")
         state = .Binding
         let serviceUUID = CBUUID(string: type(of: self).deviceServiceUUID)
@@ -65,7 +65,7 @@ final class DeviceManager: NSObject {
             return
         }
         
-        // slice APDU
+        // Slice APDU
         onDebugMessage?(self, "Trying to split APDU into chunks...")
         if let chunks = TransportHelper.split(data, command: .message, chuncksize: chunksize), chunks.count > 0 {
             onDebugMessage?(self, "Successfully split APDU into \(chunks.count) part(s)")
@@ -109,7 +109,7 @@ final class DeviceManager: NSObject {
             break
         }
         
-        // join APDU
+        // Join APDU
         pendingInput.append(chunk)
         if let APDU = TransportHelper.join(pendingInput, command: .message) {
             onDebugMessage?(self, "Successfully joined APDU = \(APDU)")
@@ -141,7 +141,7 @@ extension DeviceManager: CBPeripheralDelegate {
             return
         }
         
-        // discover characteristics
+        // Discover characteristics
         onDebugMessage?(self, "Successfully discovered services")
         let writeCharacteristicUUID = CBUUID(string: type(of: self).writeCharacteristicUUID)
         let notifyCharacteristicUUID = CBUUID(string: type(of: self).notifyCharacteristicUUID)
@@ -163,13 +163,13 @@ extension DeviceManager: CBPeripheralDelegate {
             return
         }
     
-        // retain characteristics
+        // Retain characteristics
         onDebugMessage?(self, "Successfully discovered characteristics")
         self.writeCharacteristic = writeCharacteristic
         self.notifyCharacteristic = notifyCharacteristic
         self.controlpointLengthCharacteristic = controlpointLengthCharacteristic
         
-        // ask for notifications
+        // Ask for notifications
         onDebugMessage?(self, "Enabling notifications...")
         peripheral.setNotifyValue(true, for: notifyCharacteristic)
     }
@@ -182,7 +182,7 @@ extension DeviceManager: CBPeripheralDelegate {
             return
         }
         
-        // ask for chunksize
+        // Ask for chunksize
         onDebugMessage?(self, "Successfully enabled notifications")
         onDebugMessage?(self, "Reading chunksize...")
         peripheral.readValue(for: self.controlpointLengthCharacteristic!)
@@ -199,7 +199,7 @@ extension DeviceManager: CBPeripheralDelegate {
             return
         }
         
-        // received data
+        // Received data
         onDebugMessage?(self, "Received data of size \(data.count) = \(data)")
         
         if characteristic == controlpointLengthCharacteristic {
@@ -211,17 +211,17 @@ extension DeviceManager: CBPeripheralDelegate {
                 return
             }
             
-            // successfully bound
+            // Successfully bound
             onDebugMessage?(self, "Successfully read chuncksize = \(chunksize)")
             self.chunksize = Int(chunksize)
             state = .Bound
         }
         else if characteristic == notifyCharacteristic {
-            // handle received data
+            // Handle received data
             handleReceivedChunk(data)
         }
         else {
-            // unknown characteristic
+            // Unknown characteristic
             onDebugMessage?(self, "Received data from unknown characteristic, ignoring")
         }
     }
@@ -234,7 +234,7 @@ extension DeviceManager: CBPeripheralDelegate {
             return
         }
         
-        // write pending chunks
+        // Write pending chunks
         writeNextPendingChunk()
     }
     

@@ -1,9 +1,9 @@
 //
 //  BluetoothManager.swift
-//  u2f-ble-test-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 13/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -36,7 +36,7 @@ final class BluetoothManager: NSObject {
     func scanForDevice() {
         guard centralManager == nil else { return }
         
-        // create central
+        // Create central
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: true as Bool)])
         state = .Scanning
     }
@@ -44,7 +44,7 @@ final class BluetoothManager: NSObject {
     func stopSession() {
         guard let centralManager = centralManager else { return }
         
-        // handle disconnection
+        // Handle disconnection
         if state == .Scanning {
             centralManager.stopScan()
             self.centralManager = nil
@@ -59,7 +59,7 @@ final class BluetoothManager: NSObject {
     func exchangeAPDU(_ data: Data) {
         guard state == .Connected else { return }
         
-        // send data
+        // Send data
         onDebugMessage?(self, "Exchanging APDU = \(data)")
         deviceManager?.exchangeAPDU(data)
     }
@@ -98,7 +98,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn && state == .Scanning {
-            // bluetooth stack is ready, start scanning
+            // Bluetooth stack is ready, start scanning
             onDebugMessage?(self, "Bluetooth stack is ready, scanning devices...")
             let serviceUUID = CBUUID(string: DeviceManager.deviceServiceUUID)
             central.scanForPeripherals(withServices: [serviceUUID], options: nil)
@@ -109,7 +109,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
         guard state == .Scanning else { return }
         guard let connectable = advertisementData[CBAdvertisementDataIsConnectable] as? NSNumber, connectable.boolValue == true else { return }
         
-        // a device has been found
+        // A device has been found
         onDebugMessage?(self, "Found connectable device \"\(peripheral.name as String?)\", connecting \(peripheral.identifier.uuidString)...")
         deviceManager = DeviceManager(peripheral: peripheral)
         deviceManager?.onStateChanged = handleDeviceManagerStateChanged
@@ -123,14 +123,14 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         guard state == .Connecting, let deviceManager = deviceManager else { return }
         
-        // we're connected, bind to characteristics
+        // We're connected, bind to characteristics
         deviceManager.bindForReadWrite()
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         guard state == .Connecting, let _ = deviceManager else { return }
         
-        // failed to connect
+        // Failed to connect
         onDebugMessage?(self, "Failed to connect device \(peripheral.identifier.uuidString), error: \(error?.localizedDescription as String?)")
         resetState()
     }
@@ -138,7 +138,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         guard state == .Connecting || state == .Connected || state == .Disconnecting, let _ = deviceManager else { return }
         
-        // destroy central
+        // Destroy central
         onDebugMessage?(self, "Disconnected device \(peripheral.identifier.uuidString), error: \(error?.localizedDescription as String?)")
         resetState()
     }

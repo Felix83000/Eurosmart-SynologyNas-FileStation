@@ -1,9 +1,9 @@
 //
 //  Keychain.h
-//  u2f-ble-test-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 17/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 #ifndef Keychain_h

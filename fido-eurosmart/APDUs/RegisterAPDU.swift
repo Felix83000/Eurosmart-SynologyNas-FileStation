@@ -1,9 +1,9 @@
 //
-//  RegisterAPDURequest.swift
-//  u2f-ble-test-ios
+//  RegisterAPDU.swift
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 16/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -84,7 +84,7 @@ final class RegisterAPDU: APDUType {
     func parseResponse(_ data: Data) -> Bool {
         let reader = DataReader(data: data)
         
-        // public key
+        // Public key
         guard
             let reservedByte = reader.readNextUInt8(),
             let publicKey = reader.readNextDataOfLength(65),
@@ -93,7 +93,7 @@ final class RegisterAPDU: APDUType {
             return false
         }
         
-        // key handle
+        // Key handle
         guard
             let keyHandleLength = reader.readNextUInt8(),
             let keyHandle = reader.readNextDataOfLength(Int(keyHandleLength))
@@ -101,7 +101,7 @@ final class RegisterAPDU: APDUType {
             return false
         }
 
-        // certificate
+        // Certificate
         guard let derSequence1 = reader.readNextUInt8(), derSequence1 == type(of: self).derSeqByte else { return false }
         guard let derCertificateLengthKind = reader.readNextUInt8() else { return false }
         
@@ -135,7 +135,7 @@ final class RegisterAPDU: APDUType {
         writer.writeNextData(certificate)
         let finalCertificate = writer.data
         
-        // signature
+        // Signature
         guard let derSequence2 = reader.readNextUInt8(), derSequence2 == type(of: self).derSeqByte else { return false }
         guard
             let signatureLength = reader.readNextUInt8(),
@@ -153,7 +153,19 @@ final class RegisterAPDU: APDUType {
         self.certificate = finalCertificate as Data
         self.signature = finalSignature as Data
         
-        // BDD
+        pushCertificate()
+
+        onDebugMessage?(self, "Building REGISTER APDU response...")
+        onDebugMessage?(self, "Got public key = \(publicKey)")
+        onDebugMessage?(self, "Got key handle = \(keyHandle)")
+        onDebugMessage?(self, "Got certificate = \(finalCertificate)")
+        onDebugMessage?(self, "Got signature = \(finalSignature)")
+        onDebugMessage?(self, "Verifying signature ... \(CryptoHelper.verifyRegisterSignature(self))")
+        return true
+    }
+    
+    // Pushing FIDO Certificate into the Database
+    func pushCertificate(){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         request.returnsObjectsAsFaults = false
         do {
@@ -162,9 +174,10 @@ final class RegisterAPDU: APDUType {
             
             let result = try managedContext.fetch(request)
             for data in result as! [NSManagedObject] {
-                // Vérification si l'utilisateur est dans la BDD
+                // Checking if the user is in the Database
                 let name = "Optional("+String(describing: data.value(forKey: "name") as? String ?? "Nothing")+")"
                 if (name == username){
+                    // Writting the certificate values
                     data.setValue(publicKey, forKey: "publickey")
                     data.setValue(keyHandle, forKey: "keyhandle")
                     data.setValue(certificate, forKey: "certificate")
@@ -179,14 +192,5 @@ final class RegisterAPDU: APDUType {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        // DBB
-
-        onDebugMessage?(self, "Building REGISTER APDU response...")
-        onDebugMessage?(self, "Got public key = \(publicKey)")
-        onDebugMessage?(self, "Got key handle = \(keyHandle)")
-        onDebugMessage?(self, "Got certificate = \(finalCertificate)")
-        onDebugMessage?(self, "Got signature = \(finalSignature)")
-        onDebugMessage?(self, "Verifying signature ... \(CryptoHelper.verifyRegisterSignature(self))")
-        return true
     }
 }

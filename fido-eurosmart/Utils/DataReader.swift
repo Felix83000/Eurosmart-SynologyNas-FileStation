@@ -1,9 +1,9 @@
 //
 //  DataReader.swift
-//  ledger-wallet-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 11/02/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -17,7 +17,6 @@ final class DataReader {
     }
     
     // MARK: Read methods
-    
     func readNextInt8() -> Int8? {
         return readNextInteger()
     }

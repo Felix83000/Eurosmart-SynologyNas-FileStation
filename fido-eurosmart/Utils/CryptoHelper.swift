@@ -1,10 +1,11 @@
 //
 //  CryptoHelper.swift
-//  u2f-ble-test-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 17/05/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
+
 import Foundation
 import Security
 
@@ -21,7 +22,7 @@ import Security
             return false
         }
         
-        // extract certificate publickey
+        // Extract certificate publickey
         var trustRef: SecTrust? = nil
         let policy = SecPolicyCreateBasicX509()
         guard
@@ -34,7 +35,7 @@ import Security
         let key = SecTrustCopyPublicKey(trustRef!)
         let certificatePublicKey = getPublicKeyBitsFromKey(key)
 
-        // check signature
+        // Check signature
         let crypto = GMEllipticCurveCrypto(forKey: certificatePublicKey)
         let data = NSMutableData()
         data.append([0x00] as [UInt8], length: 1)
@@ -59,7 +60,7 @@ import Security
             return false
         }
         
-        // check signature
+        // Check signature
         let crypto = GMEllipticCurveCrypto(forKey: publicKey as Data?)
         let writer = DataWriter()
         writer.writeNextData(APDU.applicationParameter)
@@ -96,5 +97,4 @@ import Security
         }
         return (r as Data, s as Data)
     }
-    
 }

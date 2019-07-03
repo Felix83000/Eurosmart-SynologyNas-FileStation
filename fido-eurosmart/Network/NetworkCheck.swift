@@ -1,5 +1,10 @@
+//
 //  NetworkCheck.swift
-//  Created by Bhat, Adithya H on 04/01/19.
+//  fido-eurosmart
+//
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
+//
 
 import Foundation
 import Network
@@ -17,9 +22,9 @@ class NetworkCheck {
         weak var observer: NetworkCheckObserver?
     }
     
-    private var monitor = NWPathMonitor()
-    private static let _sharedInstance = NetworkCheck()
-    private var observations = [ObjectIdentifier: NetworkChangeObservation]()
+    fileprivate var monitor = NWPathMonitor()
+    fileprivate static let _sharedInstance = NetworkCheck()
+    fileprivate var observations = [ObjectIdentifier: NetworkChangeObservation]()
     var currentStatus: NWPath.Status {
         get {
             return monitor.currentPath.status
@@ -57,5 +62,4 @@ class NetworkCheck {
         let id = ObjectIdentifier(observer)
         observations.removeValue(forKey: id)
     }
-    
 }

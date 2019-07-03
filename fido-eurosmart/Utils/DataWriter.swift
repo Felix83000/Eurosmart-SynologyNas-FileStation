@@ -1,9 +1,9 @@
 //
 //  DataWriter.swift
-//  ledger-wallet-ios
+//  fido-eurosmart
 //
-//  Created by Nicolas Bigot on 15/02/2016.
-//  Copyright © 2016 Ledger. All rights reserved.
+//  Created by FelixMac on 25/06/2019.
+//  Copyright © 2019 Eurosmart. All rights reserved.
 //
 
 import Foundation
@@ -94,9 +94,7 @@ final class DataWriter {
     }
     
     // MARK: Initialization
-
     init() {
         self.internalData = NSMutableData()
     }
-    
 }

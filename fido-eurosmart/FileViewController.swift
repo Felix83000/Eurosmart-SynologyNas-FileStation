@@ -12,14 +12,14 @@ import Network
 
 class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource, NetworkCheckObserver {
 
-    var tabListDirFiles = [[DirFileData]()]// Tableau des différentes requêtes
+    var tabListDirFiles = [[DirFileData]()]
     var listDirFiles = [DirFileData]()
     var lastId = 0
     fileprivate(set) var currentPath = ""
     fileprivate var network: Network? = nil
     fileprivate var networkCheck: Any?
     
-    /// Creating UIDocumentInteractionController instance.
+    // Creating UIDocumentInteractionController instance.
     fileprivate let documentInteractionController = UIDocumentInteractionController()
 
     @IBOutlet weak var navBar: UINavigationBar!
@@ -33,14 +33,19 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .gray
+        refreshControl.tintColor = UIColor(
+            red: CGFloat(23)/255,
+            green: CGFloat(141)/255,
+            blue: CGFloat(158)/255,
+            alpha: CGFloat(1.0)
+        )
         refreshControl.addTarget(self, action: #selector(callRefresh), for: .valueChanged)
         return refreshControl
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /// Setting UIDocumentInteractionController delegate.
+        // Setting UIDocumentInteractionController delegate.
         documentInteractionController.delegate = self
         
         tableView.refreshControl = refresher
@@ -67,12 +72,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         super.viewWillAppear(animated)
         if #available(iOS 12.0, *) {
             if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
-                // create the alert
-                let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
-                // add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
+                alertNetwork()
             }
             (networkCheck as! NetworkCheck).addObserver(observer: self)
         }
@@ -88,15 +88,20 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @available(iOS 12.0, *)
     func statusDidChange(status: NWPath.Status) {
         if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
-            // create the alert
-            let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            // show the alert
-            self.present(alert, animated: true, completion: nil)
+            alertNetwork()
         }
     }
-    
+    /**
+     Display an AlertViewController with a network warning message.
+     */
+    func alertNetwork(){
+        let alert = UIAlertController(title: "Network problem", message: "Check your network connection and please refresh by swiping to bottom.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    /**
+     Refresh action function that fetches directories.
+     */
     @objc
     func callRefresh(){
         if (self.currentPath == "" || self.currentPath == "/"){
@@ -106,24 +111,33 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         }
     }
     
-    // MARK: UiNavigationBarDelegate Methods
+    // MARK: UI updates
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.topAttached
     }
     
+    /**
+     Init of the UI.
+     - **Deactivation** of backButton and addButton
+     - **Positioning** of backButton and moreButton
+     */
     func initButtons(){
         backButton.isEnabled = false
         addButton.isEnabled = false
-        // Alignement du boutton au centre
+        // Alignement of backButton and moreButton
         toolBar.sizeToFit()
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         toolBar.items = [flexible,backButton,flexible,flexible,moreButton,flexible]
     }
     
+    // MARK: Action Buttons
+    /**
+    Displaying app informations.
+     */
     @IBAction func moreButton(_ sender: Any) {
-        // create the alert
-        let alert = UIAlertController(title: "About", message: "Félix Herrenschmidt developped this application for Eurosmart as an Intern.", preferredStyle: .alert)
-        // add an action (button)
+        // Create the alert
+        let alert = UIAlertController(title: "About", message: "Eurosmart Drive allows to connect to our Eurosmart Synology NAS and Access to your Storage.You may Download files, Upload files, Create new Folders, Remove Files or Folders. Félix Herrenschmidt developped this application for © Eurosmart 2019 as an Intern.", preferredStyle: .alert)
+        // Add an action (button)
         let linkAction = UIAlertAction(title: "Check his LinkedIn", style: .default) { (_) in
             let linkedinHooks = "linkedin://in/felix-herrenschmidt/"
             if (UIApplication.shared.canOpenURL(URL(string: linkedinHooks)!)){
@@ -134,10 +148,13 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(linkAction)
-        // show the alert
+        // Show the alert
         self.present(alert, animated: true, completion: nil)
     }
     
+    /**
+     Display an **AlertViewController** with different proposals: **Folder** creation, **File** upload
+     */
     @IBAction func addButton(_ sender: Any) {
         // TODO: Check permissions to write in the folder path
         
@@ -159,13 +176,72 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
         }))
         
+        // For iPad display
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = sender as? UIBarButtonItem
+        }
+        
         self.present(alert, animated: true, completion: {
         })
     }
     
+    /**
+     Permit to user to go back into parent folders.
+     */
+    @IBAction func backButton(_ sender: Any) {
+        // Si on n'est pas au dossier racine
+        if (self.lastId != 0){
+            self.listDirFiles.removeAll()
+            self.listDirFiles = self.tabListDirFiles[self.lastId]
+            // On change le chemin affiché dans le titre de la navbar
+            if (self.lastId != 1){
+                var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true)
+                sub?.removeLast()
+                self.generalPath.title?.removeAll()
+                self.currentPath = ""
+                for str in sub!{
+                    if (String(str) as String?) != nil {
+                        self.generalPath.title?.append("/")
+                        self.currentPath.append("/")
+                        self.generalPath.title?.append(String(str))
+                        self.currentPath.append(String(str))
+                    }
+                }
+            }else{
+                self.generalPath.title = "/"
+                self.currentPath = "/"
+            }
+            self.tableView.reloadData()
+            self.lastId-=1
+            // On fait disparaitre le bouton de retour si on est à la racine
+            if (self.lastId == 0){
+                backButton.isEnabled = false
+                addButton.isEnabled = false
+            }
+        }
+    }
+    
+    /**
+     Permit to user to **logout**: Display an **AlertViewController** to confirm the action.
+     */
+    @IBAction func logout(_ sender: Any) {
+        let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            let preferences = UserDefaults.standard
+            preferences.removeObject(forKey: "sid")
+            self.performSegue(withIdentifier: "logout", sender: self)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    /**
+     Display an **AlertViewController** to choose the folder name.
+     */
     func showAlertWithTextField() {
         let alertController = UIAlertController(title: "Create a Folder", message: nil, preferredStyle: .alert)
-        alertController.textFields?.first?.returnKeyType = UIReturnKeyType.done //Marche pas
         let confirmAction = UIAlertAction(title: "Create", style: .default) { (_) in
             if let txtField = alertController.textFields?.first, let folder = txtField.text {
                 // When the user enter the folder name and press "Create"
@@ -175,12 +251,22 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         alertController.addTextField { (textField) in
             textField.placeholder = "Folder Name"
+            textField.tintColor = UIColor(
+                red: CGFloat(23)/255,
+                green: CGFloat(141)/255,
+                blue: CGFloat(158)/255,
+                alpha: CGFloat(1.0)
+            )
+            textField.returnKeyType = .done
         }
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
+    /**
+     Reload the tableView data.
+     */
     func fetchDone(){
         self.tableView.reloadData()
     }
@@ -197,7 +283,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             addButton.isEnabled = true
             self.network?.fetchDirectoriesDetails(self,self.listDirFiles[indexPath.row].path,noBackButton: false)
         }else{
-            // On ouvre le fichier
+            // Open the file
             let fileName = String(self.listDirFiles[indexPath.row].path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true).last ?? "file.txt")
             
             // Passing the remote URL of the file, to be stored and then opted with mutliple actions for the user to perform
@@ -245,52 +331,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
             }
         }
     }
-    
-    @IBAction func backButton(_ sender: Any) {
-        // Si on n'est pas au dossier racine
-        if (self.lastId != 0){
-            self.listDirFiles.removeAll()
-            self.listDirFiles = self.tabListDirFiles[self.lastId]
-            // On change le chemin affiché dans le titre de la navbar
-            if (self.lastId != 1){
-                var sub = self.tabListDirFiles[self.lastId].last?.path.split(separator: "/", maxSplits: 20, omittingEmptySubsequences:   true)
-                sub?.removeLast()
-                self.generalPath.title?.removeAll()
-                self.currentPath = ""
-                for str in sub!{
-                    if (String(str) as String?) != nil {
-                        self.generalPath.title?.append("/")
-                        self.currentPath.append("/")
-                        self.generalPath.title?.append(String(str))
-                        self.currentPath.append(String(str))
-                    }
-                }
-            }else{
-                self.generalPath.title = "/"
-                self.currentPath = "/"
-            }
-            self.tableView.reloadData()
-            self.lastId-=1
-            // On fait disparaitre le bouton de retour si on est à la racine
-            if (self.lastId == 0){
-                backButton.isEnabled = false
-                addButton.isEnabled = false
-            }
-        }
-    }
-    
-    @IBAction func logout(_ sender: Any) {
-        let alertController = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
-            let preferences = UserDefaults.standard
-            preferences.removeObject(forKey: "sid")
-            self.performSegue(withIdentifier: "logout", sender: self)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
 }
 
 struct DirFileData {
@@ -305,13 +345,14 @@ struct DirFileData {
 }
 
 extension FileViewController: UIDocumentPickerDelegate {
+    // If the file to upload is selected in the FileView App
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         self.network?.uploadFile(self,urls)
     }
 }
 
 extension FileViewController {
-    /// This function will set all the required properties, and then provide a preview for the document
+    // This function will set all the required properties, and then provide a preview for the document
     func share(url: URL) {
         documentInteractionController.url = url
         documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
@@ -319,7 +360,7 @@ extension FileViewController {
         documentInteractionController.presentPreview(animated: true)
     }
     
-    /// This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
+    // This function will store your document to some temporary URL and then provide sharing, copying, printing, saving options to the user
     func storeAndShare(withURLString: String, fileName: String) {
         let urlEncoded = URL(string: withURLString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
@@ -343,7 +384,7 @@ extension FileViewController {
 }
 
 extension FileViewController: UIDocumentInteractionControllerDelegate {
-    /// If presenting atop a navigation stack, provide the navigation controller in order to animate in a manner consistent with the rest of the platform
+    // If presenting atop a navigation stack, provide the navigation controller in order to animate in a manner consistent with the rest of the platform
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         guard let navVC = self.navigationController else {
             return self
