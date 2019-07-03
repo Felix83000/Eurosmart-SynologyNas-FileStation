@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Network Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/Network" class="dashAnchor"></a>
+
+    <a title="Network Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+           Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      Network Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AddFidoViewController.html">AddFidoViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/AuthenticateAPDU.html">AuthenticateAPDU</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/BluetoothManager.html">BluetoothManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CryptoHelper.html">CryptoHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DataReader.html">DataReader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DataWriter.html">DataWriter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DeviceManager.html">DeviceManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/FileViewController.html">FileViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Network.html">Network</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/NetworkCheck.html">NetworkCheck</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/NetworkCheck/NetworkChangeObservation.html">– NetworkChangeObservation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RegisterAPDU.html">RegisterAPDU</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TransportHelper.html">TransportHelper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TransportHelper/CommandType.html">– CommandType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TransportHelper/ChunkType.html">– ChunkType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ViewController.html">ViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/BluetoothManagerState.html">BluetoothManagerState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/DeviceManagerState.html">DeviceManagerState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CBManagerState.html">CBManagerState</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/URL.html">URL</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/APDUType.html">APDUType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/EndianConvertible.html">EndianConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/NetworkCheckObserver.html">NetworkCheckObserver</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DirFileData.html">DirFileData</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>Network</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">Network</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC2ipSSvp"></a>
+                    <a name="//apple_ref/swift/Property/ip" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC2ipSSvp">ip</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>ip</code> variable is use to reach a Synology NAS, please fill it with your NAS <code>ip</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="k">var</span> <span class="nv">ip</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC4portSSvp"></a>
+                    <a name="//apple_ref/swift/Property/port" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC4portSSvp">port</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code>port</code> variable is use to reach a Synology NAS, please fill it with your NAS <code>port</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="k">var</span> <span class="nv">port</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC8httpTypeSSvp"></a>
+                    <a name="//apple_ref/swift/Property/httpType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC8httpTypeSSvp">httpType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If you want to configure <strong>API Requests</strong> in <strong>http</strong> or <strong>https</strong> change this <code>httpType</code> variable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">fileprivate</span><span class="p">(</span><span class="k">set</span><span class="p">)</span> <span class="k">var</span> <span class="nv">httpType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC3sidSSvp"></a>
+                    <a name="//apple_ref/swift/Property/sid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC3sidSSvp">sid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">sid</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkCACycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkCACycfc">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/API%20Requests"></a>
+                <a name="//apple_ref/swift/Section/API Requests" class="dashAnchor"></a>
+                <a href="#/API%20Requests">
+                  <h3 class="section-name">API Requests</h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC7doLoginyyAA14ViewControllerC_S2StF"></a>
+                    <a name="//apple_ref/swift/Method/doLogin(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC7doLoginyyAA14ViewControllerC_S2StF">doLogin(_:_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Login Request to <strong>Synology FileStation API</strong>. Connect the user if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">doLogin</span><span class="p">(</span><span class="n">_</span> <span class="nv">viewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/ViewController.html">ViewController</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">user</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">pwd</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>viewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Username who have to correspond to the NAS LDAP user.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pwd</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Password who have also to correspond to the NAS LDAP user.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC12createFolderyyAA18FileViewControllerC_SStF"></a>
+                    <a name="//apple_ref/swift/Method/createFolder(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC12createFolderyyAA18FileViewControllerC_SStF">createFolder(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create Request to <strong>Synology FileStation API</strong>. Create the folder if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createFolder</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileViewController.html">FileViewController</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">folderName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>folderName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>FolderName that the user wants to create.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC16fetchDirectories_7refreshyAA18FileViewControllerC_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/fetchDirectories(_:refresh:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC16fetchDirectories_7refreshyAA18FileViewControllerC_SbtF">fetchDirectories(_:refresh:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List Share Request to <strong>Synology FileStation API</strong>. List the shared folders if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchDirectories</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileViewController.html">FileViewController</a></span><span class="p">,</span> <span class="nv">refresh</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>refresh</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the dev wants to use this function to refresh. Refresher indicator ends after the request response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC23fetchDirectoriesDetails__12noBackButton7refreshyAA18FileViewControllerC_SSS2btF"></a>
+                    <a name="//apple_ref/swift/Method/fetchDirectoriesDetails(_:_:noBackButton:refresh:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC23fetchDirectoriesDetails__12noBackButton7refreshyAA18FileViewControllerC_SSS2btF">fetchDirectoriesDetails(_:_:noBackButton:refresh:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List Request to <strong>Synology FileStation API</strong>. List the folder needed if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">fetchDirectoriesDetails</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileViewController.html">FileViewController</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">folderPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">noBackButton</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">refresh</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>refresh</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the dev wants to use this function to refresh. Refresher indicator ends after the request response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>folderPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Synology FileStation path to the folder needed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>noBackButton</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the dev wants to use this function without enable back button history.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC10uploadFileyyAA0E14ViewControllerC_Say10Foundation3URLVGtF"></a>
+                    <a name="//apple_ref/swift/Method/uploadFile(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC10uploadFileyyAA0E14ViewControllerC_Say10Foundation3URLVGtF">uploadFile(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Upload Request to <strong>Synology FileStation API</strong>. Upload the file needed if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">uploadFile</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileViewController.html">FileViewController</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">urls</span><span class="p">:</span> <span class="p">[</span><span class="kt">URL</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>urls</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong>Local</strong> application Urls of <strong>selected files</strong>. In our case it is only <strong>one url</strong> to the file selected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC10createBody11contentFile___So13NSMutableDataC10Foundation0I0V_SSAH3URLVSStF"></a>
+                    <a name="//apple_ref/swift/Method/createBody(contentFile:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC10createBody11contentFile___So13NSMutableDataC10Foundation0I0V_SSAH3URLVSStF">createBody(contentFile:_:_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create the http POST body.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createBody</span><span class="p">(</span><span class="nv">contentFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="n">_</span> <span class="nv">folderPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">selectedFileUrl</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">_</span> <span class="nv">boundary</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSMutableData</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Content of the file the user wants to upload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>selectedFileUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Local application url to the file selected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>boundary</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Boundary.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>folderPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Synology FileStation path to the wanted folder to upload the file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14fido_eurosmart7NetworkC10deleteFileyyAA0E14ViewControllerC_SStF"></a>
+                    <a name="//apple_ref/swift/Method/deleteFile(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14fido_eurosmart7NetworkC10deleteFileyyAA0E14ViewControllerC_SStF">deleteFile(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete Request to <strong>Synology FileStation API</strong>. Delete the folder or file needed if the request is successful. Also handle errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deleteFile</span><span class="p">(</span><span class="n">_</span> <span class="nv">fileViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/FileViewController.html">FileViewController</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileViewController</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Permit access to local Controller attributes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Synology FileStation path to the folder or file the user wants to delete.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2019-07-03)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
