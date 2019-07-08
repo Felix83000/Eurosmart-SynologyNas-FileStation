@@ -15,7 +15,6 @@
 		D450950B22B00CF4002CE6A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D450950A22B00CF4002CE6A2 /* Assets.xcassets */; };
 		D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */; };
 		D45F370322C229BC00B2D6BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45F370222C229BC00B2D6BB /* Network.swift */; };
-		D484C04F22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484C04E22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift */; };
 		D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF359E22B3882B00D37FF7 /* FileViewController.swift */; };
 		D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */; };
 		D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */; };
@@ -57,8 +56,6 @@
 		D45F370222C229BC00B2D6BB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D473895722CCAF5C004DFB1C /* fido-eurosmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fido-eurosmart.entitlements"; sourceTree = "<group>"; };
 		D484C04C22C4AE7400F9D35A /* Eurosmart DriveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Eurosmart DriveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D484C04E22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eurosmart_DriveUITests.swift; sourceTree = "<group>"; };
-		D484C05022C4AE7400F9D35A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
@@ -103,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				D450950222B00CF2002CE6A2 /* fido-eurosmart */,
-				D484C04D22C4AE7400F9D35A /* Eurosmart DriveUITests */,
 				D450950122B00CF2002CE6A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,15 +134,6 @@
 				D44591F522B0F9D500DAD5A7 /* Data.xcdatamodeld */,
 			);
 			path = "fido-eurosmart";
-			sourceTree = "<group>";
-		};
-		D484C04D22C4AE7400F9D35A /* Eurosmart DriveUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D484C04E22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift */,
-				D484C05022C4AE7400F9D35A /* Info.plist */,
-			);
-			path = "Eurosmart DriveUITests";
 			sourceTree = "<group>";
 		};
 		D4A7005222BD2E77004FFF93 /* Network */ = {
@@ -348,7 +335,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D484C04F22C4AE7400F9D35A /* Eurosmart_DriveUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
