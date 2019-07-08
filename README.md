@@ -4,6 +4,8 @@
 Works on all IOS platforms. 
 
 Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
+## Documentation
+Documentation for the project can be found [here](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/).
 
 ## Use (for Developers)
 To use this application with your **Synology NAS** you simply have to change the **IP**, **PORT** and the **HTTPTYPE** in this file: [Network.swift](/fido-eurosmart/Network/Network.swift)
