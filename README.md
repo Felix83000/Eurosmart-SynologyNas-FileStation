@@ -31,6 +31,9 @@ The Synology File Station API [Documentation](https://global.download.synology.c
 ## Releases
 You can download all the [Releases](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/releases). 
 
+## Documentation
+Documentation for the project can be found [here](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/).
+
 ## Report an Issues
 You can also report a bug [here](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/issues) to help me improve this application.
 
@@ -40,7 +43,3 @@ Please use this template: [Bug-Report Template](/.github/ISSUE_TEMPLATE/bug_repo
 ### Our Synology NAS Current Version:
 -  **Model Name** : DS1517+
 -  **DSM Version** : DSM 6.2.2-24922
-
-## Documentation
-Documentation for the project can be found [here](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/).
-
