@@ -1,4 +1,4 @@
-# Eurosmart Drive
+# Eurosmart Drive ![License Badge](https://img.shields.io/github/license/Felix83000/Eurosmart-SynologyNas-FileStation.svg?style=flat-square)
 #### IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) 
 
 Works on all IOS platforms. 
