@@ -1,4 +1,7 @@
 # Eurosmart Drive 
+[![Language version](https://img.shields.io/badge/swift-v5.0-orange.svg?style=flat-square)](https://swift.org/blog/swift-5-released/)
+[![Documentation status](https://img.shields.io/badge/documentation-Yes-brightgreen.svg?style=flat-square)](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Felix83000/Eurosmart-SynologyNas-FileStation.svg?style=flat-square)](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed)
 [![License Badge](https://img.shields.io/github/license/Felix83000/Eurosmart-SynologyNas-FileStation.svg?style=flat-square)](https://github.com/Felix83000/Eurosmart-SynologyNas-FileStation/blob/master/LICENSE)
 #### IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) 
 
