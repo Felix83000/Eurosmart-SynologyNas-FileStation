@@ -19,6 +19,7 @@ protocol NetworkCheckObserver: class {
     func statusDidChange(status: NWPath.Status)
 }
 
+/// The purpose of the `NetworkCheck` class is to check in background the network status.
 @available(iOS 12.0, *)
 class NetworkCheck {
     
@@ -42,7 +43,6 @@ class NetworkCheck {
     class func sharedInstance() -> NetworkCheck {
         return _sharedInstance
     }
-    /// This class is use to check in background the network status.
     init() {
         monitor.pathUpdateHandler = { [unowned self] path in
             for (id, observations) in self.observations {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// The purpose of the `Network` class is to gather all **Synology FileStation API** Requests.
 final class Network {
     /// The `ip` variable is use to reach a Synology NAS, please fill it with your NAS `ip`.
     fileprivate(set) var ip = "172.16.103.116"
@@ -34,7 +35,7 @@ final class Network {
      - Parameter user: Username who have to correspond to the NAS LDAP user.
      - Parameter pwd: Password who have also to correspond to the NAS LDAP user.
      
-     This function is needed as **first API Request**. The answered **sid** will be used by **all** the other API requests.
+     - Warning: This function is needed as **first API Request**. The answered **sid** will be used by **all** the other API requests.
      */
     func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String)
     {

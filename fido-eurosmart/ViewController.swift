@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Network
 
+/// The purpose of the `ViewController` ViewController is to manage the View Controller **Login Page** hierarchy.
 class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserver {
 
     @IBOutlet weak var username: UITextField!

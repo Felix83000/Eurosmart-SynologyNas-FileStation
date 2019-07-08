@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+/// The purpose of the `AddFidoViewController` ViewController is to manage the **Fido View** hierarchy.
 class AddFidoViewController: UIViewController, UINavigationBarDelegate {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!

@@ -160,7 +160,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The purpose of the <code>Network</code> class is to gather all <strong>Synology FileStation API</strong> Requests.</p>
 
           </div>
         </section>
@@ -329,8 +329,11 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Login Request to <strong>Synology FileStation API</strong>. Connect the user if the request is successful. Set the <strong>session key</strong> in the <strong>preferences</strong> and <strong>class attribute</strong>. Also handle errors.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>This function is needed as <strong>first API Request</strong>. The answered <strong>sid</strong> will be used by <strong>all</strong> the other API requests.</p>
 
-<p>This function is needed as <strong>first API Request</strong>. The answered <strong>sid</strong> will be used by <strong>all</strong> the other API requests.</p>
+</div>
 
                       </div>
                       <div class="declaration">

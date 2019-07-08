@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 import Network
 
+/// The purpose of the `FileViewController` ViewController is to manage the **File View** hierarchy.
 class FileViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource, NetworkCheckObserver {
 
     var tabListDirFiles = [[DirFileData]()]
@@ -31,7 +32,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
-    /// 
     lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor(
