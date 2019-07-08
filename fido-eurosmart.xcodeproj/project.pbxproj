@@ -33,16 +33,6 @@
 		D4ECB64E22CBA24E0017ACCA /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ECB64D22CBA24E0017ACCA /* NetworkCheck.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D484C05122C4AE7400F9D35A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D45094F822B00CF2002CE6A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D45094FF22B00CF2002CE6A2;
-			remoteInfo = "fido-eurosmart";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		D44591F622B0F9D500DAD5A7 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		D445921D22B13D0200DAD5A7 /* AddFidoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFidoViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +45,6 @@
 		D450950F22B00CF4002CE6A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F370222C229BC00B2D6BB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D473895722CCAF5C004DFB1C /* fido-eurosmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fido-eurosmart.entitlements"; sourceTree = "<group>"; };
-		D484C04C22C4AE7400F9D35A /* Eurosmart DriveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Eurosmart DriveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
@@ -86,13 +75,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D484C04922C4AE7400F9D35A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -108,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				D450950022B00CF2002CE6A2 /* fido-eurosmart.app */,
-				D484C04C22C4AE7400F9D35A /* Eurosmart DriveUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,24 +199,6 @@
 			productReference = D450950022B00CF2002CE6A2 /* fido-eurosmart.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D484C04B22C4AE7400F9D35A /* Eurosmart DriveUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D484C05522C4AE7400F9D35A /* Build configuration list for PBXNativeTarget "Eurosmart DriveUITests" */;
-			buildPhases = (
-				D484C04822C4AE7400F9D35A /* Sources */,
-				D484C04922C4AE7400F9D35A /* Frameworks */,
-				D484C04A22C4AE7400F9D35A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D484C05222C4AE7400F9D35A /* PBXTargetDependency */,
-			);
-			name = "Eurosmart DriveUITests";
-			productName = "Eurosmart DriveUITests";
-			productReference = D484C04C22C4AE7400F9D35A /* Eurosmart DriveUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -257,10 +220,6 @@
 							};
 						};
 					};
-					D484C04B22C4AE7400F9D35A = {
-						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = D45094FF22B00CF2002CE6A2;
-					};
 				};
 			};
 			buildConfigurationList = D45094FB22B00CF2002CE6A2 /* Build configuration list for PBXProject "fido-eurosmart" */;
@@ -277,7 +236,6 @@
 			projectRoot = "";
 			targets = (
 				D45094FF22B00CF2002CE6A2 /* fido-eurosmart */,
-				D484C04B22C4AE7400F9D35A /* Eurosmart DriveUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -290,13 +248,6 @@
 				D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */,
 				D450950B22B00CF4002CE6A2 /* Assets.xcassets in Resources */,
 				D450950922B00CF2002CE6A2 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D484C04A22C4AE7400F9D35A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,22 +282,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D484C04822C4AE7400F9D35A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D484C05222C4AE7400F9D35A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D45094FF22B00CF2002CE6A2 /* fido-eurosmart */;
-			targetProxy = D484C05122C4AE7400F9D35A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D450950722B00CF2002CE6A2 /* Main.storyboard */ = {
@@ -526,46 +462,6 @@
 			};
 			name = Release;
 		};
-		D484C05322C4AE7400F9D35A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9W3QGD4RMG;
-				INFOPLIST_FILE = "Eurosmart DriveUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.eurosmart.Eurosmart-DriveUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "fido-eurosmart";
-			};
-			name = Debug;
-		};
-		D484C05422C4AE7400F9D35A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9W3QGD4RMG;
-				INFOPLIST_FILE = "Eurosmart DriveUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.eurosmart.Eurosmart-DriveUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "fido-eurosmart";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -583,15 +479,6 @@
 			buildConfigurations = (
 				D450951322B00CF4002CE6A2 /* Debug */,
 				D450951422B00CF4002CE6A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D484C05522C4AE7400F9D35A /* Build configuration list for PBXNativeTarget "Eurosmart DriveUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D484C05322C4AE7400F9D35A /* Debug */,
-				D484C05422C4AE7400F9D35A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -34,14 +34,12 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         {
             loginDone()
         }
-        if #available(iOS 12.0, *) {
-            self.networkCheck = NetworkCheck.sharedInstance()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 12.0, *) {
+            self.networkCheck = NetworkCheck.sharedInstance()
             if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
                 alertNetwork()
             }

@@ -569,161 +569,175 @@
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 47,
+      "line": 34,
+      "symbol": "FileViewController.refresher",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
+      "line": 46,
       "symbol": "FileViewController.viewDidLoad()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 61,
+      "line": 64,
       "symbol": "FileViewController.viewDidAppear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 68,
+      "line": 71,
       "symbol": "FileViewController.viewWillAppear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 79,
+      "line": 81,
       "symbol": "FileViewController.viewWillDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 113,
+      "line": 89,
+      "symbol": "FileViewController.statusDidChange(status:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
+      "line": 115,
       "symbol": "FileViewController.position(for:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 272,
+      "line": 274,
       "symbol": "FileViewController.tableView(_:numberOfRowsInSection:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 276,
+      "line": 278,
       "symbol": "FileViewController.tableView(_:didSelectRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 293,
+      "line": 295,
       "symbol": "FileViewController.tableView(_:cellForRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 307,
+      "line": 309,
       "symbol": "FileViewController.tableView(_:commit:forRowAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 334,
+      "line": 336,
       "symbol": "DirFileData",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 335,
+      "line": 337,
       "symbol": "DirFileData.isDir",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 336,
+      "line": 338,
       "symbol": "DirFileData.dirName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 337,
+      "line": 339,
       "symbol": "DirFileData.path",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 338,
+      "line": 340,
       "symbol": "DirFileData.init(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 345,
+      "line": 347,
       "symbol": "FileViewController",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 347,
+      "line": 349,
       "symbol": "FileViewController.documentPicker(_:didPickDocumentsAt:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 352,
+      "line": 354,
       "symbol": "FileViewController",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 354,
+      "line": 356,
       "symbol": "FileViewController.share(url:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 362,
+      "line": 364,
       "symbol": "FileViewController.storeAndShare(withURLString:fileName:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 384,
+      "line": 386,
       "symbol": "FileViewController",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 386,
+      "line": 388,
       "symbol": "FileViewController.documentInteractionControllerViewControllerForPreview(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 395,
+      "line": 397,
       "symbol": "URL.typeIdentifier",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/FileViewController.swift",
-      "line": 398,
+      "line": 400,
       "symbol": "URL.localizedName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1073,42 +1087,63 @@
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 23,
+      "line": 15,
+      "symbol": "NetworkCheckObserver.statusDidChange(status:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
+      "line": 19,
       "symbol": "NetworkCheck",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 25,
+      "line": 21,
       "symbol": "NetworkCheck.NetworkChangeObservation",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 26,
+      "line": 22,
       "symbol": "NetworkCheck.NetworkChangeObservation.observer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 42,
+      "line": 28,
+      "symbol": "NetworkCheck.currentStatus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
+      "line": 34,
       "symbol": "NetworkCheck.sharedInstance()",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 64,
+      "line": 38,
+      "symbol": "NetworkCheck.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
+      "line": 56,
       "symbol": "NetworkCheck.addObserver(observer:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/NetworkCheck.swift",
-      "line": 69,
+      "line": 61,
       "symbol": "NetworkCheck.removeObserver(observer:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -1598,42 +1633,49 @@
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 39,
+      "line": 42,
       "symbol": "ViewController.viewWillAppear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 50,
+      "line": 52,
       "symbol": "ViewController.viewWillDisappear(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 64,
+      "line": 60,
+      "symbol": "ViewController.statusDidChange(status:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
+      "line": 66,
       "symbol": "ViewController.alertNetwork()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 70,
+      "line": 72,
       "symbol": "ViewController.supportedInterfaceOrientations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 79,
+      "line": 81,
       "symbol": "ViewController.submit(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/ViewController.swift",
-      "line": 91,
+      "line": 93,
       "symbol": "ViewController.textFieldShouldReturn(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

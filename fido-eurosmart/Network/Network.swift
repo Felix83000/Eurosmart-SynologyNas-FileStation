@@ -28,11 +28,13 @@ final class Network {
     
     // MARK: API Requests
     /**
-     Login Request to **Synology FileStation API**. Connect the user if the request is successful. Also handle errors.
+     Login Request to **Synology FileStation API**. Connect the user if the request is successful. Set the **session key** in the **preferences** and **class attribute**. Also handle errors.
      
      - Parameter viewController: Permit access to local Controller attributes.
      - Parameter user: Username who have to correspond to the NAS LDAP user.
      - Parameter pwd: Password who have also to correspond to the NAS LDAP user.
+     
+     This function is needed as **first API Request**. The answered **sid** will be used by **all** the other API requests.
      */
     func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String)
     {

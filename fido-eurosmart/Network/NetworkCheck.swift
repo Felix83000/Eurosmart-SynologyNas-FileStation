@@ -11,6 +11,10 @@ import Network
 
 @available(iOS 12.0, *)
 protocol NetworkCheckObserver: class {
+    /**
+     The network status change will trigger this function.
+     - Parameter status: Network status
+     */
     @available(iOS 12.0, *)
     func statusDidChange(status: NWPath.Status)
 }
@@ -25,6 +29,10 @@ class NetworkCheck {
     fileprivate var monitor = NWPathMonitor()
     fileprivate static let _sharedInstance = NetworkCheck()
     fileprivate var observations = [ObjectIdentifier: NetworkChangeObservation]()
+    ///- The network status can be:
+    ///   - .satisfied
+    ///   - .unsatisfied
+    ///   - .requiresConnection
     var currentStatus: NWPath.Status {
         get {
             return monitor.currentPath.status
@@ -34,7 +42,7 @@ class NetworkCheck {
     class func sharedInstance() -> NetworkCheck {
         return _sharedInstance
     }
-    
+    /// This class is use to check in background the network status.
     init() {
         monitor.pathUpdateHandler = { [unowned self] path in
             for (id, observations) in self.observations {

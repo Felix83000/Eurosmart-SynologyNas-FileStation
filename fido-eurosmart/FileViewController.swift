@@ -31,6 +31,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
+    /// 
     lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor(
@@ -55,10 +56,6 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         initButtons()
         
         self.network?.fetchDirectories(self)
-        
-        if #available(iOS 12.0, *) {
-            self.networkCheck = NetworkCheck.sharedInstance()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +68,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 12.0, *) {
+            self.networkCheck = NetworkCheck.sharedInstance()
             if ((networkCheck as! NetworkCheck).currentStatus == .unsatisfied){
                 alertNetwork()
             }
@@ -136,7 +134,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
      */
     @IBAction func moreButton(_ sender: Any) {
         // Create the alert
-        let alert = UIAlertController(title: "About", message: "Eurosmart Drive allows to connect to our Eurosmart Synology NAS and Access to your Storage.You may Download files, Upload files, Create new Folders, Remove Files or Folders. Félix Herrenschmidt developped this application for © Eurosmart 2019 as an Intern.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "About", message: "Eurosmart Drive allows to connect to our Eurosmart Synology NAS and Access to your Storage. \n You may Download files, Upload files, Create new Folders, Remove Files or Folders. \n\n Félix Herrenschmidt developped this application for © Eurosmart as an Intern.", preferredStyle: .alert)
         // Add an action (button)
         let linkAction = UIAlertAction(title: "Check his LinkedIn", style: .default) { (_) in
             let linkedinHooks = "linkedin://in/felix-herrenschmidt/"
