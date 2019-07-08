@@ -8,8 +8,6 @@
 Works on all IOS platforms. 
 
 Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
-## Documentation
-Documentation for the project can be found [here](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/).
 
 ## Use (for Developers)
 To use this application with your **Synology NAS** you simply have to change the **IP**, **PORT** and the **HTTPTYPE** in this file: [Network.swift](/fido-eurosmart/Network/Network.swift)
@@ -42,4 +40,7 @@ Please use this template: [Bug-Report Template](/.github/ISSUE_TEMPLATE/bug_repo
 ### Our Synology NAS Current Version:
 -  **Model Name** : DS1517+
 -  **DSM Version** : DSM 6.2.2-24922
+
+## Documentation
+Documentation for the project can be found [here](https://felix83000.github.io/Eurosmart-SynologyNas-FileStation/).
 
