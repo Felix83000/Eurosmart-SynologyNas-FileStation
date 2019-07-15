@@ -16,6 +16,7 @@
 		D450950E22B00CF4002CE6A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D450950C22B00CF4002CE6A2 /* LaunchScreen.storyboard */; };
 		D45F370322C229BC00B2D6BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45F370222C229BC00B2D6BB /* Network.swift */; };
 		D4CF359F22B3882B00D37FF7 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF359E22B3882B00D37FF7 /* FileViewController.swift */; };
+		D4E14D5A22DC9B6600BF6F27 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E14D5922DC9B6600BF6F27 /* AuthenticationServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4E559A922B14B8D006BC7D6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */; };
 		D4E559AA22B14B8D006BC7D6 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */; };
 		D4E559AF22B14BAE006BC7D6 /* RegisterAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E559AC22B14BAE006BC7D6 /* RegisterAPDU.swift */; };
@@ -46,6 +47,7 @@
 		D45F370222C229BC00B2D6BB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D473895722CCAF5C004DFB1C /* fido-eurosmart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fido-eurosmart.entitlements"; sourceTree = "<group>"; };
 		D4CF359E22B3882B00D37FF7 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
+		D4E14D5922DC9B6600BF6F27 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		D4E559A722B14B8D006BC7D6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D4E559A822B14B8D006BC7D6 /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		D4E559AC22B14BAE006BC7D6 /* RegisterAPDU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAPDU.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E14D5A22DC9B6600BF6F27 /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 			children = (
 				D450950222B00CF2002CE6A2 /* fido-eurosmart */,
 				D450950122B00CF2002CE6A2 /* Products */,
+				D4E14D5422DC872A00BF6F27 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +128,14 @@
 				D45F370222C229BC00B2D6BB /* Network.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D4E14D5422DC872A00BF6F27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4E14D5922DC9B6600BF6F27 /* AuthenticationServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D4E559A622B14B8D006BC7D6 /* Managers */ = {
@@ -217,6 +229,12 @@
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
 								enabled = 1;
+							};
+							com.apple.AutoFillCredentialProvider = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
 							};
 						};
 					};
@@ -358,7 +376,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "fido-eurosmart/fido-eurosmart-Bridging-Header.h";
@@ -414,6 +432,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "fido-eurosmart/fido-eurosmart-Bridging-Header.h";
@@ -435,6 +454,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eurosmart.eurosmartdrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -455,6 +475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eurosmart.eurosmartdrive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

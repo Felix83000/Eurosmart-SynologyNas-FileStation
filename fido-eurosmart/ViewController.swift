@@ -19,7 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     fileprivate var network: Network? = nil
-    fileprivate var first = true
     fileprivate var networkCheck: Any?
     
     override func viewDidLoad() {
@@ -28,6 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         self.network = Network()
         username.becomeFirstResponder()
         username.delegate = self
+        password.delegate = self
         
         let preferences = UserDefaults.standard
         
@@ -90,15 +90,16 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     
     // MARK: Update UI
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (first){
+        switch textField {
+        case username:
             username.resignFirstResponder()
             password.becomeFirstResponder()
-            password.delegate = self
-            first = false
-        }else{
+        case password:
             password.resignFirstResponder()
-            first = true
             submit(self)
+        default:
+            username.resignFirstResponder()
+            password.resignFirstResponder()
         }
         return false
     }
