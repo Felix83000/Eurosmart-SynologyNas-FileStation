@@ -137,12 +137,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         let alert = UIAlertController(title: "About", message: "Eurosmart Drive allows to connect to our Eurosmart Synology NAS and Access to your Storage. \n You may Download files, Upload files, Create new Folders, Remove Files or Folders. \n\n Félix Herrenschmidt developped this application for © Eurosmart as an Intern.", preferredStyle: .alert)
         // Add an action (button)
         let linkAction = UIAlertAction(title: "Check his LinkedIn", style: .default) { (_) in
-            let linkedinHooks = "linkedin://in/felix-herrenschmidt/"
-            if (UIApplication.shared.canOpenURL(URL(string: linkedinHooks)!)){
-                UIApplication.shared.open(URL(string: linkedinHooks)!)
-            }else{
-                UIApplication.shared.open(URL(string:"https://www.linkedin.com/in/felix-herrenschmidt/")!)
-            }
+            UIApplication.shared.open(URL(string:"https://www.linkedin.com/in/felix-herrenschmidt/")!)
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(linkAction)
