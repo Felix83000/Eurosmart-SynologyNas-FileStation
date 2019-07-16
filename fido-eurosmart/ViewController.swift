@@ -114,13 +114,13 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     func addBtnEye(){
         let imageView = UIImageView()
         imageView.image = UIImage(named: "closed-eye")
-        imageView.frame = CGRect(x: -3, y: 9, width: 22, height: 22)
-        imageView.contentMode = .scaleAspectFit
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(btnEyeAction))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
         self.imageViewEye = imageView
+        
+        imageView.frame = CGRect(x: -17, y: 2, width: 35, height: 35)
+        imageView.contentMode = .scaleAspectFit
         
         let paddingView = UIView(frame: CGRect(x:0, y:0, width:25,height:password.frame.height))
         paddingView.addSubview(imageView)
