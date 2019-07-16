@@ -1,69 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataClass.swift",
-      "line": 14,
-      "symbol": "User",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataClass.swift",
-      "line": 14,
-      "symbol": "User",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 16,
-      "symbol": "User.fetchRequest()",
-      "symbol_kind": "source.lang.swift.decl.function.method.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 20,
-      "symbol": "User.certificate",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 21,
-      "symbol": "User.fidotoken",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 22,
-      "symbol": "User.keyhandle",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 23,
-      "symbol": "User.name",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 24,
-      "symbol": "User.publickey",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/build/fido-eurosmart.build/Release-iphoneos/fido-eurosmart.build/DerivedSources/CoreDataGenerated/Data/User+CoreDataProperties.swift",
-      "line": 25,
-      "symbol": "User.signature",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/APDUs/APDUType.swift",
       "line": 11,
       "symbol": "APDUType",
