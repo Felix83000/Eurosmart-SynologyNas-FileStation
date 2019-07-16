@@ -20,6 +20,9 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     
     fileprivate var network: Network? = nil
     fileprivate var networkCheck: Any?
+    fileprivate var imageViewEye: UIImageView? = nil
+    /// Permit to choose between eye or closed-eye icon.
+    fileprivate var eyeClosed: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +33,12 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         password.delegate = self
         
         let preferences = UserDefaults.standard
-        
         if(preferences.object(forKey: "sid") != nil)
         {
             loginDone()
         }
+        
+        addBtnEye()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +92,47 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         self.network?.doLogin(self,username!,password!)
     }
     
+    @objc
+    /**
+     Change eye icon (opened or closed) and toggle password UITextField SecureTextEntry.
+     */
+    func btnEyeAction(imageView: UIImageView) {
+        if(self.eyeClosed){
+            self.imageViewEye?.image = UIImage(named: "eye")
+            self.eyeClosed = false
+        }else{
+            self.imageViewEye?.image = UIImage(named: "closed-eye")
+            self.eyeClosed = true
+        }
+        password.isSecureTextEntry.toggle()
+    }
+    
     // MARK: Update UI
+    /**
+     Size and Place the eye icon in the password UITextField.
+     */
+    func addBtnEye(){
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "closed-eye")
+        imageView.frame = CGRect(x: -3, y: 9, width: 22, height: 22)
+        imageView.contentMode = .scaleAspectFit
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(btnEyeAction))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
+        self.imageViewEye = imageView
+        
+        let paddingView = UIView(frame: CGRect(x:0, y:0, width:25,height:password.frame.height))
+        paddingView.addSubview(imageView)
+        password.rightView = paddingView
+        
+        let paddingViewleft = UIView(frame: CGRect(x:0, y:0, width:25,height:password.frame.height))
+        password.leftView = paddingViewleft
+        
+        password.rightViewMode = UITextField.ViewMode.whileEditing
+        password.leftViewMode = UITextField.ViewMode.whileEditing
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case username:
@@ -105,7 +149,19 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     }
     
     /**
-     Set the **username** and **FIDO multipass** verification in the **preferences** and perform a segue to **AddFidoViewController**
+     Limit the textFields characters at 35.
+    */
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        return updatedText.count <= 35
+    }
+    
+    /**
+     Set the **username** and **FIDO multipass** verification in the **preferences** and perform a segue to **AddFidoViewController**.
      */
     func loginDone()
     {
@@ -117,6 +173,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         performSegue(withIdentifier: "addFidoSegue", sender: self)
         //performSegue(withIdentifier: "directToFiles", sender: self)
     }
+    
     // MARK: DatabaseManager
     /**
      Check if the user exist in database and if he has already register a FIDO multipass or not.
