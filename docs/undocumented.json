@@ -1017,14 +1017,14 @@
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/Network.swift",
-      "line": 19,
+      "line": 21,
       "symbol": "Network.sid",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/FelixMac/Documents/Eurosmart/fido-eurosmart-git/fido-eurosmart/Network/Network.swift",
-      "line": 21,
+      "line": 23,
       "symbol": "Network.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -16,6 +16,8 @@ final class Network {
     fileprivate(set) var port = "1987" // 1988 : https, 1987: http
     /// If you want to configure **API Requests** in **http** or **https** change this `httpType` variable.
     fileprivate(set) var httpType = "http"
+    /// If the counter is equal to 5 the account is blocked for 1 min (Your NAS Configuration)
+    fileprivate var countConnections = 1
     var sid = "none"
     
     init() {
@@ -30,6 +32,7 @@ final class Network {
     // MARK: API Requests
     /**
      Login Request to **Synology FileStation API**. Connect the user if the request is successful. Set the **session key** in the **preferences** and **class attribute**. Also handle errors.
+     Handle **NAS Password Policy** (4 connection tests and blocked account during 1 min). Therefore, **connection alerts** are displayed.
      
      - Parameter viewController: Permit access to local Controller attributes.
      - Parameter user: Username who have to correspond to the NAS LDAP user.
@@ -80,8 +83,21 @@ final class Network {
                     if (code == 400){
                         DispatchQueue.main.async {
                             viewController.activityIndicator.stopAnimating()
-                            // create the alert
-                            let alert = UIAlertController(title: "Identification problem", message: "The account or password is not valid. Please try again.", preferredStyle: .alert)
+                            let alert: UIAlertController
+                            // If the user tried more than 4 times to connect, the account is blocked for 1 min (Your NAS Configuration)
+                            if(self.countConnections < 5){
+                                alert = UIAlertController(title: "Identification problem", message: "The account or password is not valid. Please try again. \(4 - self.countConnections) tests remaining.", preferredStyle: .alert)
+                                // If there is no tests remaining we start a 1 min counter to display the alert below
+                                if (4 - self.countConnections == 0){
+                                    // Triggered after 1 min
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                                        self.countConnections = 1
+                                    }
+                                }
+                            }else{
+                                alert = UIAlertController(title: "Identification problem", message: "Your account is blocked for 1 min. Please wait.", preferredStyle: .alert)
+                            }
+                            self.countConnections+=1
                             // add an action (button)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             // show the alert
