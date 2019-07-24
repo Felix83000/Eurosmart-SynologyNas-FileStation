@@ -16,7 +16,7 @@ final class Network {
     fileprivate(set) var port = "1987" // 1988 : https, 1987: http
     /// If you want to configure **API Requests** in **http** or **https** change this `httpType` variable.
     fileprivate(set) var httpType = "http"
-    /// If the counter is equal to 5 the account is blocked for 1 min (Your NAS Configuration)
+    /// If the counter is equal to 5 the account is blocked for 1 min (NAS Configuration)
     fileprivate var countConnections = 1
     var sid = "none"
     
@@ -84,12 +84,12 @@ final class Network {
                         DispatchQueue.main.async {
                             viewController.activityIndicator.stopAnimating()
                             let alert: UIAlertController
-                            // If the user tried more than 4 times to connect, the account is blocked for 1 min (Your NAS Configuration)
+                            // If the user tried more than 4 connections, the account is blocked for 1 min (Change this value according to your NAS configuration)
                             if(self.countConnections < 5){
                                 alert = UIAlertController(title: "Identification problem", message: "The account or password is not valid. Please try again. \(4 - self.countConnections) tests remaining.", preferredStyle: .alert)
                                 // If there is no tests remaining we start a 1 min counter to display the alert below
                                 if (4 - self.countConnections == 0){
-                                    // Triggered after 1 min
+                                    // Triggered after 1 min (Change this value according to your NAS configuration)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
                                         self.countConnections = 1
                                     }
