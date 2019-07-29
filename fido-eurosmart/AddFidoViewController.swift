@@ -47,6 +47,12 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
             performSegue(withIdentifier: "logoutFido", sender: self)
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        /// Adapting the font to the User Accessibilty Settings
+        let font = UIFont.preferredFont(forTextStyle: .subheadline)
+        scanButton.titleLabel?.font = font
+        stopButton.titleLabel?.font = font
+    }
     
     // MARK: UI updates
     func position(for bar: UIBarPositioning) -> UIBarPosition {

@@ -288,6 +288,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currentDir = listDirFiles[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        /// Adapting the font of the cells to the User Accessibilty Settings
+        let subheadFont = UIFont.preferredFont(forTextStyle: .subheadline)
+        cell.textLabel?.font = subheadFont
+        
         if(currentDir.isDir == true){
             let image : UIImage = UIImage(named: "folderIcon")!
             cell.imageView!.image = image
