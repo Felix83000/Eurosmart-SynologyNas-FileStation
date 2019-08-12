@@ -156,16 +156,17 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
         alert.addAction(UIAlertAction(title: "Create a Folder", style: .default, handler: { (_) in
             self.showAlertWithTextField()
         }))
-        
-        alert.addAction(UIAlertAction(title: "Upload a File", style: .default, handler: { (_) in
-            let docTypes = [
-                "public.data",
-                "public.content"
-            ]
-            let documentPicker = UIDocumentPickerViewController(documentTypes: docTypes, in: .import)
-            documentPicker.delegate = self
-            self.present(documentPicker, animated: true, completion: nil)
-        }))
+        if #available(iOS 11.0, *) {
+            alert.addAction(UIAlertAction(title: "Upload a File", style: .default, handler: { (_) in
+                let docTypes = [
+                    "public.data",
+                    "public.content"
+                ]
+                let documentPicker = UIDocumentPickerViewController(documentTypes: docTypes, in: .import)
+                documentPicker.delegate = self
+                self.present(documentPicker, animated: true, completion: nil)
+            }))
+        }
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
         }))
         

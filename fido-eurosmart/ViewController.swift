@@ -82,7 +82,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
     
     // MARK: Action Buttons
     @IBAction func submit(_ sender: Any) {
-        let username = self.username.text
+        let username = self.username.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = self.password.text
         
         if(username == "" || password == ""){
@@ -165,13 +165,11 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
      */
     func loginDone()
     {
-        print("Connection successful : \(username.text!)")
         let preferences = UserDefaults.standard
-        preferences.set(username.text, forKey: "username")
+        preferences.set(self.username.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), forKey: "username")
         
         preferences.set(String(isFidoInBdd()), forKey: "isFidoRegistered")
         performSegue(withIdentifier: "addFidoSegue", sender: self)
-        //performSegue(withIdentifier: "directToFiles", sender: self)
     }
     
     // MARK: DatabaseManager
@@ -185,6 +183,8 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
      */
     func isFidoInBdd() -> Bool
     {
+        // No uppercase because Synology don't support them in username
+        let user = self.username.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return false
@@ -197,7 +197,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
             let result = try managedContext.fetch(request)
             for data in result as! [NSManagedObject] {
                 // Checking if the user is in the Database
-                if (data.value(forKey: "name") as? String ?? "Nothing" == username.text){
+                if (data.value(forKey: "name") as? String ?? "Nothing" == user){
                     // Is fido registered?
                     return data.value(forKey: "fidotoken") as? Bool ?? false
                 }
@@ -210,7 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate, NetworkCheckObserve
         let entity = NSEntityDescription.entity(forEntityName: "User", in: managedContext)!
         let person = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        person.setValue(username.text, forKey: "name")
+        person.setValue(user, forKey: "name")
         
         do {
             try managedContext.save()
