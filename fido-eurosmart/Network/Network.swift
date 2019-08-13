@@ -37,14 +37,20 @@ final class Network {
      - Parameter viewController: Permit access to local Controller attributes.
      - Parameter user: Username who have to correspond to the NAS LDAP user.
      - Parameter pwd: Password who have also to correspond to the NAS LDAP user.
+     - Parameter otp_code: If a 2-step verification code is required.
      
      - Warning: This function is needed as **first API Request**. The answered **sid** will be used by **all** the other API requests.
      */
-    func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String)
+    func doLogin(_ viewController: ViewController,_ user:String,_ pwd:String, otp_code: String="")
     {
         viewController.activityIndicator.startAnimating()
+        var urlOriginal: String
         
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+        if (otp_code != ""){
+            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&otp_code=\(otp_code)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+        }else{
+            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+        }
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         let session = URLSession.shared
@@ -98,6 +104,47 @@ final class Network {
                                 alert = UIAlertController(title: "Identification problem", message: "Your account is blocked for 1 min. Please wait.", preferredStyle: .alert)
                             }
                             self.countConnections+=1
+                            // add an action (button)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            // show the alert
+                            viewController.present(alert, animated: true, completion: nil)
+                            viewController.password.text = ""
+                        }
+                    }
+                    // If a 2-step authentication is needed
+                    if (code == 403){
+                        DispatchQueue.main.async {
+                            viewController.activityIndicator.stopAnimating()
+                            let alertController = UIAlertController(title: "Enter the verification code", message: nil, preferredStyle: .alert)
+                            let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                                if let txtField = alertController.textFields?.first, let otp = txtField.text {
+                                    // When the user enter the folder name and press "Create"
+                                    viewController.activityIndicator.startAnimating()
+                                    self.doLogin(viewController, user, pwd,otp_code: otp)
+                                }
+                            }
+                            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+                            alertController.addTextField { (textField) in
+                                textField.placeholder = "6-digit verification code"
+                                textField.tintColor = UIColor(
+                                    red: CGFloat(23)/255,
+                                    green: CGFloat(141)/255,
+                                    blue: CGFloat(158)/255,
+                                    alpha: CGFloat(1.0)
+                                )
+                                textField.returnKeyType = .done
+                                textField.keyboardType = UIKeyboardType.numberPad
+                            }
+                            alertController.addAction(confirmAction)
+                            alertController.addAction(cancelAction)
+                            viewController.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                    if (code == 404){
+                        DispatchQueue.main.async {
+                            viewController.activityIndicator.stopAnimating()
+                            // create the alert
+                            let alert = UIAlertController(title: "Identification problem", message: "Failed to authenticate 2-step verification code.", preferredStyle: .alert)
                             // add an action (button)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             // show the alert
