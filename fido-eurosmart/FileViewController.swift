@@ -19,6 +19,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     fileprivate(set) var currentPath = ""
     fileprivate var network: Network? = nil
     fileprivate var networkCheck: Any?
+    fileprivate var localSid: Any?
     
     // Creating UIDocumentInteractionController instance.
     fileprivate let documentInteractionController = UIDocumentInteractionController()
@@ -60,7 +61,10 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
     
     override func viewDidAppear(_ animated: Bool) {
         let preferences = UserDefaults.standard
-        if(preferences.object(forKey: "sid") == nil){
+        if (localSid == nil){
+            localSid = preferences.object(forKey: "sid")
+        }
+        if(preferences.object(forKey: "sid") == nil && localSid == nil){
             performSegue(withIdentifier: "logout", sender: self)
         }
     }
@@ -252,6 +256,7 @@ class FileViewController: UIViewController, UINavigationBarDelegate, UITableView
                 alpha: CGFloat(1.0)
             )
             textField.returnKeyType = .done
+            textField.keyboardAppearance = UIKeyboardAppearance.dark
         }
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)

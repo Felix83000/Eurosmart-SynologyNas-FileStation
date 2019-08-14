@@ -47,9 +47,9 @@ final class Network {
         var urlOriginal: String
         
         if (otp_code != ""){
-            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&otp_code=\(otp_code)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&otp_code=\(otp_code)&session=FileStation&format=sid"
         }else{
-            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"// À passer en https, avec cert let's encrypt
+            urlOriginal = "\(httpType)://\(ip):\(port)/webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=login&account=\(user)&passwd=\(pwd)&session=FileStation&format=sid"
         }
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
@@ -132,6 +132,7 @@ final class Network {
                                     blue: CGFloat(158)/255,
                                     alpha: CGFloat(1.0)
                                 )
+                                textField.keyboardAppearance = UIKeyboardAppearance.dark
                                 textField.returnKeyType = .done
                                 textField.keyboardType = UIKeyboardType.numberPad
                             }
@@ -149,7 +150,6 @@ final class Network {
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             // show the alert
                             viewController.present(alert, animated: true, completion: nil)
-                            viewController.password.text = ""
                         }
                     }
                 }
@@ -188,7 +188,7 @@ final class Network {
         if(folderPath == ""){
             folderPath = "/"
         }
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.CreateFolder&version=2&method=create&folder_path=\(folderPath)&name=\(folderName)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.CreateFolder&version=2&method=create&folder_path=\(folderPath)&name=\(folderName)&_sid=\(sid)"
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         let session = URLSession.shared
@@ -267,7 +267,7 @@ final class Network {
             fileViewController.activityIndicator.startAnimating()
         }
         
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list_share&_sid=\(sid)"
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         let session = URLSession.shared
@@ -339,7 +339,7 @@ final class Network {
         if(!refresh){
             fileViewController.activityIndicator.startAnimating()
         }
-        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folderPath)&_sid=\(sid)"// À passer en https, avec cert let's encrypt
+        let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi?api=SYNO.FileStation.List&version=2&method=list&folder_path=\(folderPath)&_sid=\(sid)"
         let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
         
         let session = URLSession.shared
@@ -423,7 +423,7 @@ final class Network {
                 folderPath = "/"
             }
             
-            let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi"// À passer en https, avec cert let's encrypt
+            let urlOriginal = "\(httpType)://\(ip):\(port)/webapi/entry.cgi"
             let url = URL(string: urlOriginal.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? "")
             
             let session = URLSession.shared
