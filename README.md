@@ -9,7 +9,7 @@ Works on all IOS platforms.
 
 Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
 
-## Demo video - Eurosmart Members 
+## Demo Clip 
 
 [![Demo video](https://img.youtube.com/vi/yCl9vRSfd5U/0.jpg)](https://www.youtube.com/watch?v=yCl9vRSfd5U)
 
