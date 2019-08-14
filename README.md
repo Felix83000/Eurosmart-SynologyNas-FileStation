@@ -6,6 +6,7 @@
 #### IOS Application : Access and Upload your Files/Folders in your Synology NAS with 2FA Authentication (FIDO) 
 
 Works on all IOS platforms. 
+
 Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
 
 ## Demo video - Eurosmart Members 
