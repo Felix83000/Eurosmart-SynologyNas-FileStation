@@ -36,6 +36,7 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
     fileprivate var useInvalidKeyHandle = false
     fileprivate var currentAPDU: APDUType? = nil
     fileprivate var registerAPDU: RegisterAPDU? = nil
+    fileprivate var localSid: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,7 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
         if(preferences.object(forKey: "sid") == nil){
             performSegue(withIdentifier: "logoutFido", sender: self)
         }
+        self.localSid = preferences.object(forKey: "sid")
     }
     override func viewWillAppear(_ animated: Bool) {
         /// Adapting the font to the User Accessibilty Settings
@@ -216,6 +218,11 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
             pushFidoRegistered()
             
             activityIndicator.stopAnimating()
+            
+            // Avoid unexpected disconnection
+            let preferences = UserDefaults.standard
+            preferences.set(self.localSid, forKey: "sid")
+            
             // The Multipass FIDO is now registered. Hence we can perform a segue to FileViewController
             performSegue(withIdentifier: "fileSegue", sender: self)
         }
