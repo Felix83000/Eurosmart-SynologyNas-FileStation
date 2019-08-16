@@ -154,7 +154,12 @@ class AddFidoViewController: UIViewController, UINavigationBarDelegate {
             print("Unable to build AUTHENTICATE APDU")
         }
     }
-    
+    /**
+     Redirect to the **Demo Clip**.
+     */
+    @IBAction func helpButton(_ sender: Any) {
+        UIApplication.shared.open(URL(string:"https://www.youtube.com/watch?v=yCl9vRSfd5U")!)
+    }
     // MARK: DatabaseManager
     /**
     Fetch MultiPass FIDO Certificate **informations** into the Database and **set** these into **registerAPDU** instance.
