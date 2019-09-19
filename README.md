@@ -8,7 +8,8 @@
 Works on all IOS platforms. 
 
 Already in the [App Store](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
-[![App Store](https://herrenschmidt.pro/data/BEP_App_Store_Badge.png)](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
+
+[![App Store](https://herrenschmidt.pro/data/BEP_App_Store_Badge.svg)](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
 
 Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
 
