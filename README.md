@@ -7,11 +7,9 @@
 
 Works on all IOS platforms. 
 
-Already in the [App Store](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
+Available on the app store.
 
 [![App Store](https://herrenschmidt.pro/data/BEP_App_Store_Badge.svg)](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
-
-Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
 
 ## Demo Clip 
 
@@ -51,3 +49,5 @@ Please use this template: [Bug-Report Template](/.github/ISSUE_TEMPLATE/bug_repo
 ### Our Synology NAS Current Version:
 -  **Model Name** : DS1517+
 -  **DSM Version** : DSM 6.2.2-24922
+
+Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
