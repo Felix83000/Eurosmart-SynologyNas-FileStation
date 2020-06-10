@@ -50,4 +50,4 @@ Please use this template: [Bug-Report Template](/.github/ISSUE_TEMPLATE/bug_repo
 -  **Model Name** : DS1517+
 -  **DSM Version** : DSM 6.2.2-24922
 
-Developed for [© Eurosmart 2019](https://www.eurosmart.com/)
+Developed for [© Eurosmart 2020](https://www.eurosmart.com/)
