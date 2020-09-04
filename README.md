@@ -9,7 +9,7 @@ Works on all IOS platforms.
 
 Available on the app store.
 
-[![App Store](https://herrenschmidt.pro/data/BEP_App_Store_Badge.svg)](https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
+[![App Store](https://herrenschmidt.pro/data/BEP_App_Store_Badge.svg)]{:height="10px" width="10px"}(https://apps.apple.com/us/app/eurosmart-drive/id1470413108?l=fr#?platform=iphone)
 
 ## Demo Clip 
 
